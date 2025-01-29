@@ -458,19 +458,43 @@
 
             MoneyField.prototype = new jsGrid.NumberField({
 
-                itemTemplate: function (value) {
-                    return  parseFloat(value).toFixed(2);
-                },
+//                itemTemplate: function (value) {
+//                    return  parseFloat(value).toFixed(2) || parseFloat(0).toFixed(2);
+//
+//                },
+//
+//                filterValue: function () {
+//                    return parseFloat(this.filterControl.val() || 9999);
+//                },
+//                insertValue: function () {
+//                    return parseFloat(this.insertControl.val() || 9999);
+//                },
+////                editValue: function () {
+////                    return parseDouble(this.editControl.val() || 0);
+////                }
+//                editValue: function () {
+//                    return parseFloat(this.editControl.val() || 999);
+//                }
 
-                filterValue: function () {
-                    return parseFloat(this.filterControl.val() || 0);
-                },
-                insertValue: function () {
-                    return parseFloat(this.insertControl.val() || 0);
-                },
-                editValue: function () {
-                    return parseFloat(this.editControl.val() || 0);
-                }
+
+
+                  filterValue: function () {
+                        return this.filterControl.val()
+                                ? parseFloat(this.filterControl.val() || 0, 10)
+                                : undefined;
+                    },
+
+                    insertValue: function () {
+                        return this.insertControl.val()
+                                ? parseFloat(this.insertControl.val() || 0, 10)
+                                : undefined;
+                    },
+
+                    editValue: function () {
+                        return this.editControl.val()
+                                ? parseFloat(this.editControl.val() || 0, 10)
+                                : undefined;
+                    },
 
             });
             jsGrid.fields.money = MoneyField;
@@ -481,6 +505,56 @@
 
 
             $(function () {
+                
+                    function MoneyField(config) {
+                jsGrid.NumberField.call(this, config);
+            }
+
+            MoneyField.prototype = new jsGrid.NumberField({
+
+//                itemTemplate: function (value) {
+//                    return  parseFloat(value).toFixed(2) || parseFloat(0).toFixed(2);
+//
+//                },
+//
+//                filterValue: function () {
+//                    return parseFloat(this.filterControl.val() || 9999);
+//                },
+//                insertValue: function () {
+//                    return parseFloat(this.insertControl.val() || 9999);
+//                },
+////                editValue: function () {
+////                    return parseDouble(this.editControl.val() || 0);
+////                }
+//                editValue: function () {
+//                    return parseFloat(this.editControl.val() || 999);
+//                }
+
+
+
+                  filterValue: function () {
+                        return this.filterControl.val()
+                                ? parseFloat(this.filterControl.val() || 0, 10)
+                                : undefined;
+                    },
+
+                    insertValue: function () {
+                        return this.insertControl.val()
+                                ? parseFloat(this.insertControl.val() || 0, 10)
+                                : undefined;
+                    },
+
+                    editValue: function () {
+                        return this.editControl.val()
+                                ? parseFloat(this.editControl.val() || 0, 10)
+                                : undefined;
+                    }
+
+            });
+            jsGrid.fields.money = MoneyField;
+
+
+                
 
                 $("#grid").jsGrid({
                     width: "100%",
@@ -521,6 +595,7 @@
                     onItemUpdating: function (args) {
 
                         var onhand = "NO";
+                        alert(args.item.QTY_ISSU);
                         console.log(args.item);
                         console.log(args.item.QTY_ISSU < parseInt(args.item.ONHAND));
                         console.log(args.item.QTY_ISSU > 0);
@@ -594,7 +669,47 @@
             );
 ///////////////////Modal Grid//////////////////////
 
+            (function (jsGrid, $, undefined) {
 
+                var TextField = jsGrid.TextField;
+
+                function NumberField(config) {
+                    TextField.call(this, config);
+                }
+
+                NumberField.prototype = new TextField({
+
+                    sorter: "number2",
+                    align: "right",
+                    readOnly: false,
+
+                    filterValue: function () {
+                        return this.filterControl.val()
+                                ? parseFloat(this.filterControl.val() || 0, 10)
+                                : undefined;
+                    },
+
+                    insertValue: function () {
+                        return this.insertControl.val()
+                                ? parseFloat(this.insertControl.val() || 0, 10)
+                                : undefined;
+                    },
+
+                    editValue: function () {
+                        return this.editControl.val()
+                                ? parseFloat(this.editControl.val() || 0, 10)
+                                : undefined;
+                    },
+
+                    _createTextBox: function () {
+                        return $("<input>").attr("type", "number")
+                                .prop("readonly", !!this.readOnly);
+                    }
+                });
+
+                jsGrid.fields.number2 = jsGrid.NumberField = NumberField;
+
+            }(jsGrid, jQuery));
 
             var modal = document.getElementById("frm_sublot");
             var span_1 = document.getElementsByClassName("close")[0];

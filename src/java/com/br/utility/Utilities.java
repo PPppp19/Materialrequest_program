@@ -45,7 +45,7 @@ public class Utilities {
 
             }
 
-            String Sql = "UPDATE BRLDTA0100.FAR_MTRREQ04\n"
+            String Sql = "UPDATE "+GBVAR.DBPRD+".FAR_MTRREQ04\n"
                     + "SET   ORD_STAT = '" + state + "'  \n"
                     + "WHERE ORD_ID  = '" + ordernum + "'";
 
@@ -58,16 +58,16 @@ public class Utilities {
             String LinkCreate = "";
             if (nextStatus == "SS") {
 
-                LinkCreate = "<p> Material request Send to Store <a href=\"http://192.200.9.94:8080/MaterialRequest/?page=history\"><u>Check it</U></a>.</p>";
+                LinkCreate = "<p> Material request Send to Store <a href=\"http://192.200.9.189:8080/MaterialRequest/?page=history\"><u>Check it</U></a>.</p>";
 
             } else {
 
 //http://localhost:8080/MaterialRequest/DeptCONO.jsp?ORDID=23031926&username=PHONGS_PHO               
-                         // LinkCreate = "<p> Material request ID : "+ ordernum +" from : "+ username +" : <a href=\"http://192.200.9.94:8080/MaterialRequest/?report=material_request&status=" + nextStatus + "&ORDID=" + ordernum  +"\"><u>Click Here</U></a>.</p>";
-              //  LinkCreate = "<p> Material request ID : " + ordernum + " from : " + username + " : <a href=\"http://192.200.9.94:8080/MaterialRequest/DeptCONO.jsp?ORDID=" + ordernum + "&user=PP><u>Click Here</U></a>.</p>";
+                         // LinkCreate = "<p> Material request ID : "+ ordernum +" from : "+ username +" : <a href=\"http://192.200.9.189:8080/MaterialRequest/?report=material_request&status=" + nextStatus + "&ORDID=" + ordernum  +"\"><u>Click Here</U></a>.</p>";
+              //  LinkCreate = "<p> Material request ID : " + ordernum + " from : " + username + " : <a href=\"http://192.200.9.189:8080/MaterialRequest/DeptCONO.jsp?ORDID=" + ordernum + "&user=PP><u>Click Here</U></a>.</p>";
 //                          LinkCreate = "<p> Material request ID : " + ordernum + " from : " + username + " : <a href=\"http://localhost:8080/MaterialRequest/DeptCONO.jsp?user="+touser+"&ORDID=" + ordernum + "\"><u>Click Here</U></a>.</p>";
-//                          LinkCreate = "<p> Material request ID : " + ordernum + " from : " + username + " : <a href=\"http://192.200.9.94:8080/MaterialRequest/DeptCONO.jsp?user="+touser+"&ORDID=" + ordernum + "&CONO="+cono+"\"><u>Click Here to approve</U></a>.</p> ";
-                          LinkCreate = "<p> Material request ID : " + ordernum + " from : " + username + " : <a href=\"http://210.1.14.22:8080/MaterialRequest/DeptCONO.jsp?user="+touser+"&ORDID=" + ordernum + "&CONO="+cono+"\"><u>Click Here to puclic network</U></a>.</p> <p> Material request ID : " + ordernum + " from : " + username + " : <a href=\"http://192.200.9.94:8080/MaterialRequest/DeptCONO.jsp?user="+touser+"&ORDID=" + ordernum + "&CONO="+cono+"\"><u>Click Here to internal network</U></a>.</p>";
+//                          LinkCreate = "<p> Material request ID : " + ordernum + " from : " + username + " : <a href=\"http://192.200.9.189:8080/MaterialRequest/DeptCONO.jsp?user="+touser+"&ORDID=" + ordernum + "&CONO="+cono+"\"><u>Click Here to approve</U></a>.</p> ";
+                          LinkCreate = "<p> Material request ID : " + ordernum + " from : " + username + " : <a href=\"http://210.1.14.22:8080/MaterialRequest/DeptCONO.jsp?user="+touser+"&ORDID=" + ordernum + "&CONO="+cono+"\"><u>Click Here to puclic network</U></a>.</p> <p> Material request ID : " + ordernum + " from : " + username + " : <a href=\"http://192.200.9.189:8080/MaterialRequest/DeptCONO.jsp?user="+touser+"&ORDID=" + ordernum + "&CONO="+cono+"\"><u>Click Here to internal network</U></a>.</p>";
 
             
             }
@@ -115,7 +115,7 @@ public class Utilities {
                     break;
             }
 
-            String Sql = "UPDATE BRLDTA0100.FAR_MTRREQ04\n"
+            String Sql = "UPDATE "+GBVAR.DBPRD+".FAR_MTRREQ04\n"
                     + "SET   ORD_STAT = '" + state + "'  \n"
                     + "WHERE ORD_ID  = '" + ordernum + "'";
 
@@ -125,7 +125,7 @@ public class Utilities {
             //String LinkCreate = "Please click this link to verify your email address : http://192.200.9.106:8080/UserRequest/?page=ResetNewPW&pp=" + encyptedCodeStr;
 //            String LinkCreate = " Testpp: http://192.200.9.106:8080/UserRequest/?page=ResetNewPW&Destination=ResetPW&pp=" + urlEncry;
 //            String LinkCreate = "<p>Please click this link to verify your email address : <a href=\"http://192.200.9.106:8080/UserRequest/?page=ResetNewPW&Destination=ResetPW&pp="+encyptedCodeStr+"\"><u>Click Here</U></a>.</p>";
-            String LinkCreate = "<p> your request has been return Please Here : <a href=\"http://192.200.9.94:8080/MaterialRequest/?report=material_request&status=" + nextStatus + "&ORDID=" + ordernum + "\"><u>Click Here</U></a>.</p>";
+            String LinkCreate = "<p> your request has been return Please Here : <a href=\"http://192.200.9.189:8080/MaterialRequest/?report=material_request&status=" + nextStatus + "&ORDID=" + ordernum + "\"><u>Click Here</U></a>.</p>";
 
             //String LinkCreate = "Please click this link to verify your email address : http://localhost:8080/UserRequest/?page=ResetNewPW&pp=" + encyptedCodeStr;
             //http://localhost:8080/UserRequest/?page=ResetNewPW&Destination=ResetPW&pp=LGZdzeQUNBzT4R9/oIUPoHBnPFmns740qCrqCGfPQZBhhSviWAj5hV33UaT0JiQwWXdvfJz5amWhWdzFqoRl+g==
@@ -159,7 +159,7 @@ public class Utilities {
 //            String nextStatus = "";
 
 //            state = "99";
-            String Sql = "UPDATE BRLDTA0100.FAR_MTRREQ04\n"
+            String Sql = "UPDATE "+GBVAR.DBPRD+".FAR_MTRREQ04\n"
                     + "SET   ORD_STAT = '" + state + "', MVX_ORDE = '11111111'  \n"
                     + "WHERE ORD_ID  = '" + ordernum + "'";
 

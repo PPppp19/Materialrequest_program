@@ -6,6 +6,7 @@
 package com.br.data;
 
 import com.br.connection.ConnectDB2;
+import com.br.utility.GBVAR;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -30,7 +31,7 @@ public class Delete {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "DELETE  FROM BRLDTA0100.FAR_ITMTLB04\n"
+                String query = "DELETE  FROM "+GBVAR.DBPRD+".FAR_ITMTLB04\n"
                         + "WHERE ITM_ID = '" + code + "'\n"
                         + "AND QTY_REQT = '" + qty + "'\n"
                         + "AND ORD_ID = '" + id + "'";
@@ -65,7 +66,7 @@ public class Delete {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "DELETE  FROM BRLDTA0100.FAR_ITMTLB04\n"
+                String query = "DELETE  FROM "+GBVAR.DBPRD+".FAR_ITMTLB04\n"
                         + "WHERE ITM_ID = '" + code + "'\n"
                         + "AND ID = '" + itid + "'\n"
                         + "AND ORD_ID = '" + id + "'";

@@ -1043,20 +1043,42 @@
         jsGrid.NumberField.call(this, config);
     }
 
+
     MoneyField.prototype = new jsGrid.NumberField({
 
+//        itemTemplate: function (value) {
+//            return  parseFloat(value).toFixed(2) || parseFloat(0).toFixed(2)  ;
+//        },
+//
+//        filterValue: function () {
+//            return parseFloat(this.filterControl.val() || 0);
+//        },
+//        insertValue: function () {
+//            return parseFloat(this.insertControl.val() || 0);
+//        },
+//        editValue: function () {
+//            return parseFloat(this.editControl.val() || 0);
+//        }
+
+
         itemTemplate: function (value) {
-            return  parseFloat(value).toFixed(2);
+            var num = parseFloat(value);
+            return isNaN(num) ? parseFloat(0).toFixed(2) : num.toFixed(2);
         },
 
         filterValue: function () {
-            return parseFloat(this.filterControl.val() || 0);
+            var num = parseFloat(this.filterControl.val());
+            return isNaN(num) ? 0 : num;
         },
+
         insertValue: function () {
-            return parseFloat(this.insertControl.val() || 0);
+            var num = parseFloat(this.insertControl.val());
+            return isNaN(num) ? 0 : num;
         },
+
         editValue: function () {
-            return parseFloat(this.editControl.val() || 0);
+            var num = parseFloat(this.editControl.val());
+            return isNaN(num) ? 0 : num;
         }
 
     });
@@ -1123,6 +1145,71 @@
 
 
     $(function () {
+        
+        function MoneyField(config) {
+        jsGrid.NumberField.call(this, config);
+    }
+
+
+    MoneyField.prototype = new jsGrid.NumberField({
+
+//        itemTemplate: function (value) {
+//            return  parseFloat(value).toFixed(2) || parseFloat(0).toFixed(2)  ;
+//        },
+//
+//        filterValue: function () {
+//            return parseFloat(this.filterControl.val() || 0);
+//        },
+//        insertValue: function () {
+//            return parseFloat(this.insertControl.val() || 0);
+//        },
+//        editValue: function () {
+//            return parseFloat(this.editControl.val() || 0);
+//        }
+
+
+        itemTemplate: function (value) {
+            var num = parseFloat(value);
+            return isNaN(num) ? parseFloat(0).toFixed(2) : num.toFixed(2);
+        },
+
+        filterValue: function () {
+            var num = parseFloat(this.filterControl.val());
+            return isNaN(num) ? 0 : num;
+        },
+
+        insertValue: function () {
+            var num = parseFloat(this.insertControl.val());
+            return isNaN(num) ? 0 : num;
+        },
+
+        editValue: function () {
+            var num = parseFloat(this.editControl.val());
+            return isNaN(num) ? 0 : num;
+        }
+
+    });
+    jsGrid.fields.money = MoneyField;
+        
+    TextSelectField.prototype = new jsGrid.SelectField({
+
+        sorter: "string",
+        filterValue: function () {
+            return this.filterControl.val();
+        },
+        itemTemplate: function (value) {
+
+            return value;
+        },
+        insertValue: function () {
+            return this.insertControl.val();
+        },
+        editValue: function () {
+            return this.editControl.val();
+        }
+    });
+    jsGrid.fields.textSelect = TextSelectField;
+    
 
         var username = document.getElementById("username").value;
         const queryString = window.location.search;
@@ -1274,7 +1361,7 @@
 
 
                             alert("this ORD_ID is not this state");
-                            window.location.href = "http://192.200.9.94:8080/MaterialRequest/?report=material_request";
+                            window.location.href = "http://192.200.9.189:8080/MaterialRequest/?report=material_request";
                         }
 
 
@@ -1517,7 +1604,7 @@
         } else {
             alert("this ORD_IS has been completed.");
 //              location.replace("http://192.200.9.189:8080/UserRequest/login.jsp");
-            window.location.href = "http://192.200.9.94:8080/MaterialRequest/?report=material_request";
+            window.location.href = "http://192.200.9.189:8080/MaterialRequest/?report=material_request";
         }
 
 
@@ -1926,7 +2013,7 @@
             success: function (result) {
 
                 alert("Returned");
-                window.location.replace("http://192.200.9.94:8080/MaterialRequest/?report=material_request");
+                window.location.replace("http://192.200.9.189:8080/MaterialRequest/?report=material_request");
             }
 
         });
@@ -2229,7 +2316,7 @@
                     select: function (event, ui) {
 
 
-
+                     
                         let text = ui.item.value;
                         const myArray = text.split(":");
                         let word = myArray[0];
@@ -2248,7 +2335,7 @@
                             },
                             success: function (data) {
 
-
+                              
                                 console.log("Clicked");
                                 items = data;
                                 ittem = items;
@@ -2278,7 +2365,7 @@
             },
             editTemplate: function (value) {
 
-
+             
                 var state = document.getElementById("vState").value;
                 if (state === "State1" || state === "State2") {
 
@@ -2291,11 +2378,12 @@
                         select: function (event, ui) {
 
 
-
+                      
                             let text = ui.item.value;
                             const myArray = text.split(":");
                             let word = myArray[0];
                             let disc = myArray[1];
+
                             selectedid = word;
                             ui.item.value = word;
                             $.ajax({
@@ -2310,7 +2398,7 @@
                                 },
                                 success: function (data) {
 
-
+                             
                                     console.log("Clicked");
                                     items = data;
                                     console.log(items);
@@ -2838,10 +2926,9 @@
                 },
                 {title: "Unit", name: "ITM_UNIT", type: "textSelect", items: ittem, filtering: false, width: 30, editing: true, insertcss: "states-filter", editcss: "estates-filter"
                 },
-                {title: "Qty_Reg", name: "QTY_REQT", type: "money", width: 30, inserting: true, filtering: false
+         
+                {title: "Qty_Reg", name: "QTY_REQT", type: "money", width: 30, inserting: true, filtering: false},
 
-
-                },
 //                {title: "Qty_Iss", name: "QTY_ISSU", type: "number", width: 30, filtering: false, editing: true,
 
 
@@ -2933,7 +3020,7 @@
     var itemname = [];
     var itemtype = [];
     var itemfull = [];
-    var ittem = [];
+    var ittem = ["0"];
     $('.college').click(function () {
         $('.college').css('color', 'red');
     });
@@ -2985,25 +3072,21 @@
 
 
 
-    TextSelectField.prototype = new jsGrid.SelectField({
-
-        sorter: "string",
-        filterValue: function () {
-            return this.filterControl.val();
-        },
-        itemTemplate: function (value) {
-
-            return value;
-        },
-        insertValue: function () {
-            return this.insertControl.val();
-        },
-        editValue: function () {
-            return this.editControl.val();
-        }
-    });
-    jsGrid.fields.textSelect = TextSelectField;
+    
+    
+    
     /////////////////////////////////////
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
     var getmyid = function (username) {
@@ -3823,8 +3906,8 @@
 
         });
     }
-    
-    
+
+
 
 </script>
 

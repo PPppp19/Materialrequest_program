@@ -7,6 +7,7 @@ package com.br.data;
 
 import com.br.connection.ConnectDB2;
 import com.br.connection.ConnectSQLServer;
+import com.br.utility.GBVAR;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -47,7 +48,7 @@ public class Insert {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "INSERT INTO  BRLDTA0100.FAR_ITMTLB04\n"
+                String query = "INSERT INTO  "+GBVAR.DBPRD+".FAR_ITMTLB04\n"
                         + "(ID,ORD_ID,ITM_ID,ITM_DESC,ITM_UNIT,QTY_REQT,QTY_ISSU,ONH_STAT,POS_STAT, REG_CONO,REG_DIVI)\n"
                         + "VALUES \n"
                         + "('" + itid + "','" + id + "','" + code + "','" + desc + "','" + unit + "','" + reqt + "','" + issu + "','" + onhandsts + "','-','" + cono + "','" + divi + "') \n ";
@@ -95,7 +96,7 @@ public class Insert {
                 int a = Integer.parseInt(nextid);
 
                 Statement stmt2 = conn.createStatement();
-                String query2 = "INSERT INTO BRLDTA0100.FAR_MTRREQ04 (ID,ORD_ID,RUID,COM_ID ,ORD_REGB,DEP_NAME,COS_CENT, ORD_PURP, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, MVX_ORDE, REG_CONO, REG_DIVI) values (" + id + "," + a + ", " + ruid + " , '" + vcompany + "', '" + vrequester + "', '" + vdepartmentname + "', '" + vcostcenter + "', '" + orderpurpose + "' , '" + vdate + "', '" + vtype + "', '" + vfwhs + "', '" + vtwhs + "', '" + location + "', '" + rqtdate + "', '" + dpmhead + "', '" + orddpmh + "', '" + dphdate + "', '" + ordissb + "', '" + isbdate + "', '" + ordstat + "','00000000','" + vcono + "','" + vdivi + "' )";
+                String query2 = "INSERT INTO "+GBVAR.DBPRD+".FAR_MTRREQ04 (ID,ORD_ID,RUID,COM_ID ,ORD_REGB,DEP_NAME,COS_CENT, ORD_PURP, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, MVX_ORDE, REG_CONO, REG_DIVI) values (" + id + "," + a + ", " + ruid + " , '" + vcompany + "', '" + vrequester + "', '" + vdepartmentname + "', '" + vcostcenter + "', '" + orderpurpose + "' , '" + vdate + "', '" + vtype + "', '" + vfwhs + "', '" + vtwhs + "', '" + location + "', '" + rqtdate + "', '" + dpmhead + "', '" + orddpmh + "', '" + dphdate + "', '" + ordissb + "', '" + isbdate + "', '" + ordstat + "','00000000','" + vcono + "','" + vdivi + "' )";
                 System.out.println("AddOrderID\n" + query2);
                 stmt2.execute(query2);
 

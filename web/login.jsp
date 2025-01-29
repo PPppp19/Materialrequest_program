@@ -66,9 +66,14 @@
                         </div>
 
                         <div class="form-group">
-                            <select class="form-control form-control-user" name="company" id="vCompany">
+                            <select class="form-control form-control-user" name="company" id="vCompany"  onchange="Location(this.value)">
                                 <option value="" selected="selected">Select Company</option>
                             </select>
+                        </div>
+                        
+                            <div class="form-group">
+                           <select class="form-control form-control-user" name="vFac" id="vFac">
+                        </select>
                         </div>
                         
                          <div class="row container col-md-12" style="font-size: 13px; width: 280px;">
@@ -79,7 +84,7 @@
                         
                         <div class="form-group">
                             <div style="width: 140px;">
-                                <a href="#" onclick="window.open('http://192.200.9.94:8080/MaterialRequest/คู่มือการใช้งานโปรแกรม_Material_Request.pdf', '_blank', 'fullscreen=yes'); return true;" ><li style="color: blue;"><u>คู่มือการใช้งานโปรแกรม_Material_Request</u></li></a>        
+                                <a href="#" onclick="window.open('http://192.200.9.189:8080/MaterialRequest/คู่มือการใช้งานโปรแกรม_Material_Request.pdf', '_blank', 'fullscreen=yes'); return true;" ><li style="color: blue;"><u>คู่มือการใช้งานโปรแกรม_Material_Request</u></li></a>        
                             </div>  
                         </div>
                         <p style="color: red">${msg}</p>
@@ -108,7 +113,7 @@
   
 //      location.replace("http://192.200.9.251:8080/MaterialRequest/login.jsp");
 
-        
+
         
     <% System.out.println("Path : " + request.getContextPath());%>
 
@@ -132,5 +137,59 @@
         });
 
     });
+    
+    
+    
+    
+  function Location(val) {
+      //alert(val);
+      console.log("xxx");
 
+
+ 
+
+        let text = val;
+        const myArray = text.split(":");
+        let cono = myArray[0];
+        let divi = myArray[1];
+        $("#location").empty();
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: './Action',
+            data: {
+                  path: "GetFAC",
+                CONO: cono,
+                DIVI: divi        
+            },
+ success: function (getdata) {
+    
+    // เคลียร์ข้อมูลเก่าทั้งหมดใน #vFac
+    $('#vFac').empty();
+    
+    if (getdata.length === 0) {
+        // ถ้า getdata ไม่มีข้อมูล ให้เพิ่ม option "-" ลงไป
+        $('#vFac').append("<option value='-'>-</option>");
+    } else {
+        // ถ้ามีข้อมูลใน getdata
+        $.each(getdata, function (i, obj) {
+            var div_data = "<option value='" + obj.RL_LCCODE + "'>" + obj.RL_LCDESC + "</option>";
+            $('#vFac').append(div_data);  // เพิ่มข้อมูลใหม่
+        });
+    }
+}
+
+
+
+        });
+
+//
+//var div_data = "<option value='xxxx'>xxx</option>";
+//                    $(div_data).appendTo('#vFac');
+//    }
+
+      console.log("xxx");
+
+
+  }
 </script>

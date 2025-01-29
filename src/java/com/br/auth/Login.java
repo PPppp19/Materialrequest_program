@@ -82,6 +82,7 @@ public class Login extends HttpServlet {
         HttpSession session = request.getSession(true);
         String strCono = new String("cono");
         String strDivi = new String("divi");
+        String strFac = new String("vFac");
         String strUser = new String("user");
         String strPass = new String("pass");
         String strComp = new String("comp");
@@ -99,6 +100,7 @@ public class Login extends HttpServlet {
 
             String username = request.getParameter("username");
             String password = request.getParameter("password");
+            String fac = request.getParameter("vFac");
             String[] getCompany = request.getParameter("company").split(" : ");
             String cono = getCompany[0];
             String divi = getCompany[1];
@@ -113,6 +115,8 @@ public class Login extends HttpServlet {
                 if (conn != null) {
                     session.setAttribute(strCono, cono);
                     session.setAttribute(strDivi, divi);
+                    session.setAttribute(strFac, fac);
+
                     session.setAttribute(strUser, username.toUpperCase());
                     session.setAttribute(strPass, password);
                     session.setAttribute(strComp, comp);

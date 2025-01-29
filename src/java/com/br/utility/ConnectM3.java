@@ -55,7 +55,8 @@ public class ConnectM3 {
     SoftReference<ArrayList<String>> itemissu = new SoftReference<>(new ArrayList<>());
     SoftReference<ArrayList<String>> itemonhand = new SoftReference<>(new ArrayList<>());
 //    protected String mneLogOnUrl = "https://bkrmvxm3.bangkokranch.com:22008/mne/servlet/MvxMCSvt"; //TST
-    protected String mneLogOnUrl = "https://bkrmvxm3.bangkokranch.com:21008/mne/servlet/MvxMCSvt";  //PRD
+//    protected String mneLogOnUrl = "https://bkrmvxm3.bangkokranch.com:21008/mne/servlet/MvxMCSvt";  //PRD
+    protected String mneLogOnUrl =  GBVAR.LoginUrlConnectionm3;  
 
     MvxSockJ sock;
     protected int cono;
@@ -243,7 +244,8 @@ public class ConnectM3 {
                 cono = usercono;
                 divi = userdivi;
                 appServer = "192.200.9.190";
-                appPort = 16105;
+//                appPort = 16105;
+                appPort = GBVAR.DBPORT;
                 int i = 0;
                 System.out.println(" Start to log in");
 
@@ -324,12 +326,21 @@ public class ConnectM3 {
                         //-------------------------------------------------------
                         List<String> listid = itemid1.get();
                         List<String> listonhand = itemonhand.get();
+                        
+                        System.out.println(listonhand); // แสดงรายการทั้งหมด
+                        
+                        for (String item : listonhand) {
+    System.out.println(item);
+}
+
                         List<String> listunit = itemunit.get();
 //                        List<String> listkid = itemkid.get();
                         List<String> listissu = itemissu.get();
                         System.out.println("size : " + listid.size());
 
                         for (i = 0; i <= listid.size() - 1; i++) {
+
+                                                    System.out.println(listonhand); // แสดงรายการทั้งหมด
 
                             int index = i - 1;
                             if ("YES".equals(listonhand.get(i))) {
@@ -389,7 +400,7 @@ public class ConnectM3 {
                                         SimpleDateFormat A = new SimpleDateFormat("dd/MM/yyyy");
                                         String DateNow = A.format(d);
 
-                                        Sql = "UPDATE BRLDTA0100.FAR_MTRREQ04\n"
+                                        Sql = "UPDATE " + GBVAR.DBPRD + ".FAR_MTRREQ04\n"
                                                 + "SET  MVX_ORDE  = '" + order_no + "' , ORD_STAT = '22', ORD_REMAR = '" + Pcreateddate + "'  \n"
                                                 + "WHERE ORD_ID  = '" + id + "'";
 
@@ -490,8 +501,9 @@ public class ConnectM3 {
                 cono = usercono;
                 divi = userdivi;
                 appServer = "192.200.9.190";
-                appPort = 16105;
+//                appPort = 16105;
 //                appPort = 16305;//TST
+                appPort = GBVAR.DBPORT;
                 int i = 0;
 
                 MNEHelper mne = new MNEHelper(appServer, appPort, mneLogOnUrl);
@@ -600,7 +612,7 @@ public class ConnectM3 {
                                         SimpleDateFormat A = new SimpleDateFormat("dd/MM/yyyy");
                                         String DateNow = A.format(d);
                                         String Sql = "";
-                                        Sql = "UPDATE BRLDTA0100.FAR_MTRREQ04\n"
+                                        Sql = "UPDATE " + GBVAR.DBPRD + ".FAR_MTRREQ04\n"
                                                 + "SET  MVX_ORDE  = '" + order_no + "' , ORD_STAT = '22', ORD_REMAR = '" + Pcreateddate + "'  \n"
                                                 + "WHERE ORD_ID  = '" + id + "'";
 

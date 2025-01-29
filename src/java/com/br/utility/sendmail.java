@@ -392,7 +392,7 @@ public class sendmail extends HttpServlet {
             JSONArray mJSonArr = new JSONArray();
 
 //            Statement sta = conn.createStatement();
-            String query = "            SELECT ORD_REGB   FROM  BRLDTA0100.FAR_MTRREQ04                  \n"
+            String query = "            SELECT ORD_REGB   FROM  "+GBVAR.DBPRD+".FAR_MTRREQ04                  \n"
                     + "                        WHERE  ORD_ID  = '" + id + "'\n"
                     + "               ";
             ResultSet mRes = stmt.executeQuery(query);

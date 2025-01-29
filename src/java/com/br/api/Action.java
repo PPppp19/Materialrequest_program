@@ -73,7 +73,7 @@ public class Action extends HttpServlet {
 
                 String SubjectEmail = "Material Request";
                 String LinkCreate = "Your request No. " + request.getParameter("ordernum") + " has been Complete ";
-                Send_mail.Sendmail_ICT(Appemail, LinkCreate, SubjectEmail);
+             //   Send_mail.Sendmail_ICT(Appemail, LinkCreate, SubjectEmail);
                 out.flush();
 
                 break;
@@ -115,6 +115,15 @@ public class Action extends HttpServlet {
                 out.print(Select.Company());
                 out.flush();
                 break;
+                
+                
+                  case "GetFAC":
+                System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaazzzzz");
+                out.print(Select.Location(request.getParameter("CONO"),request.getParameter("DIVI")));
+                out.flush();
+                break;
+                
+                
 
             case "checkuserprioAPV":
                 System.out.println("checkuserprioAPV");
@@ -228,6 +237,12 @@ public class Action extends HttpServlet {
                 out.print(Select.getHistorybystate(request.getParameter("cono"), request.getParameter("divi")));
                 out.flush();
                 break;
+                
+                  case "getHistorybystatefarm":
+                System.out.println("getHistorybystatefarm");
+                out.print(Select.getHistorybystatefarm(request.getParameter("cono"), request.getParameter("divi")));
+                out.flush();
+                break;
 
             case "gethistory":
                 System.out.println("gethistory");
@@ -238,6 +253,12 @@ public class Action extends HttpServlet {
             case "gethistorysp":
                 System.out.println("gethistorysp");
                 out.print(Select.getHistorysp(request.getParameter("cono"), request.getParameter("divi")));
+                out.flush();
+                break;
+                
+                case "gethistoryspfarm":
+                System.out.println("gethistoryspfarm");
+                out.print(Select.getHistoryspfarm(request.getParameter("cono"), request.getParameter("divi")));
                 out.flush();
                 break;
 
@@ -365,9 +386,10 @@ public class Action extends HttpServlet {
 
                 Date date = new Date();
                 String numtxt;
-                numtxt = currentID.substring(4, 8);
+                numtxt = currentID.substring(2, 8);
+                System.out.println("xx" + numtxt);
                 //SimpleDateFormat sdf = new SimpleDateFormat("yyMM");
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
                 sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 
                 System.out.println();
@@ -382,19 +404,22 @@ public class Action extends HttpServlet {
                     numy -= 543;
                 }
                 String yy = Integer.toString(numy).substring(2, 4);
-                String mm = stringDate.substring(4, 6);
 
-                String id = yy + mm + txt;
+                String id = yy  + txt;
 
                 nextid = id;
                 nextid1 = String.valueOf(inum);
 
                 System.out.println(id);
                 System.out.println(inum);
+                 System.out.println(nextid1);
+                
                 System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
                 System.out.println(request.getParameter("vcompany"));
                 System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 
+                System.out.println(id);
+                
                 out.print(Insert.AddOrderID(nextid, nextid1, inum, request.getParameter("vcompany"), request.getParameter("vrequester"), request.getParameter("vdepartmentname"), request.getParameter("vcostcenter"), request.getParameter("orderpurpose"), request.getParameter("vdate"), request.getParameter("vtype"), request.getParameter("vfwhs"), request.getParameter("vtwhs"), request.getParameter("location"),
                         request.getParameter("rqtdate"), request.getParameter("dpmhead"), request.getParameter("orddpmh"), request.getParameter("drhdate"), request.getParameter("ordissb"), request.getParameter("isbdate"), request.getParameter("ordstat"), request.getParameter("vcono"), request.getParameter("vdivi")));
 

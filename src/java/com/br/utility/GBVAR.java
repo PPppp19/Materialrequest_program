@@ -12,6 +12,11 @@ public class GBVAR {
     
     
     public static String  SELECTEDPAGE = "PAGE1"; 
+    
+    
+    
+    public static String  StoreFAC = "A00"; 
+    public static String  FarmFAC = "A73"; 
                        
 //                          
     public static String  M3DB = "M3FDBPRD"; 

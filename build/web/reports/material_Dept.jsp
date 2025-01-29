@@ -1681,7 +1681,7 @@
 //        } else {
 //            alert("this ORD_IS has been completed.");
 ////              location.replace("http://192.200.9.189:8080/UserRequest/login.jsp");
-//            window.location.href = "http://192.200.9.94:8080/MaterialRequest/?report=material_request";
+//            window.location.href = "http://192.200.9.189:8080/MaterialRequest/?report=material_request";
 //        }
 //
 //
