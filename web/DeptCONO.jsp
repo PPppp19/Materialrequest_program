@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 
-
+//
     <%
             if (request.getParameter("ORDID") != null) { 
                 session.setAttribute("user", request.getParameter("user"));
