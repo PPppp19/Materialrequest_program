@@ -37,20 +37,18 @@ public class Select {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "SELECT DISTINCT RL_CONO, RL_DIVI,RL_LCCODE, RL_LCDESC\n"
-                        + " FROM brldta0100.RECEIPT_LOCAFNC\n"
-                        + " WHERE RL_CONO = '" + CONO.trim() + "'\n"
-                        + " AND RL_DIVI ='" + DIVI.trim() + "'\n"
-                        + " AND RL_STS = '20'";
+                String query = "SELECT CFFACI,CFFACI || ' : '  || CFFACN  AS CFFACN \n" +
+"FROM M3FDBPRD.CFACIL\n" +
+"WHERE CFCONO = '"+CONO.trim()+"'\n" +
+"AND CFDIVI = '"+DIVI.trim()+"'";
                 System.out.println("SelectCompany\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
 
                 while (mRes.next()) {
                     Map<String, Object> mMap = new HashMap<>();
-                    mMap.put("RL_CONO", mRes.getString(1).trim());
-                    mMap.put("RL_DIVI", mRes.getString(2).trim());
-                    mMap.put("RL_LCCODE", mRes.getString(3).trim());
-                    mMap.put("RL_LCDESC", mRes.getString(4).trim());
+                
+                    mMap.put("CFFACI", mRes.getString(1).trim());
+                    mMap.put("CFFACN", mRes.getString(2).trim());
                     mJSonArr.put(mMap);
 
                 }

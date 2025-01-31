@@ -173,7 +173,9 @@
     } else {
         // ถ้ามีข้อมูลใน getdata
         $.each(getdata, function (i, obj) {
-            var div_data = "<option value='" + obj.RL_LCCODE + "'>" + obj.RL_LCDESC + "</option>";
+            
+
+            var div_data = "<option value='" + obj.CFFACI + "'>" + obj.CFFACN + "</option>";
             $('#vFac').append(div_data);  // เพิ่มข้อมูลใหม่
         });
     }
