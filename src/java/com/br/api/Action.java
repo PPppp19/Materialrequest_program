@@ -421,7 +421,7 @@ public class Action extends HttpServlet {
                 System.out.println(id);
                 
                 out.print(Insert.AddOrderID(nextid, nextid1, inum, request.getParameter("vcompany"), request.getParameter("vrequester"), request.getParameter("vdepartmentname"), request.getParameter("vcostcenter"), request.getParameter("orderpurpose"), request.getParameter("vdate"), request.getParameter("vtype"), request.getParameter("vfwhs"), request.getParameter("vtwhs"), request.getParameter("location"),
-                        request.getParameter("rqtdate"), request.getParameter("dpmhead"), request.getParameter("orddpmh"), request.getParameter("drhdate"), request.getParameter("ordissb"), request.getParameter("isbdate"), request.getParameter("ordstat"), request.getParameter("vcono"), request.getParameter("vdivi")));
+                        request.getParameter("rqtdate"), request.getParameter("dpmhead"), request.getParameter("orddpmh"), request.getParameter("drhdate"), request.getParameter("ordissb"), request.getParameter("isbdate"), request.getParameter("ordstat"), request.getParameter("vcono"), request.getParameter("vdivi"),request.getParameter("fac")));
 
                 out.flush();
                 break;

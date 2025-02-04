@@ -82,7 +82,7 @@ public class Login extends HttpServlet {
         HttpSession session = request.getSession(true);
         String strCono = new String("cono");
         String strDivi = new String("divi");
-        String strFac = new String("vFac");
+        String strFac = new String("fac");
         String strUser = new String("user");
         String strPass = new String("pass");
         String strComp = new String("comp");

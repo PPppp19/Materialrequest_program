@@ -155,11 +155,11 @@
                             </li>
                             
                             
-                             <li  class="dropdown" id="farmpart" style=" visibility: visible" ><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" href="./">Farm Approval<span class="caret"></span></a>
+                             <li  class="dropdown" id="farmpart" style=" visibility: visible" ><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" href="./">Admin Approval<span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu" style=" color: #ffffff; background-color: #070c13;">
-                                    <li  role="presentation"><a style=" color: #ffffff; background-color: #070c13;"class='dropdown-item' name="rental" href="?report=FarmPage">Farm Approval List</a></li>
+                                    <li  role="presentation"><a style=" color: #ffffff; background-color: #070c13;"class='dropdown-item' name="rental" href="?report=FarmPage">Admin Approval List</a></li>
                                     <li  role="presentation"><a style=" color: #ffffff; background-color: #070c13;"class='dropdown-item' name="rental" href="?report=MTRRQT_Report">Report</a></li>
-                                    <li  role="presentation"><a style=" color: #ffffff; background-color: #070c13;"class='dropdown-item' name="rental" href="?report=Historycompletefarm">Specialty History for Farm</a></li>
+                                    <li  role="presentation"><a style=" color: #ffffff; background-color: #070c13;"class='dropdown-item' name="rental" href="?report=Historycompletefarm">Specialty History for Admin</a></li>
                                     <li  role="presentation"><a style=" color: #ffffff; background-color: #070c13;"class='dropdown-item' name="rental" href="?page=ROLLBACK">ROLLBACK</a></li>
 
                                     <!--                                    <li  role="presentation"><a style=" color: #ffffff; background-color: #070c13;" class='dropdown-item' name="rental" href="?report=material_request&status=S3&ORDID=00000000">Approval</a></li>-->
@@ -291,10 +291,10 @@
 
 
 
-        var f = "<%out.print(session.getAttribute("vFac"));%>";
+        var f = "<%out.print(session.getAttribute("fac"));%>";
         
         
-       // alert(f);
+      //  alert(f);
         var username = "<%out.print(session.getAttribute("user"));%>";
         var st = document.getElementById("storepart");
         var DH = document.getElementById("DEPTHEAD");

@@ -84,7 +84,7 @@ public class Insert {
 
     }
 
-    public static String AddOrderID(String nextid, String id, int ruid, String vcompany, String vrequester, String vdepartmentname, String vcostcenter, String orderpurpose, String vdate, String vtype, String vfwhs, String vtwhs, String location, String rqtdate, String dpmhead, String orddpmh, String dphdate, String ordissb, String isbdate, String ordstat, String vcono, String vdivi) throws Exception {
+    public static String AddOrderID(String nextid, String id, int ruid, String vcompany, String vrequester, String vdepartmentname, String vcostcenter, String orderpurpose, String vdate, String vtype, String vfwhs, String vtwhs, String location, String rqtdate, String dpmhead, String orddpmh, String dphdate, String ordissb, String isbdate, String ordstat, String vcono, String vdivi , String fac) throws Exception {
 
         JSONArray mJSonArr = new JSONArray();
         //Connection conn = ConnectSQLServer.ConnectionDB();
@@ -96,7 +96,7 @@ public class Insert {
                 int a = Integer.parseInt(nextid);
 
                 Statement stmt2 = conn.createStatement();
-                String query2 = "INSERT INTO "+GBVAR.DBPRD+".FAR_MTRREQ04 (ID,ORD_ID,RUID,COM_ID ,ORD_REGB,DEP_NAME,COS_CENT, ORD_PURP, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, MVX_ORDE, REG_CONO, REG_DIVI) values (" + id + "," + a + ", " + ruid + " , '" + vcompany + "', '" + vrequester + "', '" + vdepartmentname + "', '" + vcostcenter + "', '" + orderpurpose + "' , '" + vdate + "', '" + vtype + "', '" + vfwhs + "', '" + vtwhs + "', '" + location + "', '" + rqtdate + "', '" + dpmhead + "', '" + orddpmh + "', '" + dphdate + "', '" + ordissb + "', '" + isbdate + "', '" + ordstat + "','00000000','" + vcono + "','" + vdivi + "' )";
+                String query2 = "INSERT INTO "+GBVAR.DBPRD+".FAR_MTRREQ04 (ID,ORD_ID,RUID,COM_ID ,ORD_REGB,DEP_NAME,COS_CENT, ORD_PURP, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, MVX_ORDE, REG_CONO, REG_DIVI,REG_FAC) values (" + id + "," + a + ", " + ruid + " , '" + vcompany + "', '" + vrequester + "', '" + vdepartmentname + "', '" + vcostcenter + "', '" + orderpurpose + "' , '" + vdate + "', '" + vtype + "', '" + vfwhs + "', '" + vtwhs + "', '" + location + "', '" + rqtdate + "', '" + dpmhead + "', '" + orddpmh + "', '" + dphdate + "', '" + ordissb + "', '" + isbdate + "', '" + ordstat + "','00000000','" + vcono + "','" + vdivi + "'  , '"+fac+"' )";
                 System.out.println("AddOrderID\n" + query2);
                 stmt2.execute(query2);
 

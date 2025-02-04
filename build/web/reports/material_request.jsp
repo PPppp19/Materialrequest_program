@@ -1666,6 +1666,11 @@
             var Location = document.getElementById("fname").value;
             var vcono = document.getElementById("cono").value;
             var vdivi = document.getElementById("divi").value;
+            
+            // todo addfac
+            
+            var facility = "<%out.print(session.getAttribute("fac"));%>".trim();
+
             var orderPurpose = "-";
             var rqtdate = "-";
             var dpmhead = "2000-00-00";
@@ -1702,7 +1707,8 @@
                         isbdate: isbdate,
                         ordstat: ordstat,
                         vcono: vcono,
-                        vdivi: vdivi
+                        vdivi: vdivi,
+                        fac:facility,
 
 
 
@@ -2174,7 +2180,8 @@
     });
     var cono = document.getElementById("cono").value;
     var divi = document.getElementById("divi").value;
-    var facility = "1A1";
+      var facility = "<%out.print(session.getAttribute("fac"));%>".trim();
+//    var facility =  document.getElementById("fac").value;
 //    var cono = "10"
 //    var divi = "101"
 
@@ -3234,6 +3241,14 @@
         });
     };
     $(document).ready(function () {
+
+
+    
+
+
+    //var facility =  document.getElementById("fac").value;
+
+//alert(cono);
 
         var mvxtxt = document.getElementById('movextxt');
         var date = document.getElementById('vDate');

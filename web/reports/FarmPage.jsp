@@ -169,7 +169,7 @@
 
         <header class="header"  >
 
-            <h1 align="center";  style=" color: #ffffff; font-weight: bold"> Store Approval  </h1>
+            <h1 align="center";  style=" color: #ffffff; font-weight: bold"> Admin Approval  </h1>
 
             <h3 align="center";  style=" color: #ffffff; font-weight: bold"><%out.print(session.getAttribute("comp"));%> </h3>
 

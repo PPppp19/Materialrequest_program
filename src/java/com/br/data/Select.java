@@ -1422,7 +1422,7 @@ public class Select {
 //                        + "                        (SELECT * FROM BRLDTA0100.FAR_ITMTLB03 ) AS b\n"
 //                        + "                      	ON a.ORD_ID = b.ORD_ID";
 
-                String query = " 	SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  "+GBVAR.DBPRD+".FAR_MTRREQ04 WHERE REG_CONO = '" + cono + "' AND REG_FAC = 'A73'   AND ORD_STAT = '22' AND REG_DIVI = '" + divi + "'  ORDER BY CAST(id AS int )  desc  ";
+                String query = " 	SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  "+GBVAR.DBPRD+".FAR_MTRREQ04 WHERE REG_CONO = '" + cono + "' AND REG_FAC IN ('1D1','1B1')  AND MAT_TYPE = '71'   AND ORD_STAT = '22' AND REG_DIVI = '" + divi + "'  ORDER BY CAST(id AS int )  desc  ";
                 System.out.println("Selectall history23\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
 
@@ -1533,7 +1533,10 @@ public class Select {
 //                        + "                        (SELECT * FROM BRLDTA0100.FAR_ITMTLB03 ) AS b\n"
 //                        + "                      	ON a.ORD_ID = b.ORD_ID";
 
-                String query = " 	SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  "+GBVAR.DBPRD+".FAR_MTRREQ04 WHERE REG_CONO = '" + cono + "' AND ( REG_FAC != '"+GBVAR.FarmFAC+"' OR  REG_FAC IS NULL  )  AND ORD_STAT = '22' AND REG_DIVI = '" + divi + "'  ORDER BY CAST(id AS int )  desc  ";
+                String query = " 	SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  "+GBVAR.DBPRD+".FAR_MTRREQ04 WHERE REG_CONO = '" + cono + "'  AND ( \n" +
+"                (REG_FAC IN ('1B1', '1D1') AND MAT_TYPE <> '71') \n" +
+"              OR (REG_FAC NOT IN ('1B1', '1D1') AND MAT_TYPE = '71') \n" +
+"               )  AND ORD_STAT = '22' AND REG_DIVI = '" + divi + "'  ORDER BY CAST(id AS int )  desc  ";
                 System.out.println("Selectall history23\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
 
@@ -1638,7 +1641,7 @@ public class Select {
 
                 Statement stmt = conn.createStatement();
 
-                String query = "SELECT ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  "+GBVAR.DBPRD+".FAR_MTRREQ04 WHERE ORD_STAT IN  ('11','21') AND REG_FAC = 'A73'  AND REG_CONO = '" + cono + "' AND REG_DIVI = '" + divi + "' AND ISB_DATE = '-'   ORDER BY CAST(id AS int )  desc  ";
+                String query = "SELECT ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  "+GBVAR.DBPRD+".FAR_MTRREQ04 WHERE ORD_STAT IN  ('11','21')   AND REG_FAC IN ('1B1', '1D1')   AND MAT_TYPE = '71'    AND REG_CONO = '" + cono + "' AND REG_DIVI = '" + divi + "' AND ISB_DATE = '-'   ORDER BY CAST(id AS int )  desc  ";
                 System.out.println("Selectall history3\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
 
@@ -1741,7 +1744,10 @@ public class Select {
 
                 Statement stmt = conn.createStatement();
 
-                String query = "SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  "+GBVAR.DBPRD+".FAR_MTRREQ04 WHERE ORD_STAT IN  ('11','21')   AND REG_CONO = '" + cono + "' AND REG_DIVI = '" + divi + "'  AND ( REG_FAC != '"+GBVAR.FarmFAC+"' OR  REG_FAC IS NULL  ) AND ISB_DATE = '-'   ORDER BY CAST(id AS int )  desc  ";
+                String query = "SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  "+GBVAR.DBPRD+".FAR_MTRREQ04 WHERE ORD_STAT IN  ('11','21')   AND REG_CONO = '" + cono + "' AND REG_DIVI = '" + divi + "'      AND ( \n" +
+"                (REG_FAC IN ('1B1', '1D1') AND MAT_TYPE <> '71') \n" +
+"              OR (REG_FAC NOT IN ('1B1', '1D1') AND MAT_TYPE = '71') \n" +
+"               )AND ISB_DATE = '-'   ORDER BY CAST(id AS int )  desc  ";
                 System.out.println("Selectall history3\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
 
@@ -2480,7 +2486,7 @@ public class Select {
                 String query = "SELECT MWWHLO,MWWHNM,MWWHLO || ' : ' || MWWHNM AS WAREHOUSE \n"
                         + "FROM M3FDBPRD.MITWHL\n"
                         + "WHERE MWCONO = '" + cono + "'\n"
-                        + "AND MWDIVI = '" + divi + "'\n"
+                        + "AND MWDIVI = '" + divi + "'   AND MWFACI  = '"+fac+"'   \n"
                         + "ORDER BY MWWHLO";
                 System.out.println("getWarehouse\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
