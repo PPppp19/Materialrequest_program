@@ -235,6 +235,8 @@ public class ConnectM3 {
         //System.out.println(Select.getloadm3(orderid));
         return Select.getloadm3(orderid);
     }
+    
+ 
 
     private String getordertype(String materiltype, String faculty) throws Exception {
 
@@ -319,7 +321,9 @@ public class ConnectM3 {
 
                 if (mne.panel.equals("MMS100/B1")) {
                     //System.out.println(mne.panel);
-                    mne.setField("WWFACI", faculty.trim());
+                    //mne.setField("WWFACI", faculty.trim());
+                                        mne.setField("WWFACI", faculty.trim().equals("-") ? "1A1" : faculty.trim());
+
                     mne.setField("W1TRTP", getordertype(type, faculty));
 
                     //mne.selectOption(MNEProtocol.OptionCreate);
@@ -582,7 +586,9 @@ public class ConnectM3 {
 
                 if (mne.panel.equals("MMS100/B1")) {
                     //System.out.println(mne.panel);
-                    mne.setField("WWFACI", faculty.trim());
+                   // mne.setField("WWFACI", faculty.trim());
+                    mne.setField("WWFACI", faculty.trim().equals("-") ? "1A1" : faculty.trim());
+
                     mne.setField("W1TRTP", getordertype(type, faculty));
                     mne.setField("_PSEQ", "E1");
 
