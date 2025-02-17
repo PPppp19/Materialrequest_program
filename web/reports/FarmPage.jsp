@@ -827,9 +827,7 @@
                     success: function (data) {
 
 
-         let numericData = Number(data);
 
-        if (!isNaN(numericData) ) {
 
                         $("#loader").hide();
                         $.ajax({
@@ -850,10 +848,6 @@
                         document.getElementById('movexno').innerHTML = data;
                         
                         
-                              }
-                                            $("#loader").stop();
-                                            hideLoader();
-                                             alert(data);
                     },
                         
                     error: function (e) {
