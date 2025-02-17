@@ -445,9 +445,9 @@
                         {title: "TYPE", name: "MAT_TYPE", type: "text", width: 1,
                             itemTemplate: function (value, item) {
                                 if (value === "71") {
-                                    return "A71";
+                                    return "EXPENSE";
                                 } else if (value === "33") {
-                                    return "A33";
+                                    return "TRANSFER";
                                 } else {
                                     return "-";
                                 }

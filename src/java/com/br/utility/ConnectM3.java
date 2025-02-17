@@ -49,6 +49,8 @@ public class ConnectM3 {
     String fromwarehouse = "";
     String departmentname = "";
 
+    String faculty = "1A1";
+
     SoftReference<ArrayList<String>> itemid1 = new SoftReference<>(new ArrayList<>());
     SoftReference<ArrayList<String>> itemkid = new SoftReference<>(new ArrayList<>());
     SoftReference<ArrayList<String>> itemunit = new SoftReference<>(new ArrayList<>());
@@ -56,7 +58,7 @@ public class ConnectM3 {
     SoftReference<ArrayList<String>> itemonhand = new SoftReference<>(new ArrayList<>());
 //    protected String mneLogOnUrl = "https://bkrmvxm3.bangkokranch.com:22008/mne/servlet/MvxMCSvt"; //TST
 //    protected String mneLogOnUrl = "https://bkrmvxm3.bangkokranch.com:21008/mne/servlet/MvxMCSvt";  //PRD
-    protected String mneLogOnUrl =  GBVAR.LoginUrlConnectionm3;  
+    protected String mneLogOnUrl = GBVAR.LoginUrlConnectionm3;
 
     MvxSockJ sock;
     protected int cono;
@@ -93,6 +95,7 @@ public class ConnectM3 {
             movexno = "A33";
 
             JSONArray jsonArray = new JSONArray(getvalue(id).toString());
+
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                 String TO_WAHO = jsonObject1.optString("TO_WAHO");
@@ -106,6 +109,8 @@ public class ConnectM3 {
                 String FRM_WAHO = jsonObject1.optString("FRM_WAHO");
                 String ONH_STAT = jsonObject1.optString("ONH_STAT");
 
+                String REG_FAC = jsonObject1.optString("REG_FAC");
+
                 //purpose = ORD_PURP;
                 fromwarehouse = FRM_WAHO;
 
@@ -118,6 +123,13 @@ public class ConnectM3 {
 
                 createddate = GetDatePattern(ISS_DATE);
                 Pcreateddate = ISS_DATE;
+
+                if (REG_FAC == "-") {
+                    faculty = "1A1";
+                } else {
+                    faculty = REG_FAC;
+
+                }
                 List<String> listid = itemid1.get();
                 List<String> listunit = itemunit.get();
                 List<String> listkid = itemkid.get();
@@ -134,6 +146,7 @@ public class ConnectM3 {
                 System.out.println(ISS_DATE);
                 System.out.println(GetDatePattern(ISS_DATE));
                 System.out.println(orderid);
+                System.out.println(REG_FAC);
                 System.out.println("================================123");
 
             }
@@ -143,7 +156,7 @@ public class ConnectM3 {
             System.out.println(id);
             System.out.println("================================");
 
-            movexno = callMMS100A33(id, Integer.parseInt(cono), divi);
+            movexno = callMMS100A33(id, Integer.parseInt(cono), divi, type);
 
         } else if ("71".equals(type)) {
             //callMMS100A71();
@@ -164,10 +177,19 @@ public class ConnectM3 {
                 String FRM_WAHO = jsonObject1.optString("FRM_WAHO");
                 String ONH_STAT = jsonObject1.optString("ONH_STAT");
 
+                String REG_FAC = jsonObject1.optString("REG_FAC");
+
                 fromwarehouse = FRM_WAHO;
                 towarehouse = TO_WAHO;
                 createddate = GetDatePattern(ISS_DATE);
                 Pcreateddate = ISS_DATE;
+
+                if (REG_FAC == "-") {
+                    faculty = "1A1";
+                } else {
+                    faculty = REG_FAC;
+
+                }
 
                 List<String> listid = itemid1.get();
                 List<String> listunit = itemunit.get();
@@ -186,11 +208,13 @@ public class ConnectM3 {
                 System.out.println(GetDatePattern(ISS_DATE));
                 System.out.println(ONH_STAT);
                 System.out.println(itemonhand);
+                System.out.println(REG_FAC);
+
                 System.out.println("================================123");
 
             }
 
-            movexno = callMMS100A71(id, Integer.parseInt(cono), divi);
+            movexno = callMMS100A71(id, Integer.parseInt(cono), divi, type);
             System.out.println("Select type = A71");
         }
 
@@ -212,7 +236,14 @@ public class ConnectM3 {
         return Select.getloadm3(orderid);
     }
 
-    private String callMMS100A33(String id, int usercono, String userdivi) {
+    private String getordertype(String materiltype, String faculty) throws Exception {
+
+        //System.out.println("----------------------");
+        //System.out.println(Select.getloadm3(orderid));
+        return Select.GetOrderType(materiltype, faculty);
+    }
+
+    private String callMMS100A33(String id, int usercono, String userdivi, String type) {
 
         System.out.println("-------------------");
         System.out.println(fromwarehouse);
@@ -288,8 +319,8 @@ public class ConnectM3 {
 
                 if (mne.panel.equals("MMS100/B1")) {
                     //System.out.println(mne.panel);
-                    mne.setField("WWFACI", "1A1");
-                    mne.setField("W1TRTP", "A33");
+                    mne.setField("WWFACI", faculty.trim());
+                    mne.setField("W1TRTP", getordertype(type, faculty));
 
                     //mne.selectOption(MNEProtocol.OptionCreate);
                     mne.selectOption("1");
@@ -326,12 +357,12 @@ public class ConnectM3 {
                         //-------------------------------------------------------
                         List<String> listid = itemid1.get();
                         List<String> listonhand = itemonhand.get();
-                        
+
                         System.out.println(listonhand); // แสดงรายการทั้งหมด
-                        
+
                         for (String item : listonhand) {
-    System.out.println(item);
-}
+                            System.out.println(item);
+                        }
 
                         List<String> listunit = itemunit.get();
 //                        List<String> listkid = itemkid.get();
@@ -340,7 +371,7 @@ public class ConnectM3 {
 
                         for (i = 0; i <= listid.size() - 1; i++) {
 
-                                                    System.out.println(listonhand); // แสดงรายการทั้งหมด
+                            System.out.println(listonhand); // แสดงรายการทั้งหมด
 
                             int index = i - 1;
                             if ("YES".equals(listonhand.get(i))) {
@@ -376,6 +407,14 @@ public class ConnectM3 {
 
                                     mne.pressKey(MNEProtocol.KeyEnter);
                                     mne.pressKey(MNEProtocol.KeyEnter);
+                                    
+                                        if (mne.getMsg() != null) {
+                            order_no = " error " + mne.panel + ",  " + mne.getMsg();
+                            mne.pressKey(MNEProtocol.KeyF03);
+                            mne.pressKey(MNEProtocol.KeyF03);
+                            mne.closeProgram(MMS100ID);
+                            return order_no;
+                        }
 
                                     c = 0;
                                     while ((!mne.panel.equals("MMS101/B1")) && (c <= 3)) {
@@ -464,7 +503,7 @@ public class ConnectM3 {
 //
 //        return Select.getComplete(orderid);
 //    }
-    private String callMMS100A71(String id, int usercono, String userdivi) {
+    private String callMMS100A71(String id, int usercono, String userdivi, String type) {
         try {
 
             System.out.println("A7111111111111111111111111111111111111111111");
@@ -476,6 +515,9 @@ public class ConnectM3 {
             System.out.println(itemid1);
             System.out.println(itemunit);
             System.out.println(itemissu);
+
+            System.out.println(faculty);
+
             System.out.println("-------------------");
 
             Connection conn = ConnectDB2.ConnectionDB();
@@ -540,15 +582,15 @@ public class ConnectM3 {
 
                 if (mne.panel.equals("MMS100/B1")) {
                     //System.out.println(mne.panel);
-                    mne.setField("WWFACI", "1A1");
-                    mne.setField("W1TRTP", "A71");
+                    mne.setField("WWFACI", faculty.trim());
+                    mne.setField("W1TRTP", getordertype(type, faculty));
                     mne.setField("_PSEQ", "E1");
 
                     //mne.selectOption(MNEProtocol.OptionCreate);
                     mne.selectOption("1");
 
                     //========= Begin order Type A71 ==================
-                    if (mne.panel.equals("MMS100/E")) {
+                    if (mne.panel.equals("MMS100/E") ) {
 
                         mne.setField("WGWHLO", fromwarehouse.trim());
                         mne.setField("WGTRDT", createddate.trim());
@@ -564,12 +606,20 @@ public class ConnectM3 {
                             mne.pressKey(MNEProtocol.KeyEnter);
 
                         }
-                        if (c > 3) {
-                            dspmsg(mne.getMsg());
+
+                        if (mne.getMsg() != null) {
+                            order_no = " error " + mne.panel + ",  " + mne.getMsg();
+                            mne.pressKey(MNEProtocol.KeyF03);
+                            mne.pressKey(MNEProtocol.KeyF03);
                             mne.closeProgram(MMS100ID);
-                            return mne.getMsg();
+                            return order_no;
                         }
 
+//                        if (c > 3) {
+//                            dspmsg(mne.getMsg());
+//                            mne.closeProgram(MMS100ID);
+//                            return mne.getMsg();
+//                        }
                         //-------------------------------------------------------
                         List<String> listid = itemid1.get();
                         List<String> listunit = itemunit.get();
@@ -587,6 +637,9 @@ public class ConnectM3 {
                                 System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 
                                 //----------------------
+                                System.out.println(mne.panel);
+                                System.out.println(mne.getMsg());
+
                                 if (mne.panel.equals("MMS101/B1")) {
 
                                     mne.setField("WRITNO", listid.get(i));
@@ -598,6 +651,14 @@ public class ConnectM3 {
                                     movexno = order_no;
                                     mne.pressKey(MNEProtocol.KeyEnter);
                                     mne.pressKey(MNEProtocol.KeyEnter);
+
+                                    if (mne.getMsg() != null) {
+                                        order_no = " error " + mne.panel + ",  " + mne.getMsg();
+                                        mne.pressKey(MNEProtocol.KeyF03);
+                                        mne.pressKey(MNEProtocol.KeyF03);
+                                        mne.closeProgram(MMS100ID);
+                                        return order_no;
+                                    }
 
                                     //---------------------
                                     if (mne.getMsg() == null) {

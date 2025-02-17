@@ -25,10 +25,8 @@ public class Select {
 
     public static String DBPRD = GBVAR.DBPRD;
     public static String M3DB = GBVAR.M3DB;
-    
-    
-    
-     public static JSONArray Location(String CONO, String DIVI) throws Exception {
+
+    public static JSONArray Location(String CONO, String DIVI) throws Exception {
 
         JSONArray mJSonArr = new JSONArray();
         Connection conn = ConnectDB2.ConnectionDB();
@@ -37,16 +35,16 @@ public class Select {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "SELECT CFFACI,CFFACI || ' : '  || CFFACN  AS CFFACN \n" +
-"FROM M3FDBPRD.CFACIL\n" +
-"WHERE CFCONO = '"+CONO.trim()+"'\n" +
-"AND CFDIVI = '"+DIVI.trim()+"'";
+                String query = "SELECT CFFACI,CFFACI || ' : '  || CFFACN  AS CFFACN \n"
+                        + "FROM M3FDBPRD.CFACIL\n"
+                        + "WHERE CFCONO = '" + CONO.trim() + "'\n"
+                        + "AND CFDIVI = '" + DIVI.trim() + "'";
                 System.out.println("SelectCompany\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
 
                 while (mRes.next()) {
                     Map<String, Object> mMap = new HashMap<>();
-                
+
                     mMap.put("CFFACI", mRes.getString(1).trim());
                     mMap.put("CFFACN", mRes.getString(2).trim());
                     mJSonArr.put(mMap);
@@ -74,8 +72,6 @@ public class Select {
         return mJSonArr;
 
     }
-
-    
 
     public static String checkuserprioAPV(String username) throws Exception {
 
@@ -178,6 +174,57 @@ public class Select {
 
     }
 
+    public static String checkuserpriofm(String username) throws Exception {
+
+        Connection conn = ConnectDB2.ConnectionDB();
+        String isComplete = "NG";
+        int count = 0;
+
+        try {
+            if (conn != null) {
+
+                Statement stmt = conn.createStatement();
+                String query = "SELECT COUNT(CTL_UID)  \n"
+                        + "FROM BRLDTA0100.APPCTL1 a \n"
+                        + "WHERE CTL_CODE = 'MAT'\n"
+                        + "AND CTL_REM = 'AD'\n"
+                        + "AND CTL_UID = '" + username + "'";
+
+                System.out.println("getCompleteFM\n" + query);
+                ResultSet mRes = stmt.executeQuery(query);
+
+                while (mRes.next()) {
+                    count = mRes.getInt(1);
+                }
+
+            } else {
+                System.out.println("Server can't connect.");
+            }
+
+        } catch (SQLException sqle) {
+            throw sqle;
+        } catch (Exception e) {
+            if (conn != null) {
+                conn.close();
+            }
+            throw e;
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        System.out.println("mamamamamamama");
+        System.out.println(count);
+
+        if (count != 0) {
+            isComplete = "OK";
+        }
+
+        return isComplete;
+
+    }
+
     public static JSONArray getSelectID(String username, String key, String cono, String divi) throws Exception {
 
         Connection conn = ConnectDB2.ConnectionDB();
@@ -206,7 +253,7 @@ public class Select {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "SELECT  ORD_ID  FROM "+GBVAR.DBPRD+".FAR_MTRREQ04 WHERE " + column + "  = '" + username + "' AND  ORD_STAT  = '" + sts + "' AND REG_CONO = '" + cono + "' AND REG_DIVI = '" + divi + "' ORDER BY CAST(id AS int )  desc ";
+                String query = "SELECT  ORD_ID  FROM " + GBVAR.DBPRD + ".FAR_MTRREQ04 WHERE " + column + "  = '" + username + "' AND  ORD_STAT  = '" + sts + "' AND REG_CONO = '" + cono + "' AND REG_DIVI = '" + divi + "' ORDER BY CAST(id AS int )  desc ";
 
                 System.out.println("getSelectIDddddd\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
@@ -249,7 +296,7 @@ public class Select {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "SELECT  ORD_ID  FROM "+GBVAR.DBPRD+".FAR_MTRREQ04 WHERE ORD_REGB  = '" + username + "' AND REG_CONO = '" + cono + "' AND REG_DIVI = '" + divi + "' ";
+                String query = "SELECT  ORD_ID  FROM " + GBVAR.DBPRD + ".FAR_MTRREQ04 WHERE ORD_REGB  = '" + username + "' AND REG_CONO = '" + cono + "' AND REG_DIVI = '" + divi + "' ";
 
                 System.out.println("getmyid\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
@@ -294,7 +341,7 @@ public class Select {
 
                 Statement stmt = conn.createStatement();
                 String query = "         SELECT COUNT(POS_STAT) as xxx\n"
-                        + "FROM "+GBVAR.DBPRD+".FAR_ITMTLB04 fi \n"
+                        + "FROM " + GBVAR.DBPRD + ".FAR_ITMTLB04 fi \n"
                         + "WHERE  ORD_ID  = '" + orderid + "' ";
 
                 System.out.println("getComplete\n" + query);
@@ -341,7 +388,7 @@ public class Select {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "SELECT  MVX_ORDE FROM  "+GBVAR.DBPRD+".FAR_MTRREQ04\n"
+                String query = "SELECT  MVX_ORDE FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04\n"
                         + " WHERE ORD_ID = '" + ordernum + "'";
 
                 System.out.println("getmovex\n" + query);
@@ -383,7 +430,7 @@ public class Select {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "SELECT  ORD_REGB FROM  "+GBVAR.DBPRD+".FAR_MTRREQ04\n"
+                String query = "SELECT  ORD_REGB FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04\n"
                         + " WHERE ORD_ID = '" + ordernum + "'";
 
                 System.out.println("getstoredsignature\n" + query);
@@ -615,7 +662,7 @@ public class Select {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "SELECT " + rolename + "  AS nameresult FROM "+GBVAR.DBPRD+".FAR_MTRREQ04 WHERE  ORD_ID = '" + orderid + "'";
+                String query = "SELECT " + rolename + "  AS nameresult FROM " + GBVAR.DBPRD + ".FAR_MTRREQ04 WHERE  ORD_ID = '" + orderid + "'";
                 System.out.println("getstoredsignature\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
 
@@ -682,6 +729,47 @@ public class Select {
 
     }
 
+    /////// get ordertype FAC 
+    public static String GetOrderType(String mattype, String facility) throws Exception {
+
+        String ordertype = "";
+        Connection conn = ConnectDB2.ConnectionDB();
+
+        try {
+            if (conn != null) {
+
+                Statement stmt = conn.createStatement();
+                String query = "SELECT ORD_REMAR1 FROM BRLDTA0100.FAR_MTRREQ_ORDERTYPE\n"
+                        + "WHERE MAT_TYPE = '" + mattype.trim() + "'\n"
+                        + "AND REG_FAC  = '" + facility.trim() + "'";
+                System.out.println("GetOrderType\n" + query);
+                ResultSet mRes = stmt.executeQuery(query);
+
+                while (mRes.next()) {
+                    ordertype = mRes.getString("ORD_REMAR1");
+                }
+
+            } else {
+                System.out.println("Server can't connect.");
+            }
+
+        } catch (SQLException sqle) {
+            throw sqle;
+        } catch (Exception e) {
+            if (conn != null) {
+                conn.close();
+            }
+            throw e;
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        System.out.println(ordertype);
+        return ordertype;
+
+    }
+
     public static JSONArray getitemtype(String itemid, String cono) throws Exception {
 
         JSONArray mJSonArr = new JSONArray();
@@ -739,12 +827,12 @@ public class Select {
 
                 Statement stmt = conn.createStatement();
                 String query = "SELECT * FROM \n"
-                        + "                       (SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVIห FROM  "+GBVAR.DBPRD+".FAR_MTRREQ04\n"
+                        + "                       (SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVIห FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04\n"
                         + "                        WHERE ORD_ID = '" + id.trim() + "' \n"
                         + "                        AND  ORD_STAT != '22' AND  ORD_STAT != '99' \n"
                         + "AND REG_CONO= '" + cono + "' AND REG_DIVI ='" + divi + "' ) AS a \n"
                         + "            			LEFT  JOIN  \n"
-                        + "                        (SELECT * FROM "+GBVAR.DBPRD+".FAR_ITMTLB04\n"
+                        + "                        (SELECT * FROM " + GBVAR.DBPRD + ".FAR_ITMTLB04\n"
                         + "                        WHERE ORD_ID = '" + id.trim() + "' \n"
                         + "AND REG_CONO= '" + cono + "' AND REG_DIVI ='" + divi + "'') AS b\n"
                         + "                      	ON a.ORD_ID = b.ORD_ID";
@@ -836,11 +924,11 @@ public class Select {
 
                 Statement stmt = conn.createStatement();
                 String query = "SELECT * FROM \n"
-                        + "                       (                       SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM "+GBVAR.DBPRD+".FAR_MTRREQ04\n"
+                        + "                       (                       SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI , REG_FAC FROM " + GBVAR.DBPRD + ".FAR_MTRREQ04\n"
                         + "                        WHERE ORD_ID = '" + id.trim() + "' \n"
                         + "                        AND  ORD_STAT != '22' AND  ORD_STAT != '99'  ) AS a \n"
                         + "            			LEFT  JOIN  \n"
-                        + "                        (SELECT * FROM "+GBVAR.DBPRD+".FAR_ITMTLB04\n"
+                        + "                        (SELECT * FROM " + GBVAR.DBPRD + ".FAR_ITMTLB04\n"
                         + "                        WHERE ORD_ID = '" + id.trim() + "') AS b\n"
                         + "                      	ON a.ORD_ID = b.ORD_ID";
                 System.out.println("Selectall history4\n" + query);
@@ -907,27 +995,32 @@ public class Select {
 
                     if (mRes.getString(25) != null) {
 
-                        mMap.put("ITID", mRes.getString(25).trim());
-                    }
-                    if (mRes.getString(27) != null) {
-                        mMap.put("ITM_ID", mRes.getString(27).trim());
+                        mMap.put("REG_FAC", mRes.getString(25).trim());
                     }
 
+                    if (mRes.getString(26) != null) {
+
+                        mMap.put("ITID", mRes.getString(26).trim());
+                    }
                     if (mRes.getString(28) != null) {
-                        mMap.put("ITM_DESC", mRes.getString(28).trim());
-                    }
-                    if (mRes.getString(29) != null) {
-                        mMap.put("ITM_UNIT", mRes.getString(29).trim());
+                        mMap.put("ITM_ID", mRes.getString(28).trim());
                     }
 
-                    if (mRes.getString(30) != null) {
-                        mMap.put("QTY_REQT", mRes.getString(30).trim());
+                    if (mRes.getString(29) != null) {
+                        mMap.put("ITM_DESC", mRes.getString(29).trim());
                     }
+                    if (mRes.getString(30) != null) {
+                        mMap.put("ITM_UNIT", mRes.getString(30).trim());
+                    }
+
                     if (mRes.getString(31) != null) {
-                        mMap.put("QTY_ISSU", mRes.getString(31).trim());
+                        mMap.put("QTY_REQT", mRes.getString(31).trim());
                     }
                     if (mRes.getString(32) != null) {
-                        mMap.put("ONH_STAT", mRes.getString(32).trim());
+                        mMap.put("QTY_ISSU", mRes.getString(32).trim());
+                    }
+                    if (mRes.getString(33) != null) {
+                        mMap.put("ONH_STAT", mRes.getString(33).trim());
                     }
 
                     mJSonArr.put(mMap);
@@ -982,7 +1075,7 @@ public class Select {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  "+GBVAR.DBPRD+".FAR_MTRREQ04\n"
+                String query = "SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04\n"
                         + " WHERE ORD_ID = '" + id.trim() + "' \n"
                         + "AND REG_CONO != '00' AND REG_DIVI !='00' \n"
                         + " and  ORD_STAT = '" + stste + "' ";
@@ -1057,7 +1150,7 @@ public class Select {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = " SELECT * FROM "+GBVAR.DBPRD+".FAR_ITMTLB04\n"
+                String query = " SELECT * FROM " + GBVAR.DBPRD + ".FAR_ITMTLB04\n"
                         + "    WHERE ORD_ID = '" + id.trim() + "' \n"
                         + "AND REG_CONO != '00' AND REG_DIVI !='00'";
 
@@ -1129,7 +1222,7 @@ public class Select {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "SELECT ORD_REGB , ORD_DPMH  FROM  "+GBVAR.DBPRD+".FAR_MTRREQ04\n"
+                String query = "SELECT ORD_REGB , ORD_DPMH  FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04\n"
                         + " WHERE ORD_ID  = '" + orderid + "'";
                 System.out.println("getsignaturename\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
@@ -1177,7 +1270,7 @@ public class Select {
 //                String query = "SELECT  * FROM  BRLDTA0100.FAR_ITMTLB03  where ORD_ID = '" + id + "'";
                 String query = " \n"
                         + " SELECT  * \n"
-                        + "FROM (SELECT  * FROM  "+GBVAR.DBPRD+".FAR_ITMTLB04  where ORD_ID = '" + id + "' AND REG_CONO = '" + cono + "' AND REG_DIVI = '" + divi + "') AS A \n"
+                        + "FROM (SELECT  * FROM  " + GBVAR.DBPRD + ".FAR_ITMTLB04  where ORD_ID = '" + id + "' AND REG_CONO = '" + cono + "' AND REG_DIVI = '" + divi + "') AS A \n"
                         + "LEFT JOIN  \n"
                         + "(\n"
                         + "SELECT MLITNO, MLCONO ,SUM(CAST(MLSTQT AS double)-CAST(MLALQT AS double)) as ONHAND\n"
@@ -1270,7 +1363,7 @@ public class Select {
                         + "FRM_WAHO , TO_WAHO,\n"
                         + "ORD_REGB , ORD_DPMH,\n"
                         + "ORD_ISSB\n"
-                        + "FROM  "+GBVAR.DBPRD+".FAR_MTRREQ04 WHERE COM_ID = '"+cono+"' ORDER BY ord_id DESC  ";
+                        + "FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04 WHERE COM_ID = '" + cono + "' ORDER BY ord_id DESC  ";
 
                 System.out.println("Selectall history2\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
@@ -1405,9 +1498,7 @@ public class Select {
 
     }
 
-    
-            
-             public static JSONArray getHistoryspfarm(String cono, String divi) throws Exception {
+    public static JSONArray getHistoryspfarm(String cono, String divi) throws Exception {
 
         JSONArray mJSonArr = new JSONArray();
         Connection conn = ConnectDB2.ConnectionDB();
@@ -1422,7 +1513,7 @@ public class Select {
 //                        + "                        (SELECT * FROM BRLDTA0100.FAR_ITMTLB03 ) AS b\n"
 //                        + "                      	ON a.ORD_ID = b.ORD_ID";
 
-                String query = " 	SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  "+GBVAR.DBPRD+".FAR_MTRREQ04 WHERE REG_CONO = '" + cono + "' AND REG_FAC IN ('1D1','1B1')  AND MAT_TYPE = '71'   AND ORD_STAT = '22' AND REG_DIVI = '" + divi + "'  ORDER BY CAST(id AS int )  desc  ";
+                String query = " 	SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04 WHERE REG_CONO = '" + cono + "' AND REG_FAC IN ('1D1','1B1')  AND MAT_TYPE = '71'   AND ORD_STAT = '22' AND REG_DIVI = '" + divi + "'  ORDER BY CAST(id AS int )  desc  ";
                 System.out.println("Selectall history23\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
 
@@ -1516,8 +1607,7 @@ public class Select {
         return mJSonArr;
 
     }
-    
-        
+
     public static JSONArray getHistorysp(String cono, String divi) throws Exception {
 
         JSONArray mJSonArr = new JSONArray();
@@ -1533,10 +1623,10 @@ public class Select {
 //                        + "                        (SELECT * FROM BRLDTA0100.FAR_ITMTLB03 ) AS b\n"
 //                        + "                      	ON a.ORD_ID = b.ORD_ID";
 
-                String query = " 	SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  "+GBVAR.DBPRD+".FAR_MTRREQ04 WHERE REG_CONO = '" + cono + "'  AND ( \n" +
-"                (REG_FAC IN ('1B1', '1D1') AND MAT_TYPE <> '71') \n" +
-"              OR (REG_FAC NOT IN ('1B1', '1D1') AND MAT_TYPE = '71') \n" +
-"               )  AND ORD_STAT = '22' AND REG_DIVI = '" + divi + "'  ORDER BY CAST(id AS int )  desc  ";
+                String query = " 	SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04 WHERE REG_CONO = '" + cono + "'  AND ( \n"
+                        + "                (REG_FAC IN ('1B1', '1D1') AND MAT_TYPE <> '71') \n"
+                        + "              OR (REG_FAC NOT IN ('1B1', '1D1') AND MAT_TYPE = '71') \n"
+                        + "               )  AND ORD_STAT = '22' AND REG_DIVI = '" + divi + "'  ORDER BY CAST(id AS int )  desc  ";
                 System.out.println("Selectall history23\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
 
@@ -1630,7 +1720,7 @@ public class Select {
         return mJSonArr;
 
     }
-    
+
     public static JSONArray getHistorybystatefarm(String cono, String divi) throws Exception {
 
         JSONArray mJSonArr = new JSONArray();
@@ -1641,7 +1731,7 @@ public class Select {
 
                 Statement stmt = conn.createStatement();
 
-                String query = "SELECT ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  "+GBVAR.DBPRD+".FAR_MTRREQ04 WHERE ORD_STAT IN  ('11','21')   AND REG_FAC IN ('1B1', '1D1')   AND MAT_TYPE = '71'    AND REG_CONO = '" + cono + "' AND REG_DIVI = '" + divi + "' AND ISB_DATE = '-'   ORDER BY CAST(id AS int )  desc  ";
+                String query = "SELECT ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04 WHERE ORD_STAT IN  ('11','21')   AND REG_FAC IN ('1B1', '1D1')      AND REG_CONO = '" + cono + "' AND REG_DIVI = '" + divi + "' AND ISB_DATE = '-'   ORDER BY CAST(id AS int )  desc  ";
                 System.out.println("Selectall history3\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
 
@@ -1733,7 +1823,6 @@ public class Select {
 
     }
 
-
     public static JSONArray getHistorybystate(String cono, String divi) throws Exception {
 
         JSONArray mJSonArr = new JSONArray();
@@ -1744,10 +1833,10 @@ public class Select {
 
                 Statement stmt = conn.createStatement();
 
-                String query = "SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  "+GBVAR.DBPRD+".FAR_MTRREQ04 WHERE ORD_STAT IN  ('11','21')   AND REG_CONO = '" + cono + "' AND REG_DIVI = '" + divi + "'      AND ( \n" +
-"                (REG_FAC IN ('1B1', '1D1') AND MAT_TYPE <> '71') \n" +
-"              OR (REG_FAC NOT IN ('1B1', '1D1') AND MAT_TYPE = '71') \n" +
-"               )AND ISB_DATE = '-'   ORDER BY CAST(id AS int )  desc  ";
+                String query = "SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04 WHERE ORD_STAT IN  ('11','21')   AND REG_CONO = '" + cono + "' AND REG_DIVI = '" + divi + "'      AND ( \n"
+                        + "                (REG_FAC NOT IN ('1B1', '1D1') ) \n"
+                        + "               AND (REG_FAC NOT IN ('1B1', '1D1') ) \n"
+                        + "               )AND ISB_DATE = '-'   ORDER BY CAST(id AS int )  desc  ";
                 System.out.println("Selectall history3\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
 
@@ -1849,7 +1938,7 @@ public class Select {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "SELECT ID FROM "+GBVAR.DBPRD+".FAR_ITMTLB04 Order by ID  desc LIMIT 1 ";
+                String query = "SELECT ID FROM " + GBVAR.DBPRD + ".FAR_ITMTLB04 Order by ID  desc LIMIT 1 ";
                 System.out.println("SelectitemID\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
 
@@ -1903,7 +1992,7 @@ public class Select {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "SELECT ID FROM "+GBVAR.DBPRD+".FAR_MTRREQ04 Order by RUID  desc LIMIT 1 ";
+                String query = "SELECT ID FROM " + GBVAR.DBPRD + ".FAR_MTRREQ04 Order by RUID  desc LIMIT 1 ";
                 System.out.println("SelectOrderID\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
 
@@ -1957,7 +2046,7 @@ public class Select {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "SELECT ORD_ID FROM "+GBVAR.DBPRD+".FAR_MTRREQ04 Order by RUID Desc limit 1 ";
+                String query = "SELECT ORD_ID FROM " + GBVAR.DBPRD + ".FAR_MTRREQ04 Order by RUID Desc limit 1 ";
                 System.out.println("SelectOrderID\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
 
@@ -2014,7 +2103,7 @@ public class Select {
                         + "		 FROM BRLDTA0100.APPCTL1 a, BRLDTA0100.STAFFLIST b \n"
                         + "		 WHERE CTL_REM = 'AP'\n"
                         + "		 AND b.ST_N6L3 = a.CTL_UID\n"
-                        + "		 AND b.ST_STS = '20'";
+                        + "		 AND b.ST_STS = '20' AND CTL_UID != '-' ";
                 System.out.println("SelectDeptHead\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
 
@@ -2118,7 +2207,7 @@ public class Select {
 
                 String query = "SELECT S2STID ,ROW_NUMBER() OVER(ORDER BY S2AITM) AS ID, TRIM(S2AITM) AS S2AITM, S2TX15,TRIM(S2STID) AS S2STID, SUBSTR(EATX40,38,3) AS EATX40, TRIM(S2AITM) || ' : ' || TRIM(S2TX15) || ' : ' || SUBSTR(EATX40,38,3) AS COSTCENTER\n"
                         + "FROM M3FDBPRD.FSTLIN a, M3FDBPRD.FCHACC b\n"
-                        + "WHERE S2CONO = '"+cono+"'\n"
+                        + "WHERE S2CONO = '" + cono + "'\n"
                         + "AND S2SLVL = '1'\n"
                         + "AND b.EACONO = a.S2CONO\n"
                         + "AND b.EADIVI = a.S2DIVI\n"
@@ -2127,7 +2216,7 @@ public class Select {
                         + "AND b.EAAITM = a.S2AITM\n"
                         + "AND S2STID IN (SELECT TRIM(S2AITM)\n"
                         + "FROM M3FDBPRD.FSTLIN a, M3FDBPRD.FSTDEF b\n"
-                        + "WHERE S2CONO =  '"+cono+"'\n"
+                        + "WHERE S2CONO =  '" + cono + "'\n"
                         + "AND S2SLVL = '2'\n"
                         + "AND S1CONO = a.S2CONO\n"
                         + "AND S1DIVI = a.S2DIVI\n"
@@ -2181,7 +2270,7 @@ public class Select {
 
                 String query = "SELECT  * \n"
                         + "FROM \n"
-                        + ""+GBVAR.DBPRD+".FAR_ITMTLB04 fi \n"
+                        + "" + GBVAR.DBPRD + ".FAR_ITMTLB04 fi \n"
                         + "WHERE ORD_ID  = '" + order_id + "'";
 
                 System.out.println("getItemcodedown\n" + query);
@@ -2473,6 +2562,56 @@ public class Select {
         return mJSonArr;
 
     }
+    
+    
+    
+    public static JSONArray gettoWarehouse(String cono, String divi, String fac) throws Exception {
+
+        JSONArray mJSonArr = new JSONArray();
+        Connection conn = ConnectDB2.ConnectionDB();
+
+        try {
+            if (conn != null) {
+
+                Statement stmt = conn.createStatement();
+                String query = "SELECT MWWHLO,MWWHNM,MWWHLO || ' : ' || MWWHNM AS WAREHOUSE \n"
+                        + "FROM M3FDBPRD.MITWHL\n"
+                        + "WHERE MWCONO = '" + cono + "'\n"
+                        + "AND MWDIVI = '" + divi + "'     \n"
+                        + "ORDER BY MWWHLO";
+                System.out.println("getWarehouse\n" + query);
+                ResultSet mRes = stmt.executeQuery(query);
+
+                while (mRes.next()) {
+                    Map<String, Object> mMap = new HashMap<>();
+                    mMap.put("MWWHLO", mRes.getString(1).trim());
+                    mMap.put("MWWHNM", mRes.getString(2).trim());
+                    mMap.put("WAREHOUSE", mRes.getString(3).trim());
+                    mJSonArr.put(mMap);
+
+                }
+
+            } else {
+                System.out.println("Server can't connect.");
+            }
+
+        } catch (SQLException sqle) {
+            throw sqle;
+        } catch (Exception e) {
+            if (conn != null) {
+                conn.close();
+            }
+            throw e;
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return mJSonArr;
+
+    }
+
 
     public static JSONArray getWarehouse(String cono, String divi, String fac) throws Exception {
 
@@ -2486,7 +2625,7 @@ public class Select {
                 String query = "SELECT MWWHLO,MWWHNM,MWWHLO || ' : ' || MWWHNM AS WAREHOUSE \n"
                         + "FROM M3FDBPRD.MITWHL\n"
                         + "WHERE MWCONO = '" + cono + "'\n"
-                        + "AND MWDIVI = '" + divi + "'   AND MWFACI  = '"+fac+"'   \n"
+                        + "AND MWDIVI = '" + divi + "'   AND MWFACI  = '" + fac + "'   \n"
                         + "ORDER BY MWWHLO";
                 System.out.println("getWarehouse\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);

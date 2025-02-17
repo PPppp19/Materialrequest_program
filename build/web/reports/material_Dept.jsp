@@ -2270,7 +2270,7 @@
 //            $(div_data).appendTo('#vWarehouse');
 //        });
 //    });
-//    $.ajax({
+//    $.ajax({SSS
 //        url: './Action',
 //        type: 'GET',
 //        dataType: 'json',

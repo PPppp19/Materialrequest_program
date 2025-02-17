@@ -135,6 +135,12 @@ public class Action extends HttpServlet {
                 out.print(Select.checkuserprio(request.getParameter("username")));
                 out.flush();
                 break;
+                
+                   case "checkuserpriofm":
+                System.out.println("checkuserpriofm");
+                out.print(Select.checkuserpriofm(request.getParameter("username")));
+                out.flush();
+                break;
             case "getonhand1":
                 System.out.println("getonhand1");
                 out.print(Select.getonhand1(request.getParameter("itmid"), request.getParameter("fwhs"), request.getParameter("loca")));
@@ -349,6 +355,11 @@ public class Action extends HttpServlet {
 
             case "getWarehouse":
                 out.print(Select.getWarehouse(request.getParameter("cono"), request.getParameter("divi"), request.getParameter("fac")));
+                out.flush();
+                break;
+                
+                 case "gettoWarehouse":
+                out.print(Select.gettoWarehouse(request.getParameter("cono"), request.getParameter("divi"), request.getParameter("fac")));
                 out.flush();
                 break;
 

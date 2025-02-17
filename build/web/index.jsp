@@ -153,9 +153,9 @@
 
                                 </ul>
                             </li>
-                            
-                            
-                             <li  class="dropdown" id="farmpart" style=" visibility: visible" ><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" href="./">Admin Approval<span class="caret"></span></a>
+
+
+                            <li  class="dropdown" id="farmpart" style=" visibility: visible" ><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" href="./">Admin Approval<span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu" style=" color: #ffffff; background-color: #070c13;">
                                     <li  role="presentation"><a style=" color: #ffffff; background-color: #070c13;"class='dropdown-item' name="rental" href="?report=FarmPage">Admin Approval List</a></li>
                                     <li  role="presentation"><a style=" color: #ffffff; background-color: #070c13;"class='dropdown-item' name="rental" href="?report=MTRRQT_Report">Report</a></li>
@@ -292,20 +292,25 @@
 
 
         var f = "<%out.print(session.getAttribute("fac"));%>";
-        
-        
-      //  alert(f);
+
+
+        //  alert(f);
         var username = "<%out.print(session.getAttribute("user"));%>";
         var st = document.getElementById("storepart");
+        var fm = document.getElementById("farmpart");
         var DH = document.getElementById("DEPTHEAD");
         console.log(username);
         if (username == "PHONGS_PHO")
         {
             st.style.visibility = "Visible";
             DH.style.visibility = "Visible";
+            fm.style.visibility = "Visible";
+
         } else {
             Checkpriority(username);
             CheckpriorityAPV(username);
+            Checkpriorityfm(username);
+
         }
     });
     function Checkpriority(username) {
@@ -322,6 +327,7 @@
             async: false,
             success: function (data) {
                 var st = document.getElementById("storepart");
+
                 if (data == "OK") {
 
                     st.style.visibility = "Visible";
@@ -339,6 +345,38 @@
         return txt;
     }
 
+
+    function Checkpriorityfm(username) {
+        var txt = "NG";
+        $.ajax({
+            url: './Action',
+            type: 'GET',
+            dataType: 'text',
+            data: {
+                path: "checkuserpriofm",
+                username: username
+
+            },
+            async: false,
+            success: function (data) {
+                var fm = document.getElementById("farmpart");
+
+                if (data == "OK") {
+
+                    fm.style.visibility = "Visible";
+                } else {
+
+                    fm.style.visibility = "Hidden";
+                }
+
+
+            },
+            error: function (e) {
+
+            }
+        });
+        return txt;
+    }
 
 
     function CheckpriorityAPV(username) {

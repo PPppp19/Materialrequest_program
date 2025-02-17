@@ -439,7 +439,7 @@
 
 
 
-            <!--              <input class="form-control" list="orderidlist" autocomplete="off" placeholder="OrderID" id="MRNO" name="MRNO" value="">
+<!--                          <input class="form-control" list="orderidlist" autocomplete="off" placeholder="OrderID" id="MRNO" name="MRNO" value="">
                                     <datalist id="orderidlist"> </datalist>
             -->
 
@@ -588,10 +588,11 @@
                     Resend E-mail
                 </button>
 
-                <button   onclick = "fun();"  style=" width: 18%; height: 30px; color: white; background-color: #0080ff;" class="btn btn-primary" type="button" " data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                <button   onclick = "fun();"  style=" width: 15%; height: 30px; color: white; background-color: #0080ff;" class="btn btn-primary" type="button" " data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     SAVE
+                    
                 </button>
-                <button type="submit" id="SendRejectMail1" name="SendAppMail"   value="SendRejectMail" style=" width: 13%; " class="btn btn-danger mb-2" style="color:#FFFFFF; visibility:hidden;" >Cancel</button>
+                <button type="submit" id="SendRejectMail1" name="SendAppMail"   value="SendRejectMail" style=" width: 12%; " class="btn btn-danger mb-2" style="color:#FFFFFF; visibility:hidden;" >Cancel</button>
 
 
 
@@ -733,9 +734,16 @@
                             <div id="sigf" style="width: 100%;background:  #2e3135;  padding:1% 0 1% 1%;  height: 300px;">                    
                                 <br>
                                 <br>
-                                <select  class="select" name="vhead"  id="vhead" >
+<!--                                <select  class="select" name="vhead"  id="vhead" >
                                     <option value="00" selected="selected">Select Department Head </option>
-                                </select>   
+                                </select>-->
+                                
+                  
+                                
+<input class="form-control" list="orderidlist" width="50px" autocomplete="off" placeholder="Department Head" id="vhead" name="vhead" value="">
+                        <datalist id="orderidlist"> </datalist>
+                        
+                        
                                 <!-- Signature todo -->
                                 <br>
                                 <div class="frame" id="frame2" style=" width: auto">
@@ -1237,6 +1245,10 @@
 
 
         var vhead = document.getElementById("vhead").value;
+        
+       // alert(vhead);
+        
+       
         var vNo = document.getElementById("ordernum").innerHTML;
         var purpose = document.getElementById("mypparea").value;
         if (vhead != "00") {
@@ -1245,6 +1257,7 @@
         } else {
             //alert("โปรดทำรายการใหม่" + vhead + " : " + vNo);
         }
+        
     }
 
 
@@ -2244,7 +2257,7 @@
         type: 'GET',
         dataType: 'json',
         data: {
-            path: "getWarehouse",
+            path: "gettoWarehouse",
             cono: cono,
             divi: divi,
             fac: facility
@@ -2272,10 +2285,19 @@
         async: false
     }).done(function (response) {
         warehouse = response;
+        var options; 
         $.each(response, function (i, obj) {
             var div_data = "<option value=" + obj.US_LOGIN + ">" + obj.US_LOGIN + "</option>";
             $(div_data).appendTo('#vhead');
+            
+          options += '<option value="' + obj.US_LOGIN  + '" />';
+
         });
+        
+        
+           
+          document.getElementById('orderidlist').innerHTML = options;
+
     }); //todo 
 
 

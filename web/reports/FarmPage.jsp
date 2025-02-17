@@ -352,9 +352,9 @@
                     {title: "TYPE", name: "MAT_TYPE", width: 50, type: "text",
                         itemTemplate: function (value, item) {
                             if (value === "71") {
-                                return "A71";
+                                return "EP";
                             } else if (value === "33") {
-                                return "A33";
+                                return "TF";
                             } else {
                                 return "-";
                             }
@@ -826,6 +826,11 @@
                     },
                     success: function (data) {
 
+
+         let numericData = Number(data);
+
+        if (!isNaN(numericData) ) {
+
                         $("#loader").hide();
                         $.ajax({
                             type: 'GET',
@@ -843,7 +848,14 @@
                         hideLoader();
                         alert(data);
                         document.getElementById('movexno').innerHTML = data;
+                        
+                        
+                              }
+                                            $("#loader").stop();
+                                            hideLoader();
+                                             alert(data);
                     },
+                        
                     error: function (e) {
                         alert("ล้มเหลว");
 
