@@ -99,6 +99,79 @@ public class Report extends HttpServlet {
 //                }
 //                break;
 //
+            
+             case "NEWMATERAIL_REQ_1":
+
+                String CONO12 = request.getParameter("cono");
+                String REQBY12 = "PPpppp";
+                String Costc12 = "Cos";
+                String Department12 = "Dept";
+                String ORD_ID12 = request.getParameter("MRNO");
+
+                System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxx");
+                System.out.println(ORD_ID12);
+                System.out.println(CONO12);
+                System.out.println(REQBY12);
+                System.out.println(Costc12);
+                System.out.println(Department12);
+                System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxx");
+                
+                JasperDesign JPD2;
+                try {
+                    String path1 = getServletContext().getRealPath("/jaspers/");
+
+                    JPD2 = JRXmlLoader.load(path1 + "RP_MaterialReq_PP2.jrxml");
+                    JasperReport jasperReport = JasperCompileManager.compileReport(JPD2);
+
+                    Locale.setDefault(Locale.US);
+                    Date d = new Date();
+                    SimpleDateFormat A = new SimpleDateFormat("dd/MM/yyyy");
+                    String DateNow = A.format(d);
+
+                    ResultSet Data111 = Datafrom222(ORD_ID12, CONO12);
+//                    
+                    System.out.println("---------------------------");
+
+                    if (Data111.next()) {
+
+                        Costc12 = Data111.getString("COS_CENT").trim();
+                        Department12 = Data111.getString("DEP_NAME").trim();
+                        CONO12 = Data111.getString("REG_CONO").trim();
+                        REQBY12 = Data111.getString("ORD_REGB").trim();
+
+                    }
+                    Map parameters2 = new HashMap();
+                    parameters2.put("MRNO", ORD_ID12);
+                    parameters2.put("CONO", CONO12);
+                    parameters2.put("REQBY", REQBY12);
+                    parameters2.put("Costc", Costc12);
+                    parameters2.put("DATE", DateNow);
+                    parameters2.put("Department", Department12);
+
+                    System.out.println("----------------");
+
+                    try {
+                        conn = ConnectDB2.ConnectionDB();
+                    } catch (Exception ex) {
+                        Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                  
+                    byte[] bytes = JasperRunManager.runReportToPdf(jasperReport, parameters2, conn);
+                    response.setContentType("application/pdf");
+
+                    response.setContentLength(bytes.length);
+                    try ( ServletOutputStream ouputStream = response.getOutputStream()) {
+                        ouputStream.write(bytes, 0, bytes.length);
+                        ouputStream.flush();
+                    }
+                    conn.close();
+                } catch (JRException ex) {
+                    Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex) {
+                    Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                break;
 
             case "NEWMATERAIL_REQ":
 

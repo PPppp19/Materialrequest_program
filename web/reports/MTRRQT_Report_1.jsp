@@ -215,7 +215,7 @@
   
                       
                      <div class="col-md-offset-5  col-md-2 centerDiv">
-                        <button  type="submit" name="report"  id="report"  class="btn btn-danger text-center" value="NEWMATERAIL_REQ" style="width: 157px;">PRINT REPORT</button> 
+                        <button  type="submit" name="report"  id="report"  class="btn btn-danger text-center" value="NEWMATERAIL_REQ_1" style="width: 157px;">PRINT REPORT Farm</button> 
                     </div> 
                 </div>
             </div>
