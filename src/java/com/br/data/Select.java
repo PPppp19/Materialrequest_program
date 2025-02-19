@@ -730,7 +730,7 @@ public class Select {
     }
 
     /////// get ordertype FAC 
-    public static String GetOrderType(String mattype, String facility) throws Exception {
+    public static String GetOrderType(String mattype, String facility, String cono) throws Exception {
 
         String ordertype = "";
         Connection conn = ConnectDB2.ConnectionDB();
@@ -741,7 +741,7 @@ public class Select {
                 Statement stmt = conn.createStatement();
                 String query = "SELECT ORD_REMAR1 FROM BRLDTA0100.FAR_MTRREQ_ORDERTYPE\n"
                         + "WHERE MAT_TYPE = '" + mattype.trim() + "'\n"
-                        + "AND REG_FAC  = '" + facility.trim() + "'";
+                        + "AND REG_FAC  = '" + facility.trim() + "'   AND  COM_ID = '"+cono.trim()+"'   ";
                 System.out.println("GetOrderType\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
 

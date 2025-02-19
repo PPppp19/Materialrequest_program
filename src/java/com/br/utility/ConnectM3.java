@@ -238,11 +238,11 @@ public class ConnectM3 {
     
  
 
-    private String getordertype(String materiltype, String faculty) throws Exception {
+    private String getordertype(String materiltype, String faculty,String cono) throws Exception {
 
         //System.out.println("----------------------");
         //System.out.println(Select.getloadm3(orderid));
-        return Select.GetOrderType(materiltype, faculty);
+        return Select.GetOrderType(materiltype, faculty,cono);
     }
 
     private String callMMS100A33(String id, int usercono, String userdivi, String type) {
@@ -324,7 +324,7 @@ public class ConnectM3 {
                     //mne.setField("WWFACI", faculty.trim());
                                         mne.setField("WWFACI", faculty.trim().equals("-") ? "1A1" : faculty.trim());
 
-                    mne.setField("W1TRTP", getordertype(type, faculty));
+                    mne.setField("W1TRTP", getordertype(type, faculty, Integer.toString(cono)));
 
                     //mne.selectOption(MNEProtocol.OptionCreate);
                     mne.selectOption("1");
@@ -589,7 +589,7 @@ public class ConnectM3 {
                    // mne.setField("WWFACI", faculty.trim());
                     mne.setField("WWFACI", faculty.trim().equals("-") ? "1A1" : faculty.trim());
 
-                    mne.setField("W1TRTP", getordertype(type, faculty));
+                    mne.setField("W1TRTP", getordertype(type, faculty,  Integer.toString(cono)));
                     mne.setField("_PSEQ", "E1");
 
                     //mne.selectOption(MNEProtocol.OptionCreate);
