@@ -826,9 +826,7 @@
                     },
                     success: function (data) {
                         
-                                let numericData = Number(data);
-
-        if (!isNaN(numericData) ) {
+        
 
                         $("#loader").hide();
                         $.ajax({
@@ -847,11 +845,8 @@
                         hideLoader();
                         alert(data);
                         document.getElementById('movexno').innerHTML = data;
-                    }
-                                            $("#loader").stop();
-                                            hideLoader();
-                                             alert(data);
-
+                   
+        
                     },
                     error: function (e) {
                         alert("ล้มเหลว");

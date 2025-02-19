@@ -158,7 +158,7 @@
                             <li  class="dropdown" id="farmpart" style=" visibility: visible" ><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" href="./">Admin Approval<span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu" style=" color: #ffffff; background-color: #070c13;">
                                     <li  role="presentation"><a style=" color: #ffffff; background-color: #070c13;"class='dropdown-item' name="rental" href="?report=FarmPage">Admin Approval List</a></li>
-                                    <li  role="presentation"><a style=" color: #ffffff; background-color: #070c13;"class='dropdown-item' name="rental" href="?report=MTRRQT_Report">Report</a></li>
+                                    <li  role="presentation"><a style=" color: #ffffff; background-color: #070c13;"class='dropdown-item' name="rental" href="?report=MTRRQT_Report_1">Report</a></li>
                                     <li  role="presentation"><a style=" color: #ffffff; background-color: #070c13;"class='dropdown-item' name="rental" href="?report=Historycompletefarm">Specialty History for Admin</a></li>
                                     <li  role="presentation"><a style=" color: #ffffff; background-color: #070c13;"class='dropdown-item' name="rental" href="?page=ROLLBACK">ROLLBACK</a></li>
 
