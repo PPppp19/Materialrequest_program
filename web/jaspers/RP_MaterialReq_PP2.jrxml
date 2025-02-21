@@ -241,7 +241,7 @@ AND MTTTID  = 'PPS'
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="TH SarabunPSK" size="13" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["B"+$F{MAT_TYPE}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{MTWHLO}.substring(0,1)+$F{MAT_TYPE}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
