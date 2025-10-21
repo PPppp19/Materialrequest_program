@@ -1513,7 +1513,7 @@ public class Select {
 //                        + "                        (SELECT * FROM BRLDTA0100.FAR_ITMTLB03 ) AS b\n"
 //                        + "                      	ON a.ORD_ID = b.ORD_ID";
 
-                String query = " 	SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04 WHERE REG_CONO = '" + cono + "' AND REG_FAC IN ('1D1','1B1')  AND MAT_TYPE = '71'   AND ORD_STAT = '22' AND REG_DIVI = '" + divi + "'  ORDER BY CAST(id AS int )  desc  ";
+                String query = " 	SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04 WHERE REG_CONO = '" + cono + "' AND REG_FAC IN ('1D1','1B1')    AND ORD_STAT = '22' AND REG_DIVI = '" + divi + "'  ORDER BY CAST(id AS int )  desc  ";
                 System.out.println("Selectall history23\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
 
