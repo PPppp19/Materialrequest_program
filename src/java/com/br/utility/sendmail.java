@@ -76,6 +76,22 @@ public class sendmail extends HttpServlet {
 
 //                    Send_mail sm = new Send_mail();
                     String DPM_TO = request.getParameter("vhead");
+                    String pgmtype = request.getParameter("pgmtype");
+                    
+
+
+                    if (pgmtype == null || pgmtype.trim().isEmpty()) {
+                        pgmtype = "MTR";
+                    }
+
+                    if ("RTN".equals(pgmtype) || "DPS".equals(pgmtype)) {
+                        DPM_TO = "PHONGS_PHO";
+                    }
+
+                    System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+                    System.out.println(pgmtype);
+                    System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+
                     String CONO = request.getParameter("cono");
                     String status = request.getParameter("status");
 //                    String orderid = request.getParameter("ordernum");
@@ -86,7 +102,9 @@ public class sendmail extends HttpServlet {
                         case "S1":
                             DPM_TO = request.getParameter("vhead");
                             CONO = request.getParameter("cono");
-//                            DPM_TO = "PHONGS_PHO";
+                            if ("RTN".equals(pgmtype) || "DPS".equals(pgmtype)) {
+                                DPM_TO = "PHONGS_PHO";
+                            }
 
                             rsl = Getuseremail(DPM_TO);
                             while (rsl.next()) {
@@ -102,22 +120,81 @@ public class sendmail extends HttpServlet {
 
                             break;
                         case "S2":
-                            ResultSet rs2 = GetApprovemail();
-                            while (rs2.next()) {
-                                String username = rs2.getString("UID").trim();
-                                rsl = Getuseremail(username);
-                                while (rsl.next()) {
+                            
+                            if ("RTN".equals(pgmtype) || "DPS".equals(pgmtype)) {
 
-                                    arruserName.add(rsl.getString("ST_EMAIL").trim());
-                                    System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
-                                    System.out.println(arruserName);
-                                    System.out.println(rsl.getString("ST_EMAIL").trim());
-                                    System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+                                ResultSet rs2 = GetApprovemailRTNDPS(CONO,request.getParameter("ordernumpp"),status);
+                                while (rs2.next()) {
+                                    String username = rs2.getString("VAL").trim();
+                                    rsl = Getuseremail(username);
+                                    while (rsl.next()) {
 
+                                        arruserName.add(rsl.getString("ST_EMAIL").trim());
+                                        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+                                        System.out.println(arruserName);
+                                        System.out.println(rsl.getString("ST_EMAIL").trim());
+                                        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+
+                                    }
+                                }
+
+                            } 
+                                case "S4":
+                            
+                            if ("RTN".equals(pgmtype) || "DPS".equals(pgmtype)) {
+
+                                ResultSet rs2 = GetApprovemailRTNDPS(CONO,request.getParameter("ordernumpp"),status);
+                                while (rs2.next()) {
+                                    String username = rs2.getString("VAL").trim();
+                                    rsl = Getuseremail(username);
+                                    while (rsl.next()) {
+
+                                        arruserName.add(rsl.getString("ST_EMAIL").trim());
+                                        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+                                        System.out.println(arruserName);
+                                        System.out.println(rsl.getString("ST_EMAIL").trim());
+                                        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+
+                                    }
+                                }
+
+                            }
+                            
+                            else {
+                                ResultSet rs2 = GetApprovemail();
+                                while (rs2.next()) {
+                                    String username = rs2.getString("UID").trim();
+                                    rsl = Getuseremail(username);
+                                    while (rsl.next()) {
+
+                                        arruserName.add(rsl.getString("ST_EMAIL").trim());
+                                        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+                                        System.out.println(arruserName);
+                                        System.out.println(rsl.getString("ST_EMAIL").trim());
+                                        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+
+                                    }
                                 }
                             }
 
                             break;
+                            
+                            
+                            case "S5":
+                          //  DPM_TO = request.getParameter("vhead");
+                            rsl = Getuseremail("PHONGS_PHO");
+                            while (rsl.next()) {
+
+                                arruserName.add(rsl.getString("ST_EMAIL").trim());
+                                System.out.println("WWWWWWWWWWW333333WWWWWWWWWWWWWWWWWW");
+                                System.out.println(arruserName);
+                                System.out.println(rsl.getString("ST_EMAIL").trim());
+                                System.out.println("WWWWWWWWWWW333333WWWWWWWWWWWWWWWWWW");
+
+                            }
+
+                            break;
+
 
                         case "S3":
                             DPM_TO = request.getParameter("vhead");
@@ -131,13 +208,11 @@ public class sendmail extends HttpServlet {
                                 System.out.println("WWWWWWWWWWW333333WWWWWWWWWWWWWWWWWW");
 
                             }
-//                            response.sendRedirect("./?report=material_request&status=S3&ORDID=00000000");
 
                             break;
                         default:
                             DPM_TO = request.getParameter("vhead");
                             CONO = request.getParameter("cono");
-//                            DPM_TO = "PHONGS_PHO";
 
                             rsl = Getuseremail(DPM_TO);
                             while (rsl.next()) {
@@ -152,13 +227,20 @@ public class sendmail extends HttpServlet {
 
                             break;
                     }
+                    
+                    
 
                     System.out.println("Email is : ");
                     System.out.println(DPM_TO);
                     System.out.println(rsl);
                     System.out.println(" Check Send App Mail --------------------pp2");
                     int count = 0;
-                    while (arruserName.size() > count) {
+                    
+                    
+                    //while (arruserName.size() > count) {
+                    
+                    while (count < arruserName.size()) {
+
                         System.out.println(" Check Send App Mail --------------------pp3");
 
                         System.out.println(arruserName.get(count));
@@ -166,26 +248,36 @@ public class sendmail extends HttpServlet {
                         String Appemail = arruserName.get(count);
 
                         String SubjectEmail = "Material Request";
-                        String LinkCreate = com.br.utility.Utilities.getmaildetail(request.getParameter("username"), request.getParameter("ordernumpp"), request.getParameter("status"), DPM_TO, CONO
-                        );
+
+                        String LinkCreate = "";
+
+                        if ("RTN".equals(pgmtype) || "DPS".equals(pgmtype)) {
+
+                            System.out.println(" Check Send App Mail --------------------ppqqqq");
+                            System.out.println(status);
+                            System.out.println(" Check Send App Mail --------------------pqqqqq");
+                            LinkCreate = com.br.utility.Utilities.getmaildetailRTNDPS(request.getParameter("username"), request.getParameter("ordernumpp"), request.getParameter("status"), arruserName.get(count), CONO, pgmtype
+                            );
+                        } else {
+// mtr 
+                            System.out.println(" Check Send App Mail --------------------mtr");
+                            System.out.println(pgmtype);
+                            System.out.println(" Check Send App Mail --------------------mtr");
+                            LinkCreate = com.br.utility.Utilities.getmaildetail(request.getParameter("username"), request.getParameter("ordernumpp"), request.getParameter("status"), DPM_TO, CONO, pgmtype
+                            );
+                        }
+
                         Send_mail.Sendmail_ICT(Appemail, LinkCreate, SubjectEmail);
                         session.setAttribute("MSGError", "An email has been sent. Please check your  Email");
 
                         count++;
 
-                        if (status.equalsIgnoreCase("S2")) {
+                       
 
-                            response.sendRedirect("./?report=material_request&status=S2&ORDID=00000000");
-//                            response.sendRedirect("http://192.200.9.189:8080/MaterialRequest/?report=material_request");
-
-                        } else {
-
-                            response.sendRedirect("./?report=material_request");
-
-                        }
-//                            response.sendRedirect("./?report=material_request&status=S2&ORDID=00000000");
+                         
 
                     }
+                       response.sendRedirect("./?report=material_request");
 
                 } catch (Exception ex) {
 
@@ -196,7 +288,6 @@ public class sendmail extends HttpServlet {
                 }
 
                 System.out.println("UserSentMail");
-                //response.sendRedirect("./?page=./RequestUser");
 
             } else if (request.getParameter("SendAppMail").equals("SendtoM3")) {
 
@@ -223,6 +314,11 @@ public class sendmail extends HttpServlet {
             } else if (request.getParameter("SendAppMail").equals("SendReturnMail")) {
 
                 try {
+                    String pgmtype = request.getParameter("pgmtype");
+
+                    if (pgmtype == null || pgmtype.trim().isEmpty()) {
+                        pgmtype = "MTR";
+                    }
 
                     System.out.println(" Check Send SendReturnMail Mail --------------------pp");
 
@@ -245,8 +341,6 @@ public class sendmail extends HttpServlet {
                         String Appemail = rsl.getString("ST_EMAIL").trim();
                         CONO = rsl.getString("ST_CONO").trim();
 
-//                        int ST_CONO = rsl.getInt("ST_CONO");
-//
                         String SubjectEmail = "Material Request: your request has been return";
                         System.out.println("-------------------------");
                         System.out.println(request.getParameter("ordernumpp"));
@@ -255,13 +349,9 @@ public class sendmail extends HttpServlet {
 
                         System.out.println("-------------------------");
 
-                        String LinkCreate = com.br.utility.Utilities.getmaildetail(request.getParameter("username"), request.getParameter("ordernumpp"), request.getParameter("status"), DPM_TO, CONO);
-                        
-                        //TODO BACKUP MAIL
+                        String LinkCreate = com.br.utility.Utilities.getmaildetail(request.getParameter("username"), request.getParameter("ordernumpp"), request.getParameter("status"), DPM_TO, CONO, pgmtype);
 
-//                        sm.Sendmail_ICT(Appemail, LinkCreate, SubjectEmail);
-//                        //Utility.addMailLog(Appemail, SubjectEmail, LinkCreate, 10,mimeusername); 
-//                        System.out.println(Appemail + "\n" + SubjectEmail);
+
                         System.out.println(Appemail);
                         Send_mail.Sendmail_ICT(Appemail, LinkCreate, SubjectEmail);
 
@@ -361,6 +451,72 @@ public class sendmail extends HttpServlet {
         return null;
     }
 
+    public static ResultSet GetApprovemailRTNDPS(String cono,  String ordid, String status) throws Exception {
+
+        String columnName = "";
+        switch (status) {
+            case "S2":
+                columnName = "ORD_MG1";
+                break;
+            case "S4":
+                columnName = "ORD_MG2";
+                break;
+            default:
+            // code block
+        }
+
+        try {
+            Connection conn = ConnectDB2.ConnectionDB();
+            Statement sta = conn.createStatement();
+
+            // query เพื่อเอาค่าจริงจาก DB (String ที่มี comma)
+            String query = " SELECT " + columnName + " AS VAL "
+                    + " FROM BRLDTA0100.FAR_MTRREQ04 "
+                    + " WHERE ORD_ID = '" + ordid.trim() + "' "
+                    + "   AND REG_CONO  = '" + cono + "' "; 
+ 
+
+            ResultSet rs1 = sta.executeQuery(query);
+
+            // ถ้าไม่มีข้อมูล ก็ return null
+            if (!rs1.next()) {
+                return null;
+            }
+
+            // ได้ค่าต้นทาง เช่น "MAHAKI_CHU,PHONGS_PHO,PHONGS_PH2"
+            String raw = rs1.getString("VAL");
+
+            if (raw == null || raw.isEmpty()) {
+                return null;
+            }
+
+            // split string
+            String[] arr = raw.split(",");
+
+            // สร้าง query ใหม่ให้เป็นหลายแถว
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < arr.length; i++) {
+                if (i > 0) {
+                    sb.append(" UNION ALL ");
+                }
+                sb.append("SELECT '").append(arr[i].trim()).append("' AS VAL FROM SYSIBM.SYSDUMMY1");
+            }
+
+            String finalQuery = sb.toString();
+            
+            System.out.println(finalQuery);
+
+            // executeQuery ใหม่ → ได้ ResultSet ที่เป็นหลายแถวจริง ๆ
+            return sta.executeQuery(finalQuery);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
+
+    }
+
     public static ResultSet GetApprovemail() throws Exception {
 
         try {
@@ -392,7 +548,7 @@ public class sendmail extends HttpServlet {
             JSONArray mJSonArr = new JSONArray();
 
 //            Statement sta = conn.createStatement();
-            String query = "            SELECT ORD_REGB   FROM  "+GBVAR.DBPRD+".FAR_MTRREQ04                  \n"
+            String query = "            SELECT ORD_REGB   FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04                  \n"
                     + "                        WHERE  ORD_ID  = '" + id + "'\n"
                     + "               ";
             ResultSet mRes = stmt.executeQuery(query);

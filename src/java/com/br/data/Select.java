@@ -421,6 +421,68 @@ public class Select {
 
     }
 
+    public static String GETMGLIST(String GMCONO, String GMDIVI, String GMGROUP, String WHA) throws Exception {
+
+        Connection conn = ConnectDB2.ConnectionDB();
+        String MGUSER = "user";
+
+        try {
+            if (conn != null) {
+
+                Statement stmt = conn.createStatement();
+                String query = "WITH T AS (\n"
+                        + "    SELECT \n"
+                        + "        GMUSER,\n"
+                        + "        ROW_NUMBER() OVER(ORDER BY GMUSER) AS RN\n"
+                        + "    FROM "+ GBVAR.DBPRD +".SR_GROUPMASTER\n"
+                        + "    WHERE GMDES1 = 'MAT'\n"
+                        + "      AND GMGROU = '"+GMGROUP+"'\n"
+                        + "      AND GMSGRO = '"+WHA+"'\n"
+                        + "      AND GMCONO = '"+GMCONO+"'  AND GMDIVI = '"+GMDIVI+"' \n"
+                        + "),\n"
+                        + "R (RN, STR) AS (\n"
+                        + "    SELECT RN, VARCHAR(GMUSER, 5000)\n"
+                        + "    FROM T\n"
+                        + "    WHERE RN = 1\n"
+                        + "    UNION ALL\n"
+                        + "    SELECT T.RN, R.STR CONCAT ',' CONCAT T.GMUSER\n"
+                        + "    FROM R\n"
+                        + "    JOIN T ON T.RN = R.RN + 1\n"
+                        + ")\n"
+                        + "SELECT STR\n"
+                        + "FROM R\n"
+                        + "ORDER BY RN DESC\n"
+                        + "FETCH FIRST 1 ROW ONLY";
+                System.out.println("GETMGLIST\n" + query);
+                stmt.execute(query);
+
+                ResultSet mRes = stmt.executeQuery(query);
+
+                while (mRes.next()) {
+                    MGUSER = mRes.getString("STR");
+                }
+
+            } else {
+                System.out.println("Server can't connect.");
+            }
+
+        } catch (SQLException sqle) {
+            throw sqle;
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (conn != null) {
+                conn.close();
+            }
+            throw e;
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        
+            return MGUSER;
+    }
+
     public static String getcreator(String ordernum) throws Exception {
 
         Connection conn = ConnectDB2.ConnectionDB();
@@ -741,7 +803,7 @@ public class Select {
                 Statement stmt = conn.createStatement();
                 String query = "SELECT ORD_REMAR1 FROM BRLDTA0100.FAR_MTRREQ_ORDERTYPE\n"
                         + "WHERE MAT_TYPE = '" + mattype.trim() + "'\n"
-                        + "AND REG_FAC  = '" + facility.trim() + "'   AND  COM_ID = '"+cono.trim()+"'   ";
+                        + "AND REG_FAC  = '" + facility.trim() + "'   AND  COM_ID = '" + cono.trim() + "'   ";
                 System.out.println("GetOrderType\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
 
@@ -1061,10 +1123,14 @@ public class Select {
                 stste = "01";
                 break;
             case "S3":
-                stste = "10";
+                stste = "11";
                 break;
             case "S4":
-                stste = "11";
+                stste = "14";
+                break;
+                
+                  case "S5":
+                stste = "15";
                 break;
 
             default:
@@ -1075,7 +1141,7 @@ public class Select {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04\n"
+                String query = "SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI , ITM_TYPE  ,ORD_MG1, MG1_DATE FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04\n"
                         + " WHERE ORD_ID = '" + id.trim() + "' \n"
                         + "AND REG_CONO != '00' AND REG_DIVI !='00' \n"
                         + " and  ORD_STAT = '" + stste + "' ";
@@ -1115,6 +1181,12 @@ public class Select {
                     if (mRes.getString(22) != null) {
                         mMap.put("MVX_ORDE", mRes.getString(22).trim());
                     }
+
+                    mMap.put("ITM_TYPE", mRes.getString(25).trim());
+                    
+                    
+                     mMap.put("ORD_MG1", mRes.getString(26).trim());
+                       mMap.put("MG1_DATE", mRes.getString(27).trim());
 
                     mJSonArr.put(mMap);
 
@@ -1188,6 +1260,13 @@ public class Select {
                         mMap.put("QTY_ISSU", mRes.getString(7).trim());
                     }
 
+                    if (mRes.getString(13) != null) {
+                        mMap.put("QTY_ETC", mRes.getString(13).trim());
+                    }
+                    if (mRes.getString(14) != null) {
+                        mMap.put("QTY_ETCTH", mRes.getString(14).trim());
+                    }
+
                     mJSonArr.put(mMap);
 
                 }
@@ -1222,7 +1301,7 @@ public class Select {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "SELECT ORD_REGB , ORD_DPMH  FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04\n"
+                String query = "SELECT ORD_REGB , ORD_DPMH,ORD_MG1,ORD_MG2  FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04\n"
                         + " WHERE ORD_ID  = '" + orderid + "'";
                 System.out.println("getsignaturename\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
@@ -1231,6 +1310,9 @@ public class Select {
                     Map<String, Object> mMap = new HashMap<>();
                     mMap.put("ORD_REGB", mRes.getString(1).trim());
                     mMap.put("ORD_DPMH", mRes.getString(2).trim());
+                    mMap.put("ORD_MG1", mRes.getString(3).trim());
+                     mMap.put("ORD_MG2", mRes.getString(4).trim());
+                    
 
 //                    mMap.put("MMFUDS", mRes.getString(3).trim());
                     mJSonArr.put(mMap);
@@ -2152,11 +2234,11 @@ public class Select {
                 Statement stmt = conn.createStatement();
                 String query = "SELECT ST_SIGN \n"
                         + "						FROM BRLDTA0100.STAFFLIST \n"
-                        + "						WHERE ST_N6L3 =  '" + prno + "'\n"
+                        + "						WHERE ST_N6L3 =  '" + prno.trim() + "'\n"
                         + "						AND ST_CONO != '99'\n"
                         + "						AND ST_SIGN IS NOT NULL\n"
                         + "						AND ST_SIGN != ''";
-                System.out.println("getItemcode\n" + query);
+                System.out.println("getItemcodeaaa\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
 
                 while (mRes.next()) {
@@ -2320,7 +2402,7 @@ public class Select {
 
     }
 
-    public static JSONArray getItemcode(String warehouse, String check, String cono) throws Exception {
+    public static JSONArray getItemcode(String warehouse, String check, String cono, String itemtype) throws Exception {
 
         JSONArray mJSonArr = new JSONArray();
         Connection conn = ConnectDB2.ConnectionDB();
@@ -2383,39 +2465,46 @@ public class Select {
                         + " SELECT * FROM M3FDBPRD.MITMAS a\n"
                         + "  WHERE a.MMCONO = '" + cono + "'  \n"
                         + "AND a.MMSTAT = '20'  \n"
-                        + "AND a.MMMABU = '2'  \n"
+                        + "AND a.MMMABU = '" + itemtype + "'  \n"
                         + "AND a.MMCUCD <> '' \n"
                         + "AND a.MMPUPR > 0  \n"
                         + "AND a.MMITTY NOT IN ('SP','OH','FA','') \n"
                         + "AND  a.MMITNO  LIKE ('HI%') \n"
                         + "OR a.MMCONO = '" + cono + "'  \n"
                         + "AND a.MMSTAT = '20'  \n"
-                        + "AND a.MMMABU = '2'  \n"
+                        + "AND a.MMMABU =  '" + itemtype + "' \n"
                         + "AND a.MMCUCD <> '' \n"
                         + "AND a.MMPUPR > 0  \n"
                         + "AND a.MMITTY NOT IN ('SP','OH','FA','') \n"
                         + "AND  a.MMITNO  LIKE ('TD%') \n"
                         + "OR a.MMCONO = '" + cono + "'  \n"
                         + "AND a.MMSTAT = '20'  \n"
-                        + "AND a.MMMABU = '2'  \n"
+                        + "AND a.MMMABU = '" + itemtype + "' \n"
                         + "AND a.MMCUCD <> '' \n"
                         + "AND a.MMPUPR > 0  \n"
                         + "AND a.MMITTY NOT IN ('SP','OH','FA','') \n"
                         + "AND  a.MMITNO  LIKE ('RM%') \n"
                         + "OR a.MMCONO = '" + cono + "'  \n"
                         + "AND a.MMSTAT = '20'  \n"
-                        + "AND a.MMMABU = '2'  \n"
+                        + "AND a.MMMABU = '" + itemtype + "' \n"
                         + "AND a.MMCUCD <> '' \n"
                         + "AND a.MMPUPR > 0  \n"
                         + "AND a.MMITTY NOT IN ('SP','OH','FA','') \n"
                         + "AND  a.MMITNO  LIKE ('IO%') \n"
                         + "OR a.MMCONO = '" + cono + "'  \n"
                         + "AND a.MMSTAT = '20'  \n"
-                        + "AND a.MMMABU = '2'  \n"
+                        + "AND a.MMMABU = '" + itemtype + "' \n"
                         + "AND a.MMCUCD <> '' \n"
                         + "AND a.MMPUPR > 0  \n"
                         + "AND a.MMITTY NOT IN ('SP','OH','FA','') \n"
                         + "AND  a.MMITNO  LIKE ('PL%') \n"
+                        + "OR a.MMCONO = '" + cono + "'  \n"
+                        + "AND a.MMMABU = '" + itemtype + "' \n"
+                        + "AND a.MMSTAT = '20'  \n"
+                        + "AND a.MMCUCD <> '' \n"
+                        + "AND a.MMPUPR > 0  \n"
+                        + "AND a.MMITTY NOT IN ('SP','OH','FA','') \n"
+                        + "AND  a.MMITNO  LIKE ('NS%') \n"
                         + ") AS a \n"
                         + "\n"
                         + "INNER JOIN \n"
@@ -2562,9 +2651,7 @@ public class Select {
         return mJSonArr;
 
     }
-    
-    
-    
+
     public static JSONArray gettoWarehouse(String cono, String divi, String fac) throws Exception {
 
         JSONArray mJSonArr = new JSONArray();
@@ -2611,7 +2698,6 @@ public class Select {
         return mJSonArr;
 
     }
-
 
     public static JSONArray getWarehouse(String cono, String divi, String fac) throws Exception {
 

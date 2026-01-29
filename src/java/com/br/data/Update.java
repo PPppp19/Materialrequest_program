@@ -31,7 +31,7 @@ public class Update {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = " UPDATE "+GBVAR.DBPRD+".FAR_MTRREQ04 fm  \n"
+                String query = " UPDATE " + GBVAR.DBPRD + ".FAR_MTRREQ04 fm  \n"
                         + " SET ORD_STAT  = '11', ORD_ISSB  = '-', ISB_DATE  = '-'\n"
                         + " WHERE ORD_ID  = '" + ordid.trim() + "'";
 
@@ -66,7 +66,7 @@ public class Update {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = " UPDATE "+GBVAR.DBPRD+".FAR_ITMTLB04 fm  \n"
+                String query = " UPDATE " + GBVAR.DBPRD + ".FAR_ITMTLB04 fm  \n"
                         + " SET ONH_STAT  = 'YES'\n"
                         + " WHERE ORD_ID  = '" + ordid.trim() + "'";
 
@@ -101,7 +101,7 @@ public class Update {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "UPDATE "+GBVAR.DBPRD+".FAR_MTRREQ04\n"
+                String query = "UPDATE " + GBVAR.DBPRD + ".FAR_MTRREQ04\n"
                         + "SET   ORD_ISSB = '" + username.trim() + "', ISB_DATE = '" + datetime.trim() + "' \n"
                         + "WHERE ORD_ID  = '" + id + "'";
 
@@ -137,7 +137,7 @@ public class Update {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "UPDATE "+GBVAR.DBPRD+".FAR_MTRREQ04\n"
+                String query = "UPDATE " + GBVAR.DBPRD + ".FAR_MTRREQ04\n"
                         + "SET   ORD_STAT = '" + state + "'  \n"
                         + "WHERE ORD_ID  = '" + ordernum + "'";
 
@@ -171,10 +171,55 @@ public class Update {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "UPDATE "+GBVAR.DBPRD+".FAR_MTRREQ04\n"
+                String query = "UPDATE " + GBVAR.DBPRD + ".FAR_MTRREQ04\n"
                         + "                      SET ORD_STAT = '00' \n"
                         + "                      WHERE ORD_ID  = '" + id + "'";
                 System.out.println("returnid\n" + query);
+                stmt.execute(query);
+
+            } else {
+                System.out.println("Server can't connect.");
+            }
+
+        } catch (SQLException sqle) {
+            throw sqle;
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (conn != null) {
+                conn.close();
+            }
+            throw e;
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
+    public static void insertsubmitRTNDPS(String cono, String divi, String orderid, String dpmh_to, String purpose, String status) throws Exception {
+
+        Connection conn = ConnectDB2.ConnectionDB();
+
+        String columnName = "";
+        switch (status) {
+            case "S2":
+                columnName = "ORD_MG1"; 
+                break;
+            case "S4":
+                 columnName = "ORD_MG2"; 
+                break;
+            default:
+            // code block
+        }
+
+        try {
+            if (conn != null) {
+
+                Statement stmt = conn.createStatement();
+                String query = "UPDATE " + GBVAR.DBPRD + ".FAR_MTRREQ04\n"
+                        + "                      SET "+columnName+" = '" + dpmh_to + "', ORD_PURP = '" + purpose + "' \n"
+                        + "                      WHERE ORD_ID  = '" + orderid + "'";
+                System.out.println("insertsubmit\n" + query);
                 stmt.execute(query);
 
             } else {
@@ -204,7 +249,7 @@ public class Update {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "UPDATE "+GBVAR.DBPRD+".FAR_MTRREQ04\n"
+                String query = "UPDATE " + GBVAR.DBPRD + ".FAR_MTRREQ04\n"
                         + "                      SET DPM_HEAD = '" + dpmh_to + "', ORD_PURP = '" + purpose + "' \n"
                         + "                      WHERE ORD_ID  = '" + orderid + "'";
                 System.out.println("insertsubmit\n" + query);
@@ -237,7 +282,7 @@ public class Update {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "UPDATE "+GBVAR.DBPRD+".FAR_MTRREQ04\n"
+                String query = "UPDATE " + GBVAR.DBPRD + ".FAR_MTRREQ04\n"
                         + "                      SET  " + rolename + " = '" + name + "', " + roledate + " = '" + datetime + "'\n"
                         + "                      WHERE ORD_ID  = '" + orderid + "' \n"
                         + " AND ORD_STAT != '99' AND ORD_STAT != '22' ";
@@ -271,7 +316,7 @@ public class Update {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "UPDATE "+GBVAR.DBPRD+".FAR_MTRREQ04\n"
+                String query = "UPDATE " + GBVAR.DBPRD + ".FAR_MTRREQ04\n"
                         + "                      SET  " + rolename + " = '' , " + roledate + " = ''\n"
                         + "                      WHERE ORD_ID  = '" + orderid + "'\n"
                         + " AND ORD_STAT != '99' AND ORD_STAT != '22'";
@@ -309,7 +354,7 @@ public class Update {
         return text;
     }
 
-    public static void updateitemdata(String id, String itid, String code, String desc, String unit, String reqt, String issu, String onhand) throws Exception {
+    public static void updateitemdata(String id, String itid, String code, String desc, String unit, String reqt, String issu, String onhand, String QTY_ETC, String QTY_ETCTH) throws Exception {
 
         Connection conn = ConnectDB2.ConnectionDB();
         desc = convertApostrophe(desc);
@@ -318,10 +363,10 @@ public class Update {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "UPDATE "+GBVAR.DBPRD+".FAR_ITMTLB04\n"
+                String query = "UPDATE " + GBVAR.DBPRD + ".FAR_ITMTLB04\n"
                         + "SET ITM_ID = '" + code + "',ITM_DESC = '" + desc + "', ONH_STAT = '" + onhand + "',ITM_UNIT = '" + unit + "',QTY_REQT = '" + reqt + "', QTY_ISSU = '" + issu + "'\n"
                         + "WHERE ID  = '" + itid + "'"
-                        + "AND ORD_ID = '" + id + "'";
+                        + "AND ORD_ID = '" + id + "'  AND QTY_ETC = '" + QTY_ETC + "' AND QTY_ETCTH = '" + QTY_ETCTH + "'";
                 System.out.println("updateitemdata\n" + query);
                 stmt.execute(query);
 
@@ -352,7 +397,7 @@ public class Update {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "UPDATE "+GBVAR.DBPRD+".FAR_ITMTLB04\n"
+                String query = "UPDATE " + GBVAR.DBPRD + ".FAR_ITMTLB04\n"
                         + "SET ITM_ID = '" + code + "', QTY_ISSU = '" + issu + "'\n"
                         + "WHERE ID  = '" + itid + "'"
                         + "AND ORD_ID = '" + id + "'";
@@ -386,7 +431,7 @@ public class Update {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "UPDATE "+GBVAR.DBPRD+".FAR_ITMTLB04\n"
+                String query = "UPDATE " + GBVAR.DBPRD + ".FAR_ITMTLB04\n"
                         + "SET ITM_ID = '" + code + "', QTY_ISSU = '" + issu + "', ONH_STAT = '" + onhand + "'\n"
                         + "WHERE ID  = '" + itid + "'"
                         + "AND ORD_ID = '" + id + "'";
@@ -420,7 +465,7 @@ public class Update {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                String query = "UPDATE "+GBVAR.DBPRD+".FAR_MTRREQ04\n"
+                String query = "UPDATE " + GBVAR.DBPRD + ".FAR_MTRREQ04\n"
                         + "SET  DEP_NAME = '" + vdepartmentname + "',COS_CENT = '" + vcostcenter + "',CRE_DATE = '" + vdate + "',MAT_TYPE = '" + vtype + "',FRM_WAHO = '" + vfwhs + "',TO_WAHO ='" + vtwhs + "', WAH_LOCA = '" + location + "', ORD_PURP = '" + orderPurpose + "' \n"
                         + "WHERE ORD_ID  = '" + id + "' \n"
                         + "AND ORD_STAT != '99' AND ORD_STAT != '22'";

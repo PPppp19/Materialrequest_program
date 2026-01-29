@@ -33,7 +33,7 @@ public class Insert {
         return text;
     }
 
-    public static void Additemdata(String itid, String id, String code, String desc, String unit, String reqt, String issu, String onhandsts, String cono, String divi) throws Exception {
+    public static void Additemdata(String itid, String id, String code, String desc, String unit, String reqt, String issu, String onhandsts, String cono, String divi , String QTY_ETC, String QTY_ETCTH ) throws Exception {
 
         System.out.println("add reqt");
         System.out.println(reqt);
@@ -49,9 +49,9 @@ public class Insert {
 
                 Statement stmt = conn.createStatement();
                 String query = "INSERT INTO  "+GBVAR.DBPRD+".FAR_ITMTLB04\n"
-                        + "(ID,ORD_ID,ITM_ID,ITM_DESC,ITM_UNIT,QTY_REQT,QTY_ISSU,ONH_STAT,POS_STAT, REG_CONO,REG_DIVI)\n"
+                        + "(ID,ORD_ID,ITM_ID,ITM_DESC,ITM_UNIT,QTY_REQT,QTY_ISSU,ONH_STAT,POS_STAT, REG_CONO,REG_DIVI , QTY_ETC,QTY_ETCTH)\n"
                         + "VALUES \n"
-                        + "('" + itid + "','" + id + "','" + code + "','" + desc + "','" + unit + "','" + reqt + "','" + issu + "','" + onhandsts + "','-','" + cono + "','" + divi + "') \n ";
+                        + "('" + itid + "','" + id + "','" + code + "','" + desc + "','" + unit + "','" + reqt + "','" + issu + "','" + onhandsts + "','-','" + cono + "','" + divi + "' , '"+QTY_ETC+"', '"+QTY_ETCTH+"') \n ";
                 System.out.println("Additemdata\n" + query);
                 stmt.execute(query);
 
@@ -83,8 +83,11 @@ public class Insert {
         }
 
     }
-
-    public static String AddOrderID(String nextid, String id, int ruid, String vcompany, String vrequester, String vdepartmentname, String vcostcenter, String orderpurpose, String vdate, String vtype, String vfwhs, String vtwhs, String location, String rqtdate, String dpmhead, String orddpmh, String dphdate, String ordissb, String isbdate, String ordstat, String vcono, String vdivi , String fac) throws Exception {
+    
+    
+            
+            
+            public static String AddOrderIDRTNDPT(String nextid, String id, int ruid, String vcompany, String vrequester, String vdepartmentname, String vcostcenter, String orderpurpose, String vdate, String vtype, String vfwhs, String vtwhs, String location, String rqtdate, String dpmhead, String orddpmh, String dphdate, String ordissb, String isbdate, String ordstat, String vcono, String vdivi , String fac ,String itemtype,String pgmtype, String ORD_MG1, String ORD_MG2  ) throws Exception {
 
         JSONArray mJSonArr = new JSONArray();
         //Connection conn = ConnectSQLServer.ConnectionDB();
@@ -96,7 +99,53 @@ public class Insert {
                 int a = Integer.parseInt(nextid);
 
                 Statement stmt2 = conn.createStatement();
-                String query2 = "INSERT INTO "+GBVAR.DBPRD+".FAR_MTRREQ04 (ID,ORD_ID,RUID,COM_ID ,ORD_REGB,DEP_NAME,COS_CENT, ORD_PURP, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, MVX_ORDE, REG_CONO, REG_DIVI,REG_FAC) values (" + id + "," + a + ", " + ruid + " , '" + vcompany + "', '" + vrequester + "', '" + vdepartmentname + "', '" + vcostcenter + "', '" + orderpurpose + "' , '" + vdate + "', '" + vtype + "', '" + vfwhs + "', '" + vtwhs + "', '" + location + "', '" + rqtdate + "', '" + dpmhead + "', '" + orddpmh + "', '" + dphdate + "', '" + ordissb + "', '" + isbdate + "', '" + ordstat + "','00000000','" + vcono + "','" + vdivi + "'  , '"+fac+"' )";
+                String query2 = "INSERT INTO "+GBVAR.DBPRD+".FAR_MTRREQ04 (ID,ORD_ID,RUID,COM_ID ,ORD_REGB,DEP_NAME,COS_CENT, ORD_PURP, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, MVX_ORDE, REG_CONO, REG_DIVI,REG_FAC , ITM_TYPE, PGM_TYPE,ORD_MG1,ORD_MG2, MG1_DATE) values (" + id + "," + a + ", " + ruid + " , '" + vcompany + "', '" + vrequester + "', '" + vdepartmentname + "', '" + vcostcenter + "', '" + orderpurpose + "' , '" + vdate + "', '" + vtype + "', '" + vfwhs + "', '" + vtwhs + "', '" + location + "', '" + rqtdate + "', '" + dpmhead + "', '" + orddpmh + "', '" + dphdate + "', '" + ordissb + "', '" + isbdate + "', '" + ordstat + "','00000000','" + vcono + "','" + vdivi + "'  , '"+fac+"' , '"+itemtype+"', '"+pgmtype+"' ,'"+ORD_MG1+"','"+ORD_MG2+"' , '-')";
+                System.out.println("AddOrderID\n" + query2);
+                stmt2.execute(query2);
+
+                Map<String, Object> mMap = new HashMap<>();
+                mMap.put("result", "ok");
+                mMap.put("message", "insert complete");
+                mJSonArr.put(mMap);
+
+            } else {
+                System.out.println("Server can't connect.");
+            }
+
+        } catch (SQLException sqle) {
+            throw sqle;
+        } catch (NumberFormatException e) {
+            Map<String, Object> mMap = new HashMap<>();
+            mMap.put("result", "nok");
+            mMap.put("message", e);
+            mJSonArr.put(mMap);
+            if (conn != null) {
+                conn.close();
+            }
+            throw e;
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return nextid;
+
+    }
+
+    public static String AddOrderID(String nextid, String id, int ruid, String vcompany, String vrequester, String vdepartmentname, String vcostcenter, String orderpurpose, String vdate, String vtype, String vfwhs, String vtwhs, String location, String rqtdate, String dpmhead, String orddpmh, String dphdate, String ordissb, String isbdate, String ordstat, String vcono, String vdivi , String fac ,String itemtype,String pgmtype ) throws Exception {
+
+        JSONArray mJSonArr = new JSONArray();
+        //Connection conn = ConnectSQLServer.ConnectionDB();
+        Connection conn = ConnectDB2.ConnectionDB();
+
+        try {
+            if (conn != null) {
+
+                int a = Integer.parseInt(nextid);
+
+                Statement stmt2 = conn.createStatement();
+                String query2 = "INSERT INTO "+GBVAR.DBPRD+".FAR_MTRREQ04 (ID,ORD_ID,RUID,COM_ID ,ORD_REGB,DEP_NAME,COS_CENT, ORD_PURP, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, MVX_ORDE, REG_CONO, REG_DIVI,REG_FAC , ITM_TYPE, PGM_TYPE) values (" + id + "," + a + ", " + ruid + " , '" + vcompany + "', '" + vrequester + "', '" + vdepartmentname + "', '" + vcostcenter + "', '" + orderpurpose + "' , '" + vdate + "', '" + vtype + "', '" + vfwhs + "', '" + vtwhs + "', '" + location + "', '" + rqtdate + "', '" + dpmhead + "', '" + orddpmh + "', '" + dphdate + "', '" + ordissb + "', '" + isbdate + "', '" + ordstat + "','00000000','" + vcono + "','" + vdivi + "'  , '"+fac+"' , '"+itemtype+"', '"+pgmtype+"' )";
                 System.out.println("AddOrderID\n" + query2);
                 stmt2.execute(query2);
 

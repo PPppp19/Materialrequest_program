@@ -22,7 +22,7 @@
 
 </style>
 <html>
-    
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -66,22 +66,34 @@
                         </div>
 
                         <div class="form-group">
+                            <select class="form-control form-control-user" name="pgmtype" id="vPgmtype">
+                                <option value="">-- กรุณาเลือก --</option>
+                                <option value="MTR">Material Request</option>
+                                <option value="RTN">ใบเบิก</option>
+                                <option value="DPS">ใบฝาก</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
                             <select class="form-control form-control-user" name="company" id="vCompany"  onchange="Location(this.value)">
                                 <option value="" selected="selected">Select Company</option>
                             </select>
                         </div>
-                        
-                            <div class="form-group">
-                           <select class="form-control form-control-user" name="vFac" id="vFac">
-                        </select>
+
+                        <div class="form-group">
+                            <select class="form-control form-control-user" name="vFac" id="vFac">
+                            </select>
                         </div>
-                        
-                         <div class="row container col-md-12" style="font-size: 13px; width: 280px;">
+
+
+
+
+                        <div class="row container col-md-12" style="font-size: 13px; width: 280px;">
                             <div style="width: 140px;">
                                 <a href="http://192.200.9.189:8080/UserRequest/?Destination=PResetPW"><li style="color: blue;"><u>Reset Password</u></li></a>  
                             </div>  
                         </div>
-                        
+
                         <div class="form-group">
                             <div style="width: 140px;">
                                 <a href="#" onclick="window.open('http://192.200.9.189:8080/MaterialRequest/คู่มือการใช้งานโปรแกรม_Material_Request.pdf', '_blank', 'fullscreen=yes'); return true;" ><li style="color: blue;"><u>คู่มือการใช้งานโปรแกรม_Material_Request</u></li></a>        
@@ -104,17 +116,17 @@
 </html>
 
 <script>
-    
-    
+
+
 
     $(document).ready(function () {
 
 //                  location.replace("http://192.200.9.94:8080/MaterialRequest/login.jsp");
-  
+
 //      location.replace("http://192.200.9.251:8080/MaterialRequest/login.jsp");
 
 
-        
+
     <% System.out.println("Path : " + request.getContextPath());%>
 
         $.ajax({
@@ -122,31 +134,31 @@
             dataType: 'json',
             url: './Action',
             data: {
-                path: "getCompany"           
+                path: "getCompany"
             },
             success: function (getdata) {
-                console.log( getdata);
-                console.log( getdata.data);
+                console.log(getdata);
+                console.log(getdata.data);
                 $.each(getdata, function (i, obj) {
                     var div_data = "<option value=" + obj.COMPANY + ">" + obj.CCCONO + " : " + obj.CCDIVI + " : " + obj.CCCONM + "</option>";
                     console.log(div_data);
                     $(div_data).appendTo('#vCompany');
-                    
+
                 });
             }
         });
 
     });
-    
-    
-    
-    
-  function Location(val) {
-      //alert(val);
-      console.log("xxx");
 
 
- 
+
+
+    function Location(val) {
+        //alert(val);
+        console.log("xxx");
+
+
+
 
         let text = val;
         const myArray = text.split(":");
@@ -158,28 +170,28 @@
             dataType: 'json',
             url: './Action',
             data: {
-                  path: "GetFAC",
+                path: "GetFAC",
                 CONO: cono,
-                DIVI: divi        
+                DIVI: divi
             },
- success: function (getdata) {
-    
-    // เคลียร์ข้อมูลเก่าทั้งหมดใน #vFac
-    $('#vFac').empty();
-    
-    if (getdata.length === 0) {
-        // ถ้า getdata ไม่มีข้อมูล ให้เพิ่ม option "-" ลงไป
-        $('#vFac').append("<option value='-'>-</option>");
-    } else {
-        // ถ้ามีข้อมูลใน getdata
-        $.each(getdata, function (i, obj) {
-            
+            success: function (getdata) {
 
-            var div_data = "<option value='" + obj.CFFACI + "'>" + obj.CFFACN + "</option>";
-            $('#vFac').append(div_data);  // เพิ่มข้อมูลใหม่
-        });
-    }
-}
+                // เคลียร์ข้อมูลเก่าทั้งหมดใน #vFac
+                $('#vFac').empty();
+
+                if (getdata.length === 0) {
+                    // ถ้า getdata ไม่มีข้อมูล ให้เพิ่ม option "-" ลงไป
+                    $('#vFac').append("<option value='-'>-</option>");
+                } else {
+                    // ถ้ามีข้อมูลใน getdata
+                    $.each(getdata, function (i, obj) {
+
+
+                        var div_data = "<option value='" + obj.CFFACI + "'>" + obj.CFFACN + "</option>";
+                        $('#vFac').append(div_data);  // เพิ่มข้อมูลใหม่
+                    });
+                }
+            }
 
 
 
@@ -190,8 +202,8 @@
 //                    $(div_data).appendTo('#vFac');
 //    }
 
-      console.log("xxx");
+        console.log("xxx");
 
 
-  }
+    }
 </script>

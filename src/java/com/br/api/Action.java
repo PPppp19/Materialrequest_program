@@ -309,6 +309,8 @@ public class Action extends HttpServlet {
 //                    out.print(Select.getSignature(request.getParameter("cono"), request.getParameter("divi"), name));
                 } else if ("S2".equals(status)) {
 
+                    
+                    
                     feild1 = "ORD_REGB";
 
                     String name = Select.getstoredsignature(request.getParameter("orderid"), feild1);
@@ -322,7 +324,7 @@ public class Action extends HttpServlet {
 
                 } else if ("S4".equals(status)) {
 
-                    feild3 = "ORD_ISSB";
+                    feild3 = "ORD_MG1";
                     String name = Select.getstoredsignature(request.getParameter("orderid"), feild3);
                     out.print(Select.getSignature(request.getParameter("cono"), request.getParameter("divi"), name));
 
@@ -337,7 +339,7 @@ public class Action extends HttpServlet {
                 break;
             case "getItemcode":
                 System.out.println("getItemcode");
-                out.print(Select.getItemcode(request.getParameter("whs"), request.getParameter("check"), request.getParameter("cono")));
+                out.print(Select.getItemcode(request.getParameter("whs"), request.getParameter("check"), request.getParameter("cono") ,request.getParameter("itemstype")));
                 out.flush();
                 break;
 
@@ -352,6 +354,14 @@ public class Action extends HttpServlet {
                 out.print(Select.getCostcenter(request.getParameter("dep"), request.getParameter("cono"), request.getParameter("divi")));
                 out.flush();
                 break;
+                
+                
+                     case "GETMGLIST":
+    System.out.println("GETMGLIST");
+              out.print(Select.GETMGLIST(request.getParameter("GMCONO"), request.getParameter("GMDIVI"), request.getParameter("GMGROUP"), request.getParameter("WHA")));
+            out.flush();
+                break;
+
 
             case "getWarehouse":
                 out.print(Select.getWarehouse(request.getParameter("cono"), request.getParameter("divi"), request.getParameter("fac")));
@@ -372,7 +382,7 @@ public class Action extends HttpServlet {
                 String a = Integer.toString(inum1);
                 System.out.print(a);
 
-                Insert.Additemdata(a, request.getParameter("id"), request.getParameter("code"), request.getParameter("desc"), request.getParameter("unit"), request.getParameter("reqt"), request.getParameter("issu"), request.getParameter("onhandsts"), request.getParameter("cono"), request.getParameter("divi"));
+                Insert.Additemdata(a, request.getParameter("id"), request.getParameter("code"), request.getParameter("desc"), request.getParameter("unit"), request.getParameter("reqt"), request.getParameter("issu"), request.getParameter("onhandsts"), request.getParameter("cono"), request.getParameter("divi"), request.getParameter("QTY_ETC"),request.getParameter("QTY_ETCTH") );
 
             } catch (JSONException ex) {
                 Logger.getLogger(Action.class.getName()).log(Level.SEVERE, null, ex);
@@ -432,11 +442,73 @@ public class Action extends HttpServlet {
                 System.out.println(id);
                 
                 out.print(Insert.AddOrderID(nextid, nextid1, inum, request.getParameter("vcompany"), request.getParameter("vrequester"), request.getParameter("vdepartmentname"), request.getParameter("vcostcenter"), request.getParameter("orderpurpose"), request.getParameter("vdate"), request.getParameter("vtype"), request.getParameter("vfwhs"), request.getParameter("vtwhs"), request.getParameter("location"),
-                        request.getParameter("rqtdate"), request.getParameter("dpmhead"), request.getParameter("orddpmh"), request.getParameter("drhdate"), request.getParameter("ordissb"), request.getParameter("isbdate"), request.getParameter("ordstat"), request.getParameter("vcono"), request.getParameter("vdivi"),request.getParameter("fac")));
+                        request.getParameter("rqtdate"), request.getParameter("dpmhead"), request.getParameter("orddpmh"), request.getParameter("drhdate"), request.getParameter("ordissb"), request.getParameter("isbdate"), request.getParameter("ordstat"), request.getParameter("vcono"), request.getParameter("vdivi"),request.getParameter("fac"), request.getParameter("itemtype") , request.getParameter("pgmtype")  ));
 
                 out.flush();
                 break;
 
+                
+                      case "insertorderidRTNDPT":
+                System.out.print("insertorderidRTNDPT");
+                String currentID2 = Select.getOrderID();
+
+                System.out.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+                System.out.println(currentID2);
+
+                String id12 = Select.getID();
+                String nextid2;
+                String nextid12;
+                int inum2;
+
+                System.out.println(id12);
+                inum2 = parseInt(id12) + 1;
+                nextid12 = String.valueOf(inum2);
+
+                Date date2 = new Date();
+                String numtxt2;
+                numtxt2 = currentID2.substring(2, 8);
+                System.out.println("xx2" + numtxt2);
+                //SimpleDateFormat sdf = new SimpleDateFormat("yyMM");
+                SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy");
+                sdf2.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+                System.out.println();
+
+                int num2 = parseInt(numtxt2);
+                num2 += 1;
+
+                String txt2 = String.format("%04d", num2);
+                String stringDate2 = sdf2.format(date2);
+                int numy2 = parseInt(stringDate2.substring(0, 4));
+                if (numy2 > 2500) {
+                    numy2 -= 543;
+                }
+                String yy2 = Integer.toString(numy2).substring(2, 4);
+
+                String id2 = yy2  + txt2;
+
+                nextid2 = id2;
+                nextid12 = String.valueOf(inum2);
+
+                System.out.println(id2);
+                System.out.println(inum2);
+                 System.out.println(nextid12);
+                
+                System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+                System.out.println(request.getParameter("vcompany"));
+                System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+
+                System.out.println(id2);
+                
+                out.print(Insert.AddOrderIDRTNDPT(nextid2, nextid12, inum2, request.getParameter("vcompany"), request.getParameter("vrequester"), request.getParameter("vdepartmentname"), request.getParameter("vcostcenter"), request.getParameter("orderpurpose"), request.getParameter("vdate"), request.getParameter("vtype"), request.getParameter("vfwhs"), request.getParameter("vtwhs"), request.getParameter("location"),
+                        request.getParameter("rqtdate"), request.getParameter("dpmhead"), request.getParameter("orddpmh"), request.getParameter("drhdate"), request.getParameter("ordissb"), request.getParameter("isbdate"), request.getParameter("ordstat"), request.getParameter("vcono"), request.getParameter("vdivi"),request.getParameter("fac"), request.getParameter("itemtype") , request.getParameter("pgmtype"),request.getParameter("ORD_MG1"),request.getParameter("ORD_MG2")  ));
+
+                out.flush();
+                break;
+
+                
+                
+                
             // Update
             case "insertsubmit":
             try {
@@ -445,6 +517,24 @@ public class Action extends HttpServlet {
                 Logger.getLogger(Action.class.getName()).log(Level.SEVERE, null, ex);
             }
             break;
+            
+            
+             case "insertsubmitRTNDPS":
+            try {
+                Update.insertsubmitRTNDPS(request.getParameter("cono"), request.getParameter("divi"), request.getParameter("orderid"), request.getParameter("dpmh_to"), request.getParameter("purpose"), request.getParameter("status"));
+            } catch (JSONException ex) {
+                Logger.getLogger(Action.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            break;
+            
+            
+            
+            
+            
+            
+           
+            
+            
             case "returnid":
             try {
                 Update.returnid(request.getParameter("id"));
@@ -475,7 +565,7 @@ public class Action extends HttpServlet {
                 Update.updateitemdata(request.getParameter("id"), request.getParameter("itid"),
                         request.getParameter("code"), request.getParameter("desc"),
                         request.getParameter("unit"), request.getParameter("reqt"),
-                        request.getParameter("issu"), request.getParameter("onhand")
+                        request.getParameter("issu"), request.getParameter("onhand") ,request.getParameter("QTY_ETC") ,request.getParameter("QTY_ETCTH") 
                 );
             } catch (JSONException ex) {
                 Logger.getLogger(Action.class.getName()).log(Level.SEVERE, null, ex);

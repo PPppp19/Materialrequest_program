@@ -368,6 +368,7 @@
                 </select> 
             </div>
             <input id="company" style=" color: black;" type="hidden" name="company" value="<%out.print(session.getAttribute("cono"));%>" />
+
             <br>
 
             <hgroup>  
@@ -384,10 +385,17 @@
         <div class="details-form-field">
             <br>
 
+            <label id="requesttxt" style="  width: auto; height: 30%; font-size: 16px; float:left; color: #ffffff" >Request Type :  </label>
+            <label id="requestname" style="  width: auto; height: 30%; font-size: 16px; float:left; color: #ff0000" > &nbsp;  <%out.print(session.getAttribute("pgmty"));%></label>
+            <br>
+            <br>
+
             <label id="movextxt" style="  width: auto; height: 30%; font-size: 16px; float:left; color: #ffffff" >Requester : </label>
+
             <label id="movexno" name="movexno" style=" visibility: hidden; width: 1%; height: 30%; color: #ffffff;font-size: 16px; float:left;" />
 
             <label id="usename" style="  width: auto; height: 30%; font-size: 16px; float:left; color: #ffffff" ><%out.print(session.getAttribute("user"));%></label>
+
 
 
 
@@ -439,8 +447,8 @@
 
 
 
-<!--                          <input class="form-control" list="orderidlist" autocomplete="off" placeholder="OrderID" id="MRNO" name="MRNO" value="">
-                                    <datalist id="orderidlist"> </datalist>
+            <!--                          <input class="form-control" list="orderidlist" autocomplete="off" placeholder="OrderID" id="MRNO" name="MRNO" value="">
+                                                <datalist id="orderidlist"> </datalist>
             -->
 
 
@@ -464,6 +472,7 @@
                 <input style=" color: black; " type="hidden" id="username" name="username" value="<%out.print(session.getAttribute("user"));%>" />
                 <input style=" color: black; " type="hidden" id="cono" name="cono" value="<%out.print(session.getAttribute("cono"));%>" />
                 <input style=" color: black; " type="hidden" id="divi" name="divi" value="<%out.print(session.getAttribute("divi"));%>" />
+                <input style=" color: black; " type="hidden" id="pgmtype" name="pgmtype" value="<%out.print(session.getAttribute("pgmty"));%>" />
 
 
                 <label style=" width: 10%;">Cost Center :</label>
@@ -549,9 +558,13 @@
 
                 <div align="left">    
                     <p style=" color: #161637; font-weight: bold;">Type :</p>
-                    <input type="radio" id="radiotypeexp" name="radiotype" value="71">
-                    <input style=" color: black;" type="hidden" id="radiotype" name="radiotype" value="<% request.getParameter("radiotype"); %>" />
 
+                    <input style=" color: black;" type="hidden" id="itemtype" name="itemtype" value="<% request.getParameter("itemtype"); %>" />
+                    <input type="radio" id="itemtypeexp" name="itemtype" value="1">
+                    <label for="1">Manufacture</label>&nbsp;&nbsp;&nbsp;
+
+                    <input style=" color: black;" type="hidden" id="radiotype" name="radiotype" value="<% request.getParameter("radiotype"); %>" />
+                    <input type="radio" id="radiotypeexp" name="radiotype" value="71">
                     <label for="expense">For Expense (ค่าใช้จ่าย)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
                     <label style=" color: red; text-shadow: -1px 0 white, 0 0.5px white,
                            0.5px 0 white, 0 -1px white " for="expense1">ต้องการไอเทมที่</label>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -562,6 +575,11 @@
 
                 </div>
                 <div align="left">
+
+                    <input type="radio" id="itemtypetrn" name="itemtype" value="2">
+                    <label for="2">Purchased</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+
+
                     <input type="radio" id="radiotypetrn" name="radiotype" value="33">
                     <label for="age2">For Stock Transfer (คงคลัง)</label>&nbsp;&nbsp;
                     <input type="checkbox" id="onhandval" name="onhandval" value="true">
@@ -572,7 +590,7 @@
                     <select  class="select" name="period"  id="vTwarehouse"  style=" width: 155px" >
                         <option value="" selected="selected">Select Department </option>
                     </select>&nbsp;&nbsp;
-                    <input type="text" id="fname" style=" width: 20%; background-color: #2e3135; color: #cdcece; text-align: center; border-radius: 4px; border: none;
+                    <input type="text" id="fname" style=" width: 15%; background-color: #2e3135; color: #cdcece; text-align: center; border-radius: 4px; border: none;
                            border:solid 1px #cdcece;" name="fname">
 
                 </div>   
@@ -588,11 +606,26 @@
                     Resend E-mail
                 </button>
 
-                <button   onclick = "fun();"  style=" width: 15%; height: 30px; color: white; background-color: #0080ff;" class="btn btn-primary" type="button" " data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;
+
+                <button   onclick = "fun();"  style=" width: 10%; height: 30px; color: white; background-color: #0080ff;" class="btn btn-primary" type="button" " data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     SAVE
-                    
+
                 </button>
-                <button type="submit" id="SendRejectMail1" name="SendAppMail"   value="SendRejectMail" style=" width: 12%; " class="btn btn-danger mb-2" style="color:#FFFFFF; visibility:hidden;" >Cancel</button>
+                <button type="submit" id="SendRejectMail1" name="SendAppMail"   value="SendRejectMail" style=" width: 10%; " class="btn btn-danger mb-2" style="color:#FFFFFF; visibility:hidden;" >Cancel</button>
 
 
 
@@ -731,19 +764,19 @@
                                    float:left;">Department Head</label>               
                             <div style="clear:both;"></div>      
 
-                            <div id="sigf" style="width: 100%;background:  #2e3135;  padding:1% 0 1% 1%;  height: 300px;">                    
+                            <div id="sigf" style="width: 100%;background:  #2e3135;  padding:1% 0 1% 0;  height: 300px;">                    
                                 <br>
                                 <br>
-<!--                                <select  class="select" name="vhead"  id="vhead" >
-                                    <option value="00" selected="selected">Select Department Head </option>
-                                </select>-->
-                                
-                  
-                                
-<input class="form-control" list="orderidlist" width="50px" autocomplete="off" placeholder="Department Head" id="vhead" name="vhead" value="">
-                        <datalist id="orderidlist"> </datalist>
-                        
-                        
+                                <!--                                <select  class="select" name="vhead"  id="vhead" >
+                                                                    <option value="00" selected="selected">Select Department Head </option>
+                                                                </select>-->
+
+
+
+                                <input class="form-control" list="orderidlist" width="50px" autocomplete="off" placeholder="Department Head" id="vhead" name="vhead" value="">
+                                <datalist id="orderidlist"> </datalist>
+
+
                                 <!-- Signature todo -->
                                 <br>
                                 <div class="frame" id="frame2" style=" width: auto">
@@ -802,6 +835,87 @@
 
                             <br>
                         </div>
+
+
+
+                        <div id="mg1" class="divleft"> <!-- Reqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq -->
+                            <label style="text-align:left;
+                                   float:left;"> Maneger 1 </label>               
+                            <div style="clear:both;"></div>      
+
+
+                            <div style="width: 100%; background:  #2e3135; padding:1% 0 1% 1%; border-top:1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; height: 300px;">                    
+                                <br>   
+                                <!-- Signature todo -->
+                                <br>
+                                <select  name="vhead"  id="xxxx" style=" visibility: hidden" >
+                                    <option value="" selected="selected">Select Department Head3 </option>
+                                </select>   
+                                <div class="frame" id="frame4" style=" width: auto">
+                                    <div id="image_div4" class="img_wrp">
+                                        <img class="close" width="25" height="25" id="imgclose4" style=" visibility: hidden"  src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-close-1024.png" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label>Date/Time : </label>
+                                    <label id="rqdate4" >-</label>
+
+
+                                </div>
+
+
+                                <div>
+                                    <button class="btn btn-primary mb-2" style="color:#FFFFFF;" form="detailsForm" name="report" value="Submit"type="button" data-toggle="modal" data-target="#exampleModal" id = "btn_openmodal4">Log in</button>
+                                </div>
+                            </div>
+                            <div style="clear:both;"></div>
+
+                        </div>
+
+
+
+
+
+                        <div id="mg2" class="divleft"> <!-- Reqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq -->
+                            <label style="text-align:left;
+                                   float:left;"> Maneger 2 </label>               
+                            <div style="clear:both;"></div>      
+
+
+                            <div style="width: 100%; background:  #2e3135; padding:1% 0 1% 1%; border-top:1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; height: 300px;">                    
+                                <br>   
+                                <!-- Signature todo -->
+                                <br>
+                                <select  name="vhead"  id="xxxx" style=" visibility: hidden" >
+                                    <option value="" selected="selected">Select Department Head3 </option>
+                                </select>   
+                                <div class="frame" id="frame5" style=" width: auto">
+                                    <div id="image_div5" class="img_wrp">
+                                        <img class="close" width="25" height="25" id="imgclose5" style=" visibility: hidden"  src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-close-1024.png" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label>Date/Time : </label>
+                                    <label id="rqdate5" >-</label>
+
+
+                                </div>
+
+
+                                <div>
+                                    <button class="btn btn-primary mb-2" style="color:#FFFFFF;" form="detailsForm" name="report" value="Submit"type="button" data-toggle="modal" data-target="#exampleModal" id = "btn_openmodal5">Log in</button>
+                                </div>
+                            </div>
+                            <div style="clear:both;"></div>
+
+                        </div>
+
+
+
+
+
+
+
 
 
 
@@ -993,6 +1107,8 @@
             <br>
             <br>
             <button type="submit" class="btn btn-primary mb-2" style=" background-color: #0080ff; width: 20%; height: 10%; outline: 1px solid #ffffff;" onclick="return sendmail();"   id="SendAppMail" name="SendAppMail"   value="SendAppMail"  >Submit</button>
+
+            <!--<button type="submit" class="btn btn-primary mb-2" style=" background-color: #0080ff; width: 20%; height: 10%; outline: 1px solid #ffffff;" onclick="return sendmail();"   id="SendAppMail" name="SendAppMail"   value="SendAppMail"  >Submit</button>-->
             <br>
             <br>
             <br> 
@@ -1073,17 +1189,14 @@
             var num = parseFloat(value);
             return isNaN(num) ? parseFloat(0).toFixed(2) : num.toFixed(2);
         },
-
         filterValue: function () {
             var num = parseFloat(this.filterControl.val());
             return isNaN(num) ? 0 : num;
         },
-
         insertValue: function () {
             var num = parseFloat(this.insertControl.val());
             return isNaN(num) ? 0 : num;
         },
-
         editValue: function () {
             var num = parseFloat(this.editControl.val());
             return isNaN(num) ? 0 : num;
@@ -1091,7 +1204,6 @@
 
     });
     jsGrid.fields.money = MoneyField;
-
     function TextSelectField(config) {
         jsGrid.SelectField.call(this, config);
     }
@@ -1133,6 +1245,8 @@
     var chkStatus = "S1";
     var sig_req = "";
     var sig_dep = "";
+    var sig_mg1 = "";
+    var sig_mg2 = "";
     var sig_iss = "";
     ///////// all input form ////////////////////
 
@@ -1153,13 +1267,13 @@
 
 
     $(function () {
-        
+
         function MoneyField(config) {
-        jsGrid.NumberField.call(this, config);
-    }
+            jsGrid.NumberField.call(this, config);
+        }
 
 
-    MoneyField.prototype = new jsGrid.NumberField({
+        MoneyField.prototype = new jsGrid.NumberField({
 
 //        itemTemplate: function (value) {
 //            return  parseFloat(value).toFixed(2) || parseFloat(0).toFixed(2)  ;
@@ -1176,49 +1290,43 @@
 //        }
 
 
-        itemTemplate: function (value) {
-            var num = parseFloat(value);
-            return isNaN(num) ? parseFloat(0).toFixed(2) : num.toFixed(2);
-        },
+            itemTemplate: function (value) {
+                var num = parseFloat(value);
+                return isNaN(num) ? parseFloat(0).toFixed(2) : num.toFixed(2);
+            },
+            filterValue: function () {
+                var num = parseFloat(this.filterControl.val());
+                return isNaN(num) ? 0 : num;
+            },
+            insertValue: function () {
+                var num = parseFloat(this.insertControl.val());
+                return isNaN(num) ? 0 : num;
+            },
+            editValue: function () {
+                var num = parseFloat(this.editControl.val());
+                return isNaN(num) ? 0 : num;
+            }
 
-        filterValue: function () {
-            var num = parseFloat(this.filterControl.val());
-            return isNaN(num) ? 0 : num;
-        },
+        });
+        jsGrid.fields.money = MoneyField;
+        TextSelectField.prototype = new jsGrid.SelectField({
 
-        insertValue: function () {
-            var num = parseFloat(this.insertControl.val());
-            return isNaN(num) ? 0 : num;
-        },
+            sorter: "string",
+            filterValue: function () {
+                return this.filterControl.val();
+            },
+            itemTemplate: function (value) {
 
-        editValue: function () {
-            var num = parseFloat(this.editControl.val());
-            return isNaN(num) ? 0 : num;
-        }
-
-    });
-    jsGrid.fields.money = MoneyField;
-        
-    TextSelectField.prototype = new jsGrid.SelectField({
-
-        sorter: "string",
-        filterValue: function () {
-            return this.filterControl.val();
-        },
-        itemTemplate: function (value) {
-
-            return value;
-        },
-        insertValue: function () {
-            return this.insertControl.val();
-        },
-        editValue: function () {
-            return this.editControl.val();
-        }
-    });
-    jsGrid.fields.textSelect = TextSelectField;
-    
-
+                return value;
+            },
+            insertValue: function () {
+                return this.insertControl.val();
+            },
+            editValue: function () {
+                return this.editControl.val();
+            }
+        });
+        jsGrid.fields.textSelect = TextSelectField;
         var username = document.getElementById("username").value;
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
@@ -1232,6 +1340,8 @@
         document.getElementById("rqby").style.visibility = 'visible';
         document.getElementById("dpmhd").style.visibility = 'visible';
         document.getElementById("isby").style.visibility = 'hidden';
+        document.getElementById("mg1").style.visibility = 'hidden';
+        document.getElementById("mg2").style.visibility = 'hidden';
         document.getElementById("btn_openmodal2").style.visibility = 'hidden';
         document.getElementById("btn_openmodal").style.visibility = 'visible';
         document.getElementById("rqdate2txt").style.visibility = 'hidden';
@@ -1240,24 +1350,218 @@
         document.getElementById("imgclose").style.visibility = 'hidden';
         document.getElementById("imgclose2").style.visibility = 'hidden';
         document.getElementById("imgclose3").style.visibility = 'hidden';
+        document.getElementById("imgclose4").style.visibility = 'hidden';
+        document.getElementById("imgclose5").style.visibility = 'hidden';
     });
     function sendmail() {
 
 
-        var vhead = document.getElementById("vhead").value;
-        
-       // alert(vhead);
-        
-       
-        var vNo = document.getElementById("ordernum").innerHTML;
-        var purpose = document.getElementById("mypparea").value;
-        if (vhead != "00") {
-            insertsubmit(purpose, vhead, vNo);
-            getEmailByName(vhead);
-        } else {
-            //alert("โปรดทำรายการใหม่" + vhead + " : " + vNo);
+        const Key = urlParams.get('status');
+        let PGMTYPE = "<%out.print(session.getAttribute("pgmty"));%>".trim();
+
+        alert(PGMTYPE);
+        if (PGMTYPE === null) {
+            PGMTYPE = "MTR";
         }
-        
+
+
+
+        if (PGMTYPE === "MTR" || PGMTYPE === null) {
+            // alert("MTR");
+
+            var vhead = document.getElementById("vhead").value;
+
+
+            var vNo = document.getElementById("ordernum").innerHTML;
+            var purpose = document.getElementById("mypparea").value;
+            if (vhead != "00") {
+                insertsubmit(purpose, vhead, vNo);
+                getEmailByName(vhead);
+            } else {
+                //alert("โปรดทำรายการใหม่" + vhead + " : " + vNo);
+            }
+
+
+        } else {
+
+
+            if (Key !== "S2" && Key !== "S4" && Key !== "S5") {  // insert 
+                vhead = 'PHONGS_PHO';
+                //var vhead = 'WALAIL_KLE'; 
+
+
+
+
+
+                var vNo = document.getElementById("ordernum").innerHTML;
+                var purpose = document.getElementById("mypparea").value;
+
+
+
+                if (vhead != "00") {
+
+
+                    insertsubmit(purpose, vhead, vNo);
+
+                    getEmailByName(vhead);
+
+
+                } else {
+                    //alert("โปรดทำรายการใหม่" + vhead + " : " + vNo);
+                }
+
+
+
+
+
+                var GMCONO = "<%out.print(session.getAttribute("cono"));%>".trim();
+                var GMDIVI = "<%out.print(session.getAttribute("divi"));%>".trim();
+                var GMGROUP = "MKT";
+                var WHA = document.getElementById("vTwarehouse").value;
+                var vNo = document.getElementById("ordernum").innerHTML;
+
+
+
+                $.ajax({
+                    url: './Action',
+                    type: 'GET',
+                    data: {
+                        path: "GETMGLIST",
+                        GMCONO: GMCONO,
+                        GMDIVI: GMDIVI,
+                        GMGROUP: GMGROUP,
+                        WHA: WHA
+                    },
+                    success: function (result) {
+                        alert(result);
+
+
+                        // todo 
+
+                        insertsubmitRTNDPS(GMCONO, GMDIVI, purpose, result, vNo, "S2");
+
+
+                        //  insertsubmit(purpose, result, vNo);
+                    }
+
+                });
+
+
+
+
+
+
+            } else if (Key === "S2") {
+
+
+                alert("S2");
+
+                var GMCONO = "<%out.print(session.getAttribute("cono"));%>".trim();
+                var GMDIVI = "<%out.print(session.getAttribute("divi"));%>".trim();
+                var GMGROUP = "CST";
+                var WHA = document.getElementById("vTwarehouse").value;
+                var vNo = document.getElementById("ordernum").innerHTML;
+
+
+
+                $.ajax({
+                    url: './Action',
+                    type: 'GET',
+                    data: {
+                        path: "GETMGLIST",
+                        GMCONO: GMCONO,
+                        GMDIVI: GMDIVI,
+                        GMGROUP: GMGROUP,
+                        WHA: WHA
+                    },
+                    success: function (result) {
+                        alert(result);
+
+
+                        // todo 
+
+                        insertsubmitRTNDPS(GMCONO, GMDIVI, purpose, result, vNo, "S4");
+
+
+                        //  insertsubmit(purpose, result, vNo);
+                    }
+
+                });
+
+
+
+            } else if (Key === "S4") {
+
+
+
+//                alert("S4");
+//
+//                var GMCONO = "<%out.print(session.getAttribute("cono"));%>".trim();
+//                var GMDIVI = "<%out.print(session.getAttribute("divi"));%>".trim();
+//                var GMGROUP = "CST";
+//                var WHA = document.getElementById("vTwarehouse").value;
+//                var vNo = document.getElementById("ordernum").innerHTML;
+//
+//
+//
+//                $.ajax({
+//                    url: './Action',
+//                    type: 'GET',
+//                    data: {
+//                        path: "GETMGLIST",
+//                        GMCONO: GMCONO,
+//                        GMDIVI: GMDIVI,
+//                        GMGROUP: GMGROUP,
+//                        WHA: WHA
+//                    },
+//                    success: function (result) {
+//                        alert(result);
+//
+//
+//                        // todo 
+//
+//                        insertsubmitRTNDPS(GMCONO, GMDIVI, purpose, result, vNo, Key);
+//
+//
+//                        //  insertsubmit(purpose, result, vNo);
+//                    }
+//
+//                });
+
+
+
+
+            } else if (Key === "S5") {
+
+            } else { // update 
+
+
+
+
+            }
+
+
+        }
+
+
+        /*
+         
+         var vhead = document.getElementById("vhead").value;
+         
+         // alert(vhead);
+         
+         
+         var vNo = document.getElementById("ordernum").innerHTML;
+         var purpose = document.getElementById("mypparea").value;
+         if (vhead != "00") {
+         insertsubmit(purpose, vhead, vNo);
+         getEmailByName(vhead);
+         } else {
+         //alert("โปรดทำรายการใหม่" + vhead + " : " + vNo);
+         }
+         
+         */
+
     }
 
 
@@ -1285,9 +1589,17 @@
         var ordernum = document.getElementById('ordernum');
         var rj = document.getElementById('SendRejectMail');
         var cono = document.getElementById("cono").value;
+        var pgmtype = document.getElementById("pgmtype").value;
+
+
         var divi = document.getElementById("divi").value;
         if (Key === null) {
             Key = "S1";
+        }
+
+        let PGMTYPE = "<%out.print(session.getAttribute("pgmty"));%>".trim();
+        if (PGMTYPE === null) {
+            PGMTYPE = "MTR";
         }
 
 
@@ -1382,6 +1694,8 @@
 
                         var itemid = [];
                         var itemdesc = [];
+                        var itemQTY_ETC = [];
+                        var itemQTY_ETCTH = [];
                         var qtyreqt = [];
                         var qtyissu = [];
                         //                    $("#Jsgrid").jsGrid("loadData");
@@ -1447,14 +1761,25 @@
 
                                         var vcc = document.getElementById("vPeriod");
                                         vcc.options[vcc.selectedIndex].text = v;
+
+
+
+
                                     }
+
+
 
                                 } else if (k === "ORD_REGB") {
 
                                     if (v !== null) {
-
                                         // todosig 
+
+
+
                                         getsignature(v, "S2", a);
+
+
+
                                         document.getElementById("creatortxt").innerHTML = v;
                                         var usename = document.getElementById("usename").innerHTML;
                                         if (v.trim() === usename.trim() && Key === "S2") {
@@ -1481,9 +1806,35 @@
 
                                         // todosig 
                                         console.log("xxxx s3 ");
+                                        console.log("xxxx s3 cdd");
+                                        getsignature(v, "SS", a);
+                                    }
+
+                                } else if (k === "ORD_MG1") {
+
+                                    console.log("yyyyyyyyyyyyyyyy");
+                                    console.log(v);
+                                    console.log("yyyyyyyyyyyyyyyyyyyyyy");
+
+                                    if (v !== null) {
+
+                                        // todosig 
+                                        console.log("xxxx s4 ");
                                         getsignature(v, "S4", a);
                                     }
 
+                                } else if (k === "ITM_TYPE") {
+
+
+                                    if (v === "1") {
+
+                                        const MANBtn = document.getElementById('itemtypeexp');
+                                        MANBtn.checked = true;
+                                    } else {
+
+                                        const PURBtn = document.getElementById('itemtypetrn');
+                                        PURBtn.checked = true;
+                                    }
                                 } else if (k === "MAT_TYPE") {
 
 
@@ -1509,18 +1860,28 @@
                                 } else if (k === "FRM_WAHO") {
 
                                     if (v !== null) {
-                                        document.getElementById("vFwarehouse").value = v;
+                                        //    document.getElementById("vFwarehouse").value = v;
+
+                                        var vcc = document.getElementById("vFwarehouse");
+                                        vcc.options[vcc.selectedIndex].text = v;
                                         var checkBox = document.getElementById("onhandval").checked;
-                                        getItemscode(v, "false");
+                                        // var itemstype = document.querySelector('input[name="itemtype"]:checked').value;
+                                        // var itemstype = '2'; 
+                                        //  alert(itemstype);
+                                        getItemscode(v, "false", 2);
                                     }
 
-                                } else if (k === "ORD_REGB") {
+                                }
 
-                                    if (v !== null) {
-                                        document.getElementById("creatortxt").innerHTML = v;
-                                    }
+//        else if (k === "ORD_REGB") {
+//
+//                                    if (v !== null) {
+//                                        document.getElementById("creatortxt").innerHTML = v;
+//                                    }
+//
+//                                } 
 
-                                } else if (k === "TO_WAHO") {
+                                else if (k === "TO_WAHO") {
 
                                     if (v !== null) {
                                         document.getElementById("vTwarehouse").value = v;
@@ -1569,6 +1930,9 @@
                                 } else if (k === "ITM_DESC") {
                                     console.log("ITM_DESC");
                                     itemdesc.push(v);
+                                } else if (k === "QTY_ETC") {
+                                    console.log("QTY_ETC");
+                                    itemQTY_ETC.push(v);
                                 } else if (k === "QTY_REQT") {
                                     console.log("QTY_REQT");
                                     qtyreqt.push(v);
@@ -1588,7 +1952,17 @@
                                 } else if (k === "ISB_DATE") {
 
                                     document.getElementById("rqdate3").innerHTML = v;
+                                } else if (k === "MG1_DATE") {
+
+                                    console.log("xxxxxxxxxxxxxxxxxxxxxxx");
+                                    console.log(v);
+                                    console.log("xxxxxxxxxxxxxxxxxxxxxxx");
+                                    document.getElementById("rqdate4").innerHTML = v;
                                 }
+//                                } else if (k === "MG2_DATE") {
+//
+//                                    document.getElementById("rqdat5").innerHTML = v;
+//                                }
 
 
 
@@ -1631,11 +2005,16 @@
 
     function fun() {
 
+
+
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const Key = urlParams.get('status');
-
-
+        let PGMTYPE = "<%out.print(session.getAttribute("pgmty"));%>".trim();
+        if (PGMTYPE === null) {
+            PGMTYPE = "MTR";
+        }
+        alert(PGMTYPE);
         var vcc = document.getElementById("vPeriod");
         var vCostcenter = vcc.options[vcc.selectedIndex].text;
         var vRequester = document.getElementById("username").value;
@@ -1674,16 +2053,15 @@
             var vDepartmentname = document.getElementById("Dname").innerHTML;
             var vDate = document.getElementById("vDate").value;
             var vType = document.querySelector('input[name="radiotype"]:checked').value;
+            var vITMType = document.querySelector('input[name="itemtype"]:checked').value;
             var vFwhs = document.getElementById("vFwarehouse").value;
             var vTwhs = document.getElementById("vTwarehouse").value;
             var Location = document.getElementById("fname").value;
             var vcono = document.getElementById("cono").value;
             var vdivi = document.getElementById("divi").value;
-            
             // todo addfac
-            
-            var facility = "<%out.print(session.getAttribute("fac"));%>".trim();
 
+            var facility = "<%out.print(session.getAttribute("fac"));%>".trim();
             var orderPurpose = "-";
             var rqtdate = "-";
             var dpmhead = "2000-00-00";
@@ -1692,117 +2070,239 @@
             var ordissb = "-";
             var isbdate = "-";
             var ordstat = "00";
-            if (ordernum === "00000000" && Key !== "S2") {
+            if (PGMTYPE == "MTR" || PGMTYPE === null) {
+
+
+                if (ordernum === "00000000" && Key !== "S2") {
 
 
 
-                $.ajax({
-                    url: './Action',
-                    type: 'GET',
-                    dataType: 'text',
-                    data: {
-                        path: "insertorderid",
-                        vcompany: vCompany,
-                        vrequester: vRequester,
-                        vdepartmentname: vDepartmentname,
-                        vcostcenter: vCostcenter,
-                        vdate: vDate,
-                        vtype: vType,
-                        vfwhs: vFwhs,
-                        vtwhs: vTwhs,
-                        location: Location,
-                        orderpurpose: orderPurpose,
-                        rqtdate: rqtdate,
-                        dpmhead: dpmhead,
-                        orddpmh: orddpmh,
-                        drhdate: drhdate,
-                        ordissb: ordissb,
-                        isbdate: isbdate,
-                        ordstat: ordstat,
-                        vcono: vcono,
-                        vdivi: vdivi,
-                        fac:facility,
+                    $.ajax({
+                        url: './Action',
+                        type: 'GET',
+                        dataType: 'text',
+                        data: {
+                            path: "insertorderid",
+                            vcompany: vCompany,
+                            vrequester: vRequester,
+                            vdepartmentname: vDepartmentname,
+                            vcostcenter: vCostcenter,
+                            vdate: vDate,
+                            vtype: vType,
+                            vfwhs: vFwhs,
+                            vtwhs: vTwhs,
+                            location: Location,
+                            orderpurpose: orderPurpose,
+                            rqtdate: rqtdate,
+                            dpmhead: dpmhead,
+                            orddpmh: orddpmh,
+                            drhdate: drhdate,
+                            ordissb: ordissb,
+                            isbdate: isbdate,
+                            ordstat: ordstat,
+                            vcono: vcono,
+                            vdivi: vdivi,
+                            fac: facility,
+                            itemtype: vITMType,
+                            pgmtype: PGMTYPE,
+                        },
+                        success: function (result) {
 
-
-
-
-
-
-                    },
-                    success: function (result) {
-
-                        console.log("SAVED Data");
-                        document.getElementById("ordernum").innerHTML = result;
-                        document.getElementById("ordernumpp").value = result;
-                    }
-
-                });
-
-            } else {
-
-                // todoupdate 
-                var orderPurpose = document.getElementById("mypparea").value;
-                var rqtdate = "regdate";
-                var drhdate = "drhdate";
-                var isbdate = "isbdate";
-                var ordstat = "01";
-                $.ajax({
-                    url: './Action',
-                    type: 'GET',
-                    data: {
-                        path: "updateheaddata",
-                        id: document.getElementById("ordernum").innerHTML,
-                        vcompany: vCompany,
-                        vrequester: vRequester,
-                        vdepartmentname: vDepartmentname,
-                        vcostcenter: vCostcenter,
-                        vdate: vDate,
-                        vtype: vType,
-                        vfwhs: vFwhs,
-                        vtwhs: vTwhs,
-                        location: Location,
-                        orderPurpose: orderPurpose
-
-                    },
-                    success: function (result) {
-
-                        console.log("Updated Data");
-                    }
-
-                });
-                ////////  table data  Storing  //////////
-
-
-
-                var data = $("#Jsgrid").jsGrid("option", "data");
-                console.log("All data : ");
-                $.each(data, function () {
-                    $.each(this, function (k, v) {
-
-
-                        if (k === "Code") {
-                            if (v !== "22110000") {
-                                console.log("COde :");
-                            }
-
-                        } else if (k === "Description") {
-
-                            if (v !== null) {
-                                if (v !== "DEFAULT") {
-                                    console.log("Description :");
-                                }
-
-                            }
-                        } else if (k === "Unit") {
-                            console.log("Unit :");
-                        } else if (k === "Qty Iss") {
-                            console.log("Qty Iss :");
-                        } else if (k === "Qty Reg") {
-                            console.log("Qty Reg :");
+                            console.log("SAVED Data");
+                            document.getElementById("ordernum").innerHTML = result;
+                            document.getElementById("ordernumpp").value = result;
                         }
 
                     });
-                });
+                } else {
+
+                    // todoupdate 
+                    var orderPurpose = document.getElementById("mypparea").value;
+                    var rqtdate = "regdate";
+                    var drhdate = "drhdate";
+                    var isbdate = "isbdate";
+                    var ordstat = "01";
+                    $.ajax({
+                        url: './Action',
+                        type: 'GET',
+                        data: {
+                            path: "updateheaddata",
+                            id: document.getElementById("ordernum").innerHTML,
+                            vcompany: vCompany,
+                            vrequester: vRequester,
+                            vdepartmentname: vDepartmentname,
+                            vcostcenter: vCostcenter,
+                            vdate: vDate,
+                            vtype: vType,
+                            vfwhs: vFwhs,
+                            vtwhs: vTwhs,
+                            location: Location,
+                            orderPurpose: orderPurpose
+
+                        },
+                        success: function (result) {
+
+                            console.log("Updated Data");
+                        }
+
+                    });
+                    ////////  table data  Storing  //////////
+
+
+
+                    var data = $("#Jsgrid").jsGrid("option", "data");
+                    console.log("All data : ");
+                    $.each(data, function () {
+                        $.each(this, function (k, v) {
+
+
+                            if (k === "Code") {
+                                if (v !== "22110000") {
+                                    console.log("COde :");
+                                }
+
+                            } else if (k === "Description") {
+
+                                if (v !== null) {
+                                    if (v !== "DEFAULT") {
+                                        console.log("Description :");
+                                    }
+
+                                }
+                            } else if (k === "Unit") {
+                                console.log("Unit :");
+                            } else if (k === "Qty Iss") {
+                                console.log("Qty Iss :");
+                            } else if (k === "Qty Reg") {
+                                console.log("Qty Reg :");
+                            }
+
+                        });
+                    });
+                }
+
+
+            } else { // ใบเบิกใบฝาก 
+
+
+
+                console.log(Key);
+                console.log(ordernum);
+                if (ordernum === "00000000" && Key !== "S2" && Key !== "S4" && Key !== "S5") {
+
+
+
+                    let  ORD_MG1 = 'MG1';
+                    let ORD_MG2 = 'MG2';
+                    $.ajax({
+                        url: './Action',
+                        type: 'GET',
+                        dataType: 'text',
+                        data: {
+                            path: "insertorderidRTNDPT", /// ใบเบิกฝาก 
+                            vcompany: vCompany,
+                            vrequester: vRequester,
+                            vdepartmentname: vDepartmentname,
+                            vcostcenter: vCostcenter,
+                            vdate: vDate,
+                            vtype: vType,
+                            vfwhs: vFwhs,
+                            vtwhs: vTwhs,
+                            location: Location,
+                            orderpurpose: orderPurpose,
+                            rqtdate: rqtdate,
+                            dpmhead: dpmhead,
+                            orddpmh: orddpmh,
+                            drhdate: drhdate,
+                            ordissb: ordissb,
+                            isbdate: isbdate,
+                            ordstat: ordstat,
+                            vcono: vcono,
+                            vdivi: vdivi,
+                            fac: facility,
+                            itemtype: vITMType,
+                            pgmtype: PGMTYPE,
+                            ORD_MG1: ORD_MG1,
+                            ORD_MG2: ORD_MG2,
+                        },
+                        success: function (result) {
+
+                            console.log("SAVED Data");
+                            document.getElementById("ordernum").innerHTML = result;
+                            document.getElementById("ordernumpp").value = result;
+                        }
+
+                    });
+                } else {
+
+                    // todoupdate 
+                    var orderPurpose = document.getElementById("mypparea").value;
+                    var rqtdate = "regdate";
+                    var drhdate = "drhdate";
+                    var isbdate = "isbdate";
+                    var ordstat = "01";
+                    $.ajax({
+                        url: './Action',
+                        type: 'GET',
+                        data: {
+                            path: "updateheaddataRTNDPT", /// ใบเบิกฝาก 
+                            id: document.getElementById("ordernum").innerHTML,
+                            vcompany: vCompany,
+                            vrequester: vRequester,
+                            vdepartmentname: vDepartmentname,
+                            vcostcenter: vCostcenter,
+                            vdate: vDate,
+                            vtype: vType,
+                            vfwhs: vFwhs,
+                            vtwhs: vTwhs,
+                            location: Location,
+                            orderPurpose: orderPurpose,
+                            Key: Key,
+                        },
+                        success: function (result) {
+
+                            console.log("Updated Data");
+                        }
+
+                    });
+                    ////////  table data  Storing  //////////
+
+
+
+                    var data = $("#Jsgrid").jsGrid("option", "data");
+                    console.log("All data : ");
+                    $.each(data, function () {
+                        $.each(this, function (k, v) {
+
+
+                            if (k === "Code") {
+                                if (v !== "22110000") {
+                                    console.log("COde :");
+                                }
+
+                            } else if (k === "Description") {
+
+                                if (v !== null) {
+                                    if (v !== "DEFAULT") {
+                                        console.log("Description :");
+                                    }
+
+                                }
+                            } else if (k === "Unit") {
+                                console.log("Unit :");
+                            } else if (k === "Qty Iss") {
+                                console.log("Qty Iss :");
+                            } else if (k === "Qty Reg") {
+                                console.log("Qty Reg :");
+                            }
+
+                        });
+                    });
+                    alert("update RTN DPT");
+                }
+
+
+
             }
 
         } else {
@@ -2021,7 +2521,6 @@
     $("#SendReturnMail").click(function (e) {
 
         var ID = document.getElementById("ordernum").innerHTML;
-
         $.ajax({
             url: './Action',
             type: 'GET',
@@ -2036,23 +2535,19 @@
             }
 
         });
-
-
     });
-
-
     $("#SendAppMail").click(function (e) {
 
 
-
-        // todosubmit 
-        alert("An email has been sent.");
-        var vhead = document.getElementById("vhead").value;
-        var vNo = document.getElementById("ordernum").innerHTML;
-        var purpose = document.getElementById("mypparea").value;
-
-        insertsubmit(purpose, vhead, vNo);
-        getEmailByName(vhead);
+        /*
+         // todosubmit 
+         alert("An email has been sent.");
+         var vhead = document.getElementById("vhead").value;
+         var vNo = document.getElementById("ordernum").innerHTML;
+         var purpose = document.getElementById("mypparea").value;
+         insertsubmit(purpose, vhead, vNo);
+         getEmailByName(vhead);
+         */
     });
     $("#btn_openmodal").click(function (e) {
 
@@ -2066,6 +2561,14 @@
     $("#btn_openmodal3").click(function (e) {
 
         buttonid = "button3";
+    });
+    $("#btn_openmodal4").click(function (e) {
+
+        buttonid = "button4";
+    });
+    $("#btn_openmodal5").click(function (e) {
+
+        buttonid = "button5";
     });
     // todo pp 
 
@@ -2088,7 +2591,6 @@
     $("#imgclose2").click(function (e) {
         var vNo = document.getElementById("ordernum").innerHTML;
         var sm = document.getElementById("SendAppMail");
-
         console.log("Click");
         $("#image_id2").remove();
         var img = document.getElementById('image_id2');
@@ -2102,13 +2604,36 @@
         var vNo = document.getElementById("ordernum").innerHTML;
         console.log("Click");
         var sm = document.getElementById("SendAppMail");
-
         $("#image_id3").remove();
         var img = document.getElementById('image_id3');
         var imgclose = document.getElementById('imgclose3');
         imgclose.style.visibility = "hidden";
         document.getElementById("rqdate3").innerHTML = "-";
         DeleteSignature("ORD_ISSB", vNo, "ISB_DATE");
+        sm.disabled = true;
+    });
+    $("#imgclose4").click(function (e) {
+        var vNo = document.getElementById("ordernum").innerHTML;
+        console.log("Click");
+        var sm = document.getElementById("SendAppMail");
+        $("#image_id4").remove();
+        var img = document.getElementById('image_id4');
+        var imgclose = document.getElementById('imgclose4');
+        imgclose.style.visibility = "hidden";
+        document.getElementById("rqdate4").innerHTML = "-";
+        DeleteSignature("ORD_MG1", vNo, "MG2_DATE");
+        sm.disabled = true;
+    });
+    $("#imgclose5").click(function (e) {
+        var vNo = document.getElementById("ordernum").innerHTML;
+        console.log("Click");
+        var sm = document.getElementById("SendAppMail");
+        $("#image_id5").remove();
+        var img = document.getElementById('image_id5');
+        var imgclose = document.getElementById('imgclose5');
+        imgclose.style.visibility = "hidden";
+        document.getElementById("rqdate5").innerHTML = "-";
+        DeleteSignature("ORD_MG2", vNo, "MG2_DATE");
         sm.disabled = true;
     });
     $("#btn_login").click(function (e) {
@@ -2118,7 +2643,6 @@
         var modal = document.getElementById("exampleModal");
         var sm = document.getElementById("SendAppMail");
         sm.style.visibility = "visible";
-
         modal.style.display = "none"; // Close the modal
 
         var prnum = document.getElementById("cname").value;
@@ -2144,6 +2668,8 @@
                     var frame = document.getElementById('image_div');
                     var frame2 = document.getElementById('image_div2');
                     var frame3 = document.getElementById('image_div3');
+                    var frame4 = document.getElementById('image_div4');
+                    var frame5 = document.getElementById('image_div5');
                     var vNo = document.getElementById("ordernum").innerHTML;
                     //                    img.attr('src', 'data:image/png;base64,' + result[i].ST_SIGN);
 
@@ -2181,6 +2707,28 @@
                         frame3.style.border = "1px solid black";
                         img.attr('src', 'data:image/png;base64,' + result[i].ST_SIGN);
                         insertSignature("ORD_ISSB", vNo, username, date3, "ISB_DATE");
+                    } else if (buttonid === "button4")
+                    {
+                        $("#image_id4").remove();
+                        var img = $('<img id="image_id4">');
+                        img.appendTo('#image_div4');
+                        var date4 = new Date().toLocaleString();
+                        document.getElementById("rqdate4").innerHTML = date4;
+                        imgclose4.style.visibility = "visible";
+                        frame4.style.border = "1px solid black";
+                        img.attr('src', 'data:image/png;base64,' + result[i].ST_SIGN);
+                        insertSignature("ORD_MG1", vNo, username, date4, "MG1_DATE");
+                    } else if (buttonid === "button5")
+                    {
+                        $("#image_id5").remove();
+                        var img = $('<img id="image_id5">');
+                        img.appendTo('#image_div5');
+                        var date5 = new Date().toLocaleString();
+                        document.getElementById("rqdate5").innerHTML = date5;
+                        imgclose5.style.visibility = "visible";
+                        frame5.style.border = "1px solid black";
+                        img.attr('src', 'data:image/png;base64,' + result[i].ST_SIGN);
+                        insertSignature("ORD_MG2", vNo, username, date5, "MG2_DATE");
                     }
                 });
                 //document.getElementById("myDiv").style.border = "thick solid #0000FF";
@@ -2193,7 +2741,7 @@
     });
     var cono = document.getElementById("cono").value;
     var divi = document.getElementById("divi").value;
-      var facility = "<%out.print(session.getAttribute("fac"));%>".trim();
+    var facility = "<%out.print(session.getAttribute("fac"));%>".trim();
 //    var facility =  document.getElementById("fac").value;
 //    var cono = "10"
 //    var divi = "101"
@@ -2285,19 +2833,13 @@
         async: false
     }).done(function (response) {
         warehouse = response;
-        var options; 
+        var options;
         $.each(response, function (i, obj) {
             var div_data = "<option value=" + obj.US_LOGIN + ">" + obj.US_LOGIN + "</option>";
             $(div_data).appendTo('#vhead');
-            
-          options += '<option value="' + obj.US_LOGIN  + '" />';
-
+            options += '<option value="' + obj.US_LOGIN + '" />';
         });
-        
-        
-           
-          document.getElementById('orderidlist').innerHTML = options;
-
+        document.getElementById('orderidlist').innerHTML = options;
     }); //todo 
 
 
@@ -2307,9 +2849,12 @@
 
     $('#vFwarehouse').on('change', function () {
         var checkBox = document.getElementById("onhandval").checked;
+        //var itemstype = document.getElementById("itemstype").checked;
+        var itemstype = document.querySelector('input[name="itemtype"]:checked').value;
+        console.log(itemtype);
 //        item = []; 
 //        itemno = [];
-        getItemscode(this.value, checkBox);
+        getItemscode(this.value, checkBox, itemstype);
     });
     $('#vTwarehouse').on('change', function () {
 
@@ -2321,7 +2866,6 @@
         var e = document.getElementById("vFwarehouse");
         var value = e.value;
         getCostcenter("SB0102");
-
         var myTagField = function (config) {
             jsGrid.Field.call(this, config);
         };
@@ -2345,7 +2889,7 @@
                     select: function (event, ui) {
 
 
-                     
+
                         let text = ui.item.value;
                         const myArray = text.split(":");
                         let word = myArray[0];
@@ -2364,11 +2908,10 @@
                             },
                             success: function (data) {
 
-                              
+
                                 console.log("Clicked");
                                 items = data;
                                 ittem = items;
-
                                 //                                teamField.items = ittem;
                                 //                                teamField.textField = "MMUNMS";
                                 //                                teamField.valueField = "MMUNMS";
@@ -2394,7 +2937,7 @@
             },
             editTemplate: function (value) {
 
-             
+
                 var state = document.getElementById("vState").value;
                 if (state === "State1" || state === "State2") {
 
@@ -2407,12 +2950,11 @@
                         select: function (event, ui) {
 
 
-                      
+
                             let text = ui.item.value;
                             const myArray = text.split(":");
                             let word = myArray[0];
                             let disc = myArray[1];
-
                             selectedid = word;
                             ui.item.value = word;
                             $.ajax({
@@ -2427,7 +2969,7 @@
                                 },
                                 success: function (data) {
 
-                             
+
                                     console.log("Clicked");
                                     items = data;
                                     console.log(items);
@@ -2663,6 +3205,8 @@
                                     reqt: args.item.QTY_REQT,
                                     issu: issu,
                                     id: id,
+                                    QTY_ETC: args.item.QTY_ETC,
+                                    QTY_ETCTH: args.item.QTY_ETCTH,
                                     onhandsts: onhandsts,
                                     cono: cono,
                                     divi: divi
@@ -2717,6 +3261,8 @@
                                         reqt: args.item.QTY_REQT,
                                         issu: 0,
                                         id: id,
+                                        QTY_ETC: args.item.QTY_ETC,
+                                        QTY_ETCTH: args.item.QTY_ETCTH,
                                         onhandsts: "NO",
                                         cono: cono,
                                         divi: divi
@@ -2815,6 +3361,7 @@
                     console.log(args.item.Description);
                     console.log(args.item.Qty_Iss);
                     console.log(args.item.Qty_Reg);
+                    console.log(args.item.QTY_ETC);
                     console.log(args.item);
                     console.log(args);
                     console.log(args.item.Unit);
@@ -2834,6 +3381,8 @@
                             reqt: args.item.QTY_REQT,
                             issu: args.item.QTY_ISSU,
                             itid: args.item.ID,
+                            QTY_ETC: args.item.QTY_ETC,
+                            QTY_ETCTH: args.item.QTY_ETCTH,
                             id: id,
                             onhand: "NO"
 
@@ -2955,8 +3504,9 @@
                 },
                 {title: "Unit", name: "ITM_UNIT", type: "textSelect", items: ittem, filtering: false, width: 30, editing: true, insertcss: "states-filter", editcss: "estates-filter"
                 },
-         
                 {title: "Qty_Reg", name: "QTY_REQT", type: "money", width: 30, inserting: true, filtering: false},
+                {title: "QTY_ETC", name: "QTY_ETC", type: "text", width: 50, inserting: true, filtering: false},
+                {title: "QTY_ETCTH", name: "QTY_ETCTH", type: "text", width: 50, inserting: true, filtering: false},
 
 //                {title: "Qty_Iss", name: "QTY_ISSU", type: "number", width: 30, filtering: false, editing: true,
 
@@ -3101,21 +3651,21 @@
 
 
 
-    
-    
-    
+
+
+
     /////////////////////////////////////
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
 
 
     var getmyid = function (username) {
@@ -3188,14 +3738,13 @@
 
             },
             error: function (e) {
-                alert('Error occured itemcode');
+                alert('Error occured itemcode2way');
                 console.log(e);
             }
         });
     };
-
     var cono = document.getElementById("cono").value;
-    var getItemscode = function (whs, check) {
+    var getItemscode = function (whs, check, itemstype) {
         var warehouse = whs;
         $.ajax({
             type: 'GET',
@@ -3205,7 +3754,9 @@
                 path: "getItemcode",
                 whs: whs,
                 check: check,
-                cono: cono
+                cono: cono,
+                itemstype: itemstype
+
 
             },
             success: function (data) {
@@ -3222,7 +3773,7 @@
                 });
             },
             error: function (e) {
-                alert('Error occured itemcode');
+                alert('Error occured itemcodessssscode');
                 console.log(e);
             }
         });
@@ -3232,7 +3783,6 @@
         var cono = document.getElementById("cono").value;
         var divi = document.getElementById("divi").value;
         var Department = dep;
-
         $.ajax({
             type: 'GET',
             dataType: 'json',
@@ -3265,10 +3815,10 @@
     $(document).ready(function () {
 
 
-    
 
 
-    //var facility =  document.getElementById("fac").value;
+
+        //var facility =  document.getElementById("fac").value;
 
 //alert(cono);
 
@@ -3281,7 +3831,6 @@
         date.max = new Date(new Date().setDate(today.getDate() + 15)).toISOString().split("T")[0];
         date.min = new Date(new Date().setDate(today.getDate() - 45)).toISOString().split("T")[0];
         date.valueAsDate = today;
-
         var ordernum = document.getElementById('ordernum');
         var selectID = document.getElementById('idsearch');
         var searchid = document.getElementById('ssearch');
@@ -3289,13 +3838,15 @@
         var rt = document.getElementById('SendReturnMail');
         var rj = document.getElementById('SendRejectMail');
         var rj1 = document.getElementById('SendRejectMail1');
-
-
-
         console.log("ready!");
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const Key = urlParams.get('status');
+        let PGMTYPE = "<%out.print(session.getAttribute("pgmty"));%>".trim();
+        if (PGMTYPE === null) {
+            PGMTYPE = "MTR";
+        }
+
         const KeyID = urlParams.get('ORDID');
         document.getElementById("ssearch").value = KeyID;
         var box = document.getElementById("collapseExample");
@@ -3305,6 +3856,11 @@
         var user = document.getElementById("usename");
         load();
 //        GetSelectID(username, Key);  // todo ssearch  
+
+        if (PGMTYPE !== "MTR" || PGMTYPE !== null) {
+            vhead.disabled = true;
+        }
+
         if (Key === "S1") {
 
 
@@ -3313,15 +3869,12 @@
             mvxtxt.innerHTML = "Requester : ";
             $('#Jsgrid').jsGrid('option', 'inserting', true);
             $('#Jsgrid').jsGrid('option', 'editing', true);
-
             rt.style.visibility = 'hidden';
             rj.style.visibility = 'hidden';
             rj1.style.visibility = 'visible';
-
             sm.disabled = true;
-            if (signimg.src == null || signimg.src == "") {
+            if (signimg.src == null || signimg.src == "" || PGMTYPE === "RTN" || PGMTYPE !== "DPS") {
                 vhead.disabled = true;
-
             }
 
             document.getElementById("status").value = "S1";
@@ -3394,6 +3947,81 @@
             document.getElementById("imgclose").style.visibility = 'hidden';
             document.getElementById("imgclose3").style.visibility = 'hidden';
 //            getsignature("PHONGS_PHO", "S2", KeyID);
+//            getsignature("PHONGS_PHO", "S3", KeyID);f
+            var frame = document.getElementById('image_div');
+            frame.style.border = "1px solid black";
+            var frame2 = document.getElementById('image_div2');
+            frame2.style.border = "1px solid black";
+        } else if (Key === "S4") {
+
+            mvxtxt.innerHTML = "Approval : ";
+            $('#Jsgrid').jsGrid('option', 'inserting', false);
+            $('#Jsgrid').jsGrid('option', 'editing', false);
+            rt.style.visibility = 'visible';
+            rj.style.visibility = 'visible';
+//            sm3.style.visibility = 'visible';
+            sm.style.visibility = 'visible';
+            chkStatus = "S4";
+            document.getElementById("vState").value = "State4";
+            getsinglesignature(KeyID);
+            getsinglesignature();
+            getallsignature();
+            box.className = "collapse in";
+            document.getElementById("ordernum").innerHTML = KeyID;
+            document.getElementById("ordernumpp").value = KeyID;
+            document.getElementById("status").value = "S4";
+            document.getElementById("rqby").style.visibility = 'visible';
+            document.getElementById("dpmhd").style.visibility = 'visible';
+            document.getElementById("mg1").style.visibility = 'visible';
+            //document.getElementById("isby").style.visibility = 'visible';
+            document.getElementById("btn_openmodal5").style.visibility = 'hidden';
+            document.getElementById("btn_openmodal3").style.visibility = 'hidden';
+            document.getElementById("btn_openmodal2").style.visibility = 'hidden';
+            document.getElementById("btn_openmodal").style.visibility = 'hidden';
+            document.getElementById("rqdate2txt").style.visibility = 'visible';
+            document.getElementById("vhead").style.visibility = 'collapse';
+            document.getElementById("sigf").style.visibility = 'visible';
+            document.getElementById("imgclose").style.visibility = 'hidden';
+            document.getElementById("imgclose3").style.visibility = 'hidden';
+            var frame = document.getElementById('image_div');
+            frame.style.border = "1px solid black";
+            var frame2 = document.getElementById('image_div2');
+            frame2.style.border = "1px solid black";
+
+            var frame4 = document.getElementById('image_div4');
+            frame4.style.border = "1px solid black";
+        } else if (Key === "S5") {
+
+            mvxtxt.innerHTML = "Approval : ";
+            $('#Jsgrid').jsGrid('option', 'inserting', false);
+            $('#Jsgrid').jsGrid('option', 'editing', false);
+            rt.style.visibility = 'visible';
+            rj.style.visibility = 'visible';
+//            sm3.style.visibility = 'visible';
+            sm.style.visibility = 'visible';
+            chkStatus = "S5";
+            document.getElementById("vState").value = "State5";
+            getsinglesignature(KeyID);
+            getsinglesignature();
+            getallsignature();
+            box.className = "collapse in";
+            document.getElementById("ordernum").innerHTML = KeyID;
+            document.getElementById("ordernumpp").value = KeyID;
+            document.getElementById("status").value = "S5";
+            document.getElementById("rqby").style.visibility = 'visible';
+            document.getElementById("dpmhd").style.visibility = 'visible';
+            document.getElementById("mg1").style.visibility = 'visible';
+            document.getElementById("mg2").style.visibility = 'visible';
+            document.getElementById("btn_openmodal4").style.visibility = 'hidden';
+            document.getElementById("btn_openmodal3").style.visibility = 'hidden';
+            document.getElementById("btn_openmodal2").style.visibility = 'hidden';
+            document.getElementById("btn_openmodal").style.visibility = 'hidden';
+            document.getElementById("rqdate2txt").style.visibility = 'visible';
+            document.getElementById("vhead").style.visibility = 'collapse';
+            document.getElementById("sigf").style.visibility = 'visible';
+            document.getElementById("imgclose").style.visibility = 'hidden';
+            document.getElementById("imgclose3").style.visibility = 'hidden';
+//            getsignature("PHONGS_PHO", "S2", KeyID);
 //            getsignature("PHONGS_PHO", "S3", KeyID);
             var frame = document.getElementById('image_div');
             frame.style.border = "1px solid black";
@@ -3426,10 +4054,8 @@
 //            sm3.style.visibility = 'hidden';
 //    sm.style.visibility = 'hidden';
             sm.disabled = true;
-
             if (signimg.src == null || signimg.src == "") {
                 vhead.disabled = true;
-
             }
 //SendReturnMail
 //SendRejectMail
@@ -3442,6 +4068,9 @@
         alert(a);
     };
     var getsignature = function (prno, Key, KeyID) {
+
+
+        console.log("ENTER FUNCTION: Key =", Key, "len=", Key.length);
 
 
         $.ajax({
@@ -3458,25 +4087,34 @@
             },
             success: function (result) {
 
+
+
                 $.each(result, function (i, obj) {
                     //var img = $('<img id="image_id">');
                     var imgclose = document.getElementById('imgclose');
                     var frame = document.getElementById('image_div');
                     var frame2 = document.getElementById('image_div2');
                     var frame3 = document.getElementById('image_div3');
+                    var frame4 = document.getElementById('image_div4');
                     //                    img.attr('src', 'data:image/png;base64,' + result[i].ST_SIGN);
 
 
-                    if (Key === "S2")
-                    {
+                    if (Key === "S2") {
+
+
                         $("#image_id").remove();
                         var img = $('<img id="image_id">');
                         img.appendTo('#image_div');
 //                        document.getElementById("rqdate").innerHTML = new Date().toLocaleString();
                         frame.style.border = "1px solid black";
                         img.attr('src', 'data:image/png;base64,' + result[i].ST_SIGN);
+
                     } else if (Key === "S3")
                     {
+
+
+
+
 
                         $("#image_id2").remove();
                         var img = $('<img id="image_id2">');
@@ -3487,11 +4125,20 @@
                     } else if (Key === "S4")
                     {
 
-                        $("#image_id3").remove();
-                        var img = $('<img id="image_id3">');
-                        img.appendTo('#image_div3');
-//                        document.getElementById("rqdate3").innerHTML = new Date().toLocaleString();
-                        frame3.style.border = "1px solid black";
+                        $("#image_id4").remove();
+                        var img = $('<img id="image_id4">');
+                        img.appendTo('#image_div4');
+//                        document.getElementById("rqdate2").innerHTML = new Date().toLocaleString();
+                        frame4.style.border = "1px solid black";
+                        img.attr('src', 'data:image/png;base64,' + result[i].ST_SIGN);
+                    } else if (Key === "S5")
+                    {
+
+                        $("#image_id4").remove();
+                        var img = $('<img id="image_id4">');
+                        img.appendTo('#image_div4');
+//                        document.getElementById("rqdate2").innerHTML = new Date().toLocaleString();
+                        frame4.style.border = "1px solid black";
                         img.attr('src', 'data:image/png;base64,' + result[i].ST_SIGN);
                     }
                     if (Key === "S1")
@@ -3508,8 +4155,6 @@
             }
         });
     };
-
-
     var getsinglesignature = function (prno) {
 
         $.ajax({
@@ -3530,6 +4175,8 @@
                     var frame = document.getElementById('image_div');
                     var frame2 = document.getElementById('image_div2');
                     var frame3 = document.getElementById('image_div3');
+                    var frame4 = document.getElementById('image_div4');
+                    var frame5 = document.getElementById('image_div5');
                     //                    img.attr('src', 'data:image/png;base64,' + result[i].ST_SIGN);
 
 
@@ -3537,9 +4184,6 @@
             }
         });
     };
-
-
-
     var getallsignature = function (orderid) {
 
         var cono = document.getElementById("cono").value;
@@ -3562,12 +4206,13 @@
 
                     sig_req = result[i].ORD_REGB;
                     sig_dep = result[i].ORD_DPMH;
+                    sig_mg1 = result[i].ORD_MG1;
+                    sig_mg2 = result[i].ORD_MG2;
+
                 });
             }
         });
     };
-
-
     var get1signature = function (prno) {
 
         $.ajax({
@@ -3593,17 +4238,12 @@
             }
         });
     };
-
-
     var adddropdownlist = function (prno) {
 
 
 
 
     };
-
-
-
     var aa = [
         {Id1: "xxx"},
         {Id1: "xxxx"},
@@ -3681,6 +4321,52 @@
         });
     }
 
+
+
+
+
+    function insertsubmitRTNDPS(cono, divi, purpose, dpmh_to, orderid, status) {
+
+        $.ajax({
+            url: './Action',
+            type: 'GET',
+            data: {
+                path: "insertsubmitRTNDPS",
+                cono: cono,
+                divi: divi,
+                orderid: orderid,
+                dpmh_to: dpmh_to,
+                purpose: purpose,
+                status: status
+
+            },
+            success: function (result) {
+
+            }
+        });
+    }
+
+
+    function insertsubmit(purpose, dpmh_to, orderid) {
+
+        $.ajax({
+            url: './Action',
+            type: 'GET',
+            data: {
+                path: "insertsubmit",
+                cono: "10",
+                divi: "101",
+                orderid: orderid,
+                dpmh_to: dpmh_to,
+                purpose: purpose
+
+            },
+            success: function (result) {
+
+            }
+        });
+    }
+
     function getEmailByName(name) {
 
 
@@ -3707,7 +4393,6 @@
 
 
         var name = "mmm";
-
         $.ajax({
             url: './Action',
             type: 'GET',
@@ -3731,7 +4416,6 @@
     function sendtom3result() {
         type = document.querySelector('input[name="radiotype"]:checked').value;
         ordernum = document.getElementById("ordernum").innerHTML;
-
         $.ajax({
             url: './Action',
             type: 'GET',

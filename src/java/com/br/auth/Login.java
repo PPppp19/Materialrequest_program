@@ -86,6 +86,8 @@ public class Login extends HttpServlet {
         String strUser = new String("user");
         String strPass = new String("pass");
         String strComp = new String("comp");
+        String strpgmty = new String("pgmty");
+
 
         if ("".equals(request.getParameter("username"))) {
             request.setAttribute("msg", "Username is Require.");
@@ -96,7 +98,12 @@ public class Login extends HttpServlet {
         } else if ("".equals(request.getParameter("company"))) {
             request.setAttribute("msg", "Company is Require.");
             getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
-        } else {
+        }
+        else if ("".equals(request.getParameter("pgmtype"))) {
+            request.setAttribute("msg", "Program type is Require.");
+            getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+        }
+        else {
 
             String username = request.getParameter("username");
             String password = request.getParameter("password");
@@ -105,6 +112,7 @@ public class Login extends HttpServlet {
             String cono = getCompany[0];
             String divi = getCompany[1];
             String comp = getCompany[2];
+            String pgmty= request.getParameter("pgmtype");
 
 //        System.out.println("Company : " + request.getParameter("company"));
             Connection conn = null;
@@ -120,6 +128,7 @@ public class Login extends HttpServlet {
                     session.setAttribute(strUser, username.toUpperCase());
                     session.setAttribute(strPass, password);
                     session.setAttribute(strComp, comp);
+                    session.setAttribute(strpgmty, pgmty);
 //                    Utility.ConnectM3(cono, divi);
                     response.sendRedirect("./");
 
