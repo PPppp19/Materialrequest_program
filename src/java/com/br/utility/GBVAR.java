@@ -28,7 +28,7 @@ public class GBVAR {
 
 
 //    public static String M3DB = "M3FDBTST";
-//    public static String DBPRD = "M3FDBTST";
+//    public static String DBPRD = "BRLDTABK01";
 //    public static int DBPORT = 16305;
 //    public static String LoginUrlConnectionm3 = "https://bkrmvxm3.bangkokranch.com:22008/mne/servlet/MvxMCSvt"; //TST
 

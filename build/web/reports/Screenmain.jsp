@@ -549,9 +549,12 @@
 
                 <div align="left">    
                     <p style=" color: #161637; font-weight: bold;">Type :</p>
+                    <input type="radio" id="itemtypetrn" name="itemtype" value="1">
                     <input type="radio" id="radiotypeexp" name="radiotype" value="71">
+                    <input style=" color: black;" type="hidden" id="itemtype" name="itemtype" value="<% request.getParameter("itemtype"); %>" />
                     <input style=" color: black;" type="hidden" id="radiotype" name="radiotype" value="<% request.getParameter("radiotype"); %>" />
 
+                    <label for="1">Manufacture</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
                     <label for="expense">For Expense (ค่าใช้จ่าย)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
                     <label style=" color: red; text-shadow: -1px 0 white, 0 0.5px white,
                            0.5px 0 white, 0 -1px white " for="expense1">ต้องการไอเทมที่</label>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -562,6 +565,7 @@
 
                 </div>
                 <div align="left">
+                    <input type="radio" id="itemtypetrn" name="itemtype" value="2">
                     <input type="radio" id="radiotypetrn" name="radiotype" value="33">
                     <label for="age2">For Stock Transfer (คงคลัง)</label>&nbsp;&nbsp;
                     <input type="checkbox" id="onhandval" name="onhandval" value="true">
@@ -1520,6 +1524,18 @@
                                         getsignature(v, "S4", a);
                                     }
 
+                                } else if (k === "ITM_TYPE") {
+
+
+                                    if (v === "1") {
+
+                                        const MANBtn = document.getElementById('itemtypeexp');
+                                        MANBtn.checked = true;
+                                    } else {
+
+                                        const PURBtn = document.getElementById('itemtypetrn');
+                                        PURBtn.checked = true;
+                                    }
                                 } else if (k === "MAT_TYPE") {
 
 
@@ -1547,7 +1563,9 @@
                                     if (v !== null) {
                                         document.getElementById("vFwarehouse").value = v;
                                         var checkBox = document.getElementById("onhandval").checked;
-                                        getItemscode(v, "false");
+                                        var itemtype = document.getElementById("itemtype").checked;
+
+                                        getItemscode(v, "false", itemtype);
                                     }
 
                                 } else if (k === "ORD_REGB") {
@@ -1632,6 +1650,10 @@
                                 } else if (k === "ISB_DATE") {
 
                                     document.getElementById("rqdate3").innerHTML = v;
+                                }
+                                else if (k === "MG1_DATE") {
+
+                                    document.getElementById("rqdate4").innerHTML = v;
                                 }
 
 
@@ -1963,9 +1985,10 @@
 
     $('#vFwarehouse').on('change', function () {
         var checkBox = document.getElementById("onhandval").checked;
+        var itemtype = document.getElementById("itemtype").checked;
 //        item = []; 
 //        itemno = [];
-        getItemscode(this.value, checkBox);
+        getItemscode(this.value, checkBox, itemtype);
     });
     $('#vTwarehouse').on('change', function () {
 
@@ -2263,7 +2286,8 @@
                         data: {
                             path: "getItemcode",
                             whs: "A80",
-                            check: "true"
+                            check: "true",
+                            itemstype: itemstype
 
                         },
                         async: false
@@ -2932,7 +2956,7 @@
             }
         });
     };
-    var getItemscode = function (whs, check) {
+    var getItemscode = function (whs, check, itemtype) {
         var warehouse = whs;
         $.ajax({
             type: 'GET',
@@ -2941,7 +2965,8 @@
             data: {
                 path: "getItemcode",
                 whs: whs,
-                check: check
+                check: check,
+                itemstype: itemstype
 
             },
             success: function (data) {
@@ -3012,7 +3037,7 @@
         {Name: "United Kingdom", Id: 3}
     ];
     $(document).ready(function () {
-        
+
 //                var test  = session.getAttribute("test"); 
 //                alert(test);
 
@@ -3783,8 +3808,8 @@
 
 //    alldata = [{MMITNO: "001"}];
     function  Call_GridUP() {
-        
-        
+
+
         var vcc = document.getElementById("vPeriod");
         var vCostcenter = vcc.options[vcc.selectedIndex].text;
         var vRequester = document.getElementById("username").value;
@@ -3815,7 +3840,8 @@
                         data: {
                             path: "getItemcode",
                             whs: whs,
-                            check: "true"
+                            check: "true",
+                            itemstype: itemstype
 
                         },
                         async: false

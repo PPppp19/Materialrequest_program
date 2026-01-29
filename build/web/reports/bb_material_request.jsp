@@ -358,7 +358,7 @@
 
             <!--                <h5 style="margin-top: 0; color: #161637; padding-top: 0;" align="right">Material Request </h5>-->
             <h2 align="center";  style=" color: #ffffff; font-weight: bold"><%out.print(session.getAttribute("comp"));%> </h2>
-            <label id="ordernumtxt">No. </label>
+            <label id="ordernumtxt">.No. </label>
             <label id="ordernum">00000000</label>
             <div align="left">
                 <select class="select" id="vState" style="visibility: hidden; background-color: #555; color: white;">
@@ -396,7 +396,7 @@
         <div class="details-form-field">
 
 
-            <button  id="searchbtn" onclick = "load();" style=" visibility: hidden; float:right; width: 12%; height: 30px; color: white; background-color: #2c2c96; border-color: white;" class="btn btn-primary" type="button"  aria-expanded="false" aria-controls="collapseExample">
+            <button  id="searchbtn" onclick = "load();" style=" visibility: hidden; float:right; width: 12%; height: 30px; color: white; background-color: #2c2c96; border-color: white;" class="btn btnload-primary" type="button"  aria-expanded="false" aria-controls="collapseExample">
                 SEARCH
             </button>
 
@@ -439,8 +439,8 @@
 
 
 
-            <!--              <input class="form-control" list="orderidlist" autocomplete="off" placeholder="OrderID" id="MRNO" name="MRNO" value="">
-                                    <datalist id="orderidlist"> </datalist>
+            <!--                          <input class="form-control" list="orderidlist" autocomplete="off" placeholder="OrderID" id="MRNO" name="MRNO" value="">
+                                                <datalist id="orderidlist"> </datalist>
             -->
 
 
@@ -549,12 +549,13 @@
 
                 <div align="left">    
                     <p style=" color: #161637; font-weight: bold;">Type :</p>
-                    <input type="radio" id="itemtypetrn" name="itemtype" value="1">
-                    <input type="radio" id="radiotypeexp" name="radiotype" value="71">
-                    <input style=" color: black;" type="hidden" id="itemtype" name="itemtype" value="<% request.getParameter("itemtype"); %>" />
-                    <input style=" color: black;" type="hidden" id="radiotype" name="radiotype" value="<% request.getParameter("radiotype"); %>" />
 
-                    <label for="1">Manufacture</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    <input style=" color: black;" type="hidden" id="itemtype" name="itemtype" value="<% request.getParameter("itemtype"); %>" />
+                    <input type="radio" id="itemtypeexp" name="itemtype" value="1">
+                    <label for="1">Manufacture</label>&nbsp;&nbsp;&nbsp;
+
+                    <input style=" color: black;" type="hidden" id="radiotype" name="radiotype" value="<% request.getParameter("radiotype"); %>" />
+                    <input type="radio" id="radiotypeexp" name="radiotype" value="71">
                     <label for="expense">For Expense (ค่าใช้จ่าย)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
                     <label style=" color: red; text-shadow: -1px 0 white, 0 0.5px white,
                            0.5px 0 white, 0 -1px white " for="expense1">ต้องการไอเทมที่</label>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -565,7 +566,11 @@
 
                 </div>
                 <div align="left">
+
                     <input type="radio" id="itemtypetrn" name="itemtype" value="2">
+                    <label for="2">Purchased</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+
+
                     <input type="radio" id="radiotypetrn" name="radiotype" value="33">
                     <label for="age2">For Stock Transfer (คงคลัง)</label>&nbsp;&nbsp;
                     <input type="checkbox" id="onhandval" name="onhandval" value="true">
@@ -592,10 +597,11 @@
                     Resend E-mail
                 </button>
 
-                <button   onclick = "fun();"  style=" width: 18%; height: 30pxun();; color: white; background-color: #0080ff;" class="btn btn-primary" type="button" " data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                <button   onclick = "fun();"  style=" width: 10%; height: 30px; color: white; background-color: #0080ff;" class="btn btn-primary" type="button" " data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     SAVE
+
                 </button>
-                <button type="submit" id="SendRejectMail1" name="SendAppMail"   value="SendRejectMail" style=" width: 13%; " class="btn btn-danger mb-2" style="color:#FFFFFF; visibility:hidden;" >Cancel</button>
+                <button type="submit" id="SendRejectMail1" name="SendAppMail"   value="SendRejectMail" style=" width: 10%; " class="btn btn-danger mb-2" style="color:#FFFFFF; visibility:hidden;" >Cancel</button>
 
 
 
@@ -659,11 +665,7 @@
                 <div class="card card-body">
 
                     <div class="center">
-                        <div  id="Jsgridup"></div>
-                    </div>
-
-                    <div class="center">
-                        <div  id="Jsgriddown"></div>
+                        <div  id="Jsgrid"></div>
                     </div>
 
 
@@ -735,15 +737,22 @@
 
                         <div class="divleft" id="dpmhd"> <!-- Reqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq -->
                             <label style="text-align:left;
-                                   float:left;">Department Head</label>               
+                                   float:left;">Manager 2</label>               
                             <div style="clear:both;"></div>      
 
                             <div id="sigf" style="width: 100%;background:  #2e3135;  padding:1% 0 1% 1%;  height: 300px;">                    
                                 <br>
                                 <br>
-                                <select  class="select" name="vhead"  id="vhead" >
-                                    <option value="00" selected="selected">Select Department Head </option>
-                                </select>   
+                                <!--                                <select  class="select" name="vhead"  id="vhead" >
+                                                                    <option value="00" selected="selected">Select Department Head </option>
+                                                                </select>-->
+
+
+
+                                <input class="form-control" list="orderidlist" width="50px" autocomplete="off" placeholder="Department Head" id="vhead" name="vhead" value="">
+                                <datalist id="orderidlist"> </datalist>
+
+
                                 <!-- Signature todo -->
                                 <br>
                                 <div class="frame" id="frame2" style=" width: auto">
@@ -770,7 +779,42 @@
 
                         <div id="isby" class="divleft"> <!-- Reqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq -->
                             <label style="text-align:left;
-                                   float:left;">Issued By</label>               
+                                   float:left;">Manager 3</label>               
+                            <div style="clear:both;"></div>      
+
+
+                            <div style="width: 100%; background:  #2e3135; padding:1% 0 1% 1%; border-top:1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; height: 300px;">                    
+                                <br>   
+                                <!-- Signature todo -->
+                                <br>
+                                <select  name="vhead"  id="xxxx" style=" visibility: hidden" >
+                                    <option value="" selected="selected">Manager 3 </option>
+                                </select>   
+                                <div class="frame" id="frame3" style=" width: auto">
+                                    <div id="image_div3" class="img_wrp">
+                                        <img class="close" width="25" height="25" id="imgclose3" style=" visibility: hidden"  src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-close-1024.png" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label>Date/Time : </label>
+                                    <label id="rqdate3" >-</label>
+
+
+                                </div>
+
+
+                                <div>
+                                    <button class="btn btn-primary mb-2" style="color:#FFFFFF;" form="detailsForm" name="report" value="Submit"type="button" data-toggle="modal" data-target="#exampleModal" id = "btn_openmodal3">Log in</button>
+                                </div>
+                            </div>
+                            <div style="clear:both;"></div>
+
+                            <br>
+                        </div>
+                        
+                             <div id="isby" class="divleft"> <!-- Reqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq -->
+                            <label style="text-align:left;
+                                   float:left;">Manager 4</label>               
                             <div style="clear:both;"></div>      
 
 
@@ -984,7 +1028,7 @@
 
 
 
-            <button type="submit" id="SendReturnMail" name="SendAppMail"   value="SendReturnMail" style=" width: 15%; visibility: hidden; " class="btn btn-primary mb-2" style="color:#FFFFFF;" >Return</button>
+            <button type="button" id="SendReturnMail" name="SendAppMail"   value="SendReturnMail" style=" width: 15%; visibility: hidden; " class="btn btn-primary mb-2" style="color:#FFFFFF;" >Return</button>
             <button type="submit" id="SendRejectMail" name="SendAppMail"   value="SendRejectMail" style=" width: 15%; visibility: hidden; " class="btn btn-danger mb-2" style="color:#FFFFFF;" >Cancel</button>
 
             <!--            <button onclick="sendmail()" style=" width: 15%; "class="btn btn-danger" class="btn btn-primary mb-2" style="color:#FFFFFF;" form="detailsForm" name="report" value="Reject"type="button" id="Reject" >Reject</button>-->
@@ -1042,8 +1086,7 @@
 <script>
 
 
-//
-    var alldata = [];
+
     $('#vhead').change(function (e) {
 
         checkgrid();
@@ -1052,23 +1095,47 @@
         jsGrid.NumberField.call(this, config);
     }
 
+
     MoneyField.prototype = new jsGrid.NumberField({
 
+//        itemTemplate: function (value) {
+//            return  parseFloat(value).toFixed(2) || parseFloat(0).toFixed(2)  ;
+//        },
+//
+//        filterValue: function () {
+//            return parseFloat(this.filterControl.val() || 0);
+//        },
+//        insertValue: function () {
+//            return parseFloat(this.insertControl.val() || 0);
+//        },
+//        editValue: function () {
+//            return parseFloat(this.editControl.val() || 0);
+//        }
+
+
         itemTemplate: function (value) {
-            return  parseFloat(value).toFixed(2);
+            var num = parseFloat(value);
+            return isNaN(num) ? parseFloat(0).toFixed(2) : num.toFixed(2);
         },
+
         filterValue: function () {
-            return parseFloat(this.filterControl.val() || 0);
+            var num = parseFloat(this.filterControl.val());
+            return isNaN(num) ? 0 : num;
         },
+
         insertValue: function () {
-            return parseFloat(this.insertControl.val() || 0);
+            var num = parseFloat(this.insertControl.val());
+            return isNaN(num) ? 0 : num;
         },
+
         editValue: function () {
-            return parseFloat(this.editControl.val() || 0);
+            var num = parseFloat(this.editControl.val());
+            return isNaN(num) ? 0 : num;
         }
 
     });
     jsGrid.fields.money = MoneyField;
+
     function TextSelectField(config) {
         jsGrid.SelectField.call(this, config);
     }
@@ -1131,6 +1198,71 @@
 
     $(function () {
 
+        function MoneyField(config) {
+            jsGrid.NumberField.call(this, config);
+        }
+
+
+        MoneyField.prototype = new jsGrid.NumberField({
+
+//        itemTemplate: function (value) {
+//            return  parseFloat(value).toFixed(2) || parseFloat(0).toFixed(2)  ;
+//        },
+//
+//        filterValue: function () {
+//            return parseFloat(this.filterControl.val() || 0);
+//        },
+//        insertValue: function () {
+//            return parseFloat(this.insertControl.val() || 0);
+//        },
+//        editValue: function () {
+//            return parseFloat(this.editControl.val() || 0);
+//        }
+
+
+            itemTemplate: function (value) {
+                var num = parseFloat(value);
+                return isNaN(num) ? parseFloat(0).toFixed(2) : num.toFixed(2);
+            },
+
+            filterValue: function () {
+                var num = parseFloat(this.filterControl.val());
+                return isNaN(num) ? 0 : num;
+            },
+
+            insertValue: function () {
+                var num = parseFloat(this.insertControl.val());
+                return isNaN(num) ? 0 : num;
+            },
+
+            editValue: function () {
+                var num = parseFloat(this.editControl.val());
+                return isNaN(num) ? 0 : num;
+            }
+
+        });
+        jsGrid.fields.money = MoneyField;
+
+        TextSelectField.prototype = new jsGrid.SelectField({
+
+            sorter: "string",
+            filterValue: function () {
+                return this.filterControl.val();
+            },
+            itemTemplate: function (value) {
+
+                return value;
+            },
+            insertValue: function () {
+                return this.insertControl.val();
+            },
+            editValue: function () {
+                return this.editControl.val();
+            }
+        });
+        jsGrid.fields.textSelect = TextSelectField;
+
+
         var username = document.getElementById("username").value;
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
@@ -1157,152 +1289,21 @@
 
 
         var vhead = document.getElementById("vhead").value;
+
+        // alert(vhead);
+
+
         var vNo = document.getElementById("ordernum").innerHTML;
         var purpose = document.getElementById("mypparea").value;
-        insertsubmit(purpose, vhead, vNo);
-        getEmailByName(vhead);
+        if (vhead != "00") {
+            insertsubmit(purpose, vhead, vNo);
+            getEmailByName(vhead);
+        } else {
+            //alert("โปรดทำรายการใหม่" + vhead + " : " + vNo);
+        }
+
     }
 
-//    function loaddata() {
-//        var cono = document.getElementById("cono").value;
-//        var divi = document.getElementById("divi").value;
-//        $.ajax({
-//            url: './Action',
-//            type: 'GET',
-//            dataType: 'json',
-//            data: {
-//                path: "getload",
-//                ID: a,
-//                cono: cono,
-//                divi: divi
-//
-//            },
-//            success: function (result) {
-//                var itemid = [];
-//                var itemdesc = [];
-//                var qtyreqt = [];
-//                var qtyissu = [];
-//                $.each(result, function () {
-//
-//                    var code = "";
-//                    var desc = "";
-//                    var unit = "";
-//                    var qi = "";
-//                    var qr = "";
-//                    $("#Jsgrid").jsGrid("option", "data", []);
-//                    $.each(this, function (k, v) {
-//
-//
-//
-//
-//                        if (k === "Code") {
-//                            if (v !== "22110000") {
-//                                code = v;
-//                            }
-//
-//
-//                        } else if (k === "MAT_TYPE") {
-//                            if (v === 33) {
-//
-//
-//
-//                            } else {
-//
-//
-//                            }
-//                        } else if (k === "CRE_DATE") {
-//
-//
-//                            if (v !== null) {
-//                                document.getElementById("xdate").value = "PPPPPPPPPPP";
-//                            }
-//
-//                        } else if (k === "ORD_PURP") {
-//
-//
-//                            if (v !== null) {
-//
-//                                document.getElementById("mypparea").value = v;
-//                            }
-//
-//                        } else if (k === "COS_CENT") {
-//
-//                            if (v !== null) {
-//                                document.getElementById("vPeriod").value = v;
-//                            }
-//
-//                        } else if (k === "FRM_WAHO") {
-//
-//                            if (v !== null) {
-//                                document.getElementById("vFwarehouse").value = v;
-//                            }
-//
-//                        } else if (k === "TO_WAHO") {
-//
-//                            if (v !== null) {
-//                                document.getElementById("vTwarehouse").value = v;
-//                            }
-//
-//                        } else if (k === "WAH_LOCA") {
-//
-//                            if (v !== null) {
-//                                document.getElementById("fname").value = v;
-//                            }
-//
-//                        } else if (k === "DEP_NAME") {
-//
-//                            if (v !== null) {
-//                                document.getElementById("Dname").innerHTML = v;
-//                            }
-//
-//                        } else if (k === "ORD_PURP") {
-//
-//                            if (v !== null) {
-//                                document.getElementById("mypparea").innerHTML = v;
-//                            }
-//
-//                        } else if (k === "Description") {
-//
-//                            if (v !== null) {
-//                                if (v !== "DEFAULT") {
-//
-//                                    desc = v;
-//                                }
-//
-//                            }
-//                        } else if (k === "Unit") {
-//
-//                            unit = v;
-//                        } else if (k === "Qty_Iss") {
-//
-//                            qi = v;
-//                        } else if (k === "Qty_Reg") {
-//
-//                            qr = v;
-//                        } else if (k === "ITM_ID") {
-//
-//                            itemid.push(v);
-//                        } else if (k === "ITM_DESC") {
-//
-//                            itemdesc.push(v);
-//                        } else if (k === "QTY_REQT") {
-//
-//                            qtyreqt.push(v);
-//                        } else if (k === "QTY_ISSU") {
-//
-//                            qtyissu.push(v);
-//                        } else if (k === "RQT_DATE") {
-//
-//                            document.getElementById("rqdate").innerHTML = v;
-//                        }
-//
-//
-//                    });
-//                });
-//            }
-//
-//        });
-//    }
 
 // Get the input field
     var input = document.getElementById("ssearch");
@@ -1406,6 +1407,8 @@
 
                     },
                     success: function (result) {
+
+                        //alert(JSON.stringify(result));
                         console.log(Key);
                         if (a === '00000000') {
                             return;
@@ -1417,6 +1420,7 @@
                             alert("this ORD_ID is not this state");
                             window.location.href = "http://192.200.9.189:8080/MaterialRequest/?report=material_request";
                         }
+
 
 
 
@@ -1563,9 +1567,10 @@
                                     if (v !== null) {
                                         document.getElementById("vFwarehouse").value = v;
                                         var checkBox = document.getElementById("onhandval").checked;
-                                        var itemtype = document.getElementById("itemtype").checked;
-
-                                        getItemscode(v, "false", itemtype);
+                                       // var itemstype = document.querySelector('input[name="itemtype"]:checked').value;
+                                       // var itemstype = '2'; 
+                                      //  alert(itemstype);
+                                        getItemscode(v, "false", 2);
                                     }
 
                                 } else if (k === "ORD_REGB") {
@@ -1603,43 +1608,35 @@
                                     if (v !== null) {
                                         if (v !== "DEFAULT") {
                                             console.log("Description :");
-                                            console.log(v);
                                             desc = v;
                                         }
 
                                     }
                                 } else if (k === "Unit") {
-                                    console.log("Unit :");
-                                    console.log(v);
+
                                     unit = v;
                                 } else if (k === "Qty_Iss") {
-                                    console.log("Qty Iss :");
-                                    console.log(v);
+
+
                                     qi = v;
                                 } else if (k === "Qty_Reg") {
                                     console.log("Qty Reg :");
-                                    console.log(v);
                                     qr = v;
                                 } else if (k === "ITM_ID") {
                                     console.log("ITM_ID");
-                                    console.log(v);
                                     itemid.push(v);
                                 } else if (k === "ITM_DESC") {
                                     console.log("ITM_DESC");
-                                    console.log(v);
                                     itemdesc.push(v);
                                 } else if (k === "QTY_REQT") {
                                     console.log("QTY_REQT");
-                                    console.log(v);
                                     qtyreqt.push(v);
                                 } else if (k === "QTY_ISSU") {
                                     console.log("QTY_ISSU");
-                                    console.log(v);
                                     qtyissu.push(v);
                                 } else if (k === "MVX_ORDE") {
 
                                     console.log("MVX_ORDE");
-                                    console.log(v);
 //                                    document.getElementById('movexno').innerHTML = v;
                                 } else if (k === "RQT_DATE") {
 
@@ -1650,10 +1647,6 @@
                                 } else if (k === "ISB_DATE") {
 
                                     document.getElementById("rqdate3").innerHTML = v;
-                                }
-                                else if (k === "MG1_DATE") {
-
-                                    document.getElementById("rqdate4").innerHTML = v;
                                 }
 
 
@@ -1695,36 +1688,413 @@
         alert("Mail send.");
     }
 
-//    function fun() {
-//
-//        console.log("click");
-//        $("#Jsgridup").jsGrid("loadData");
-//        
-//        $.each(alldata, function (i) {
-//
-//                  console.log(alldata[i].MMITNO);
-//              });
-//
-////alert(alldata);
+    function fun() {
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const Key = urlParams.get('status');
+
+
+        var vcc = document.getElementById("vPeriod");
+        var vCostcenter = vcc.options[vcc.selectedIndex].text;
+        var vRequester = document.getElementById("username").value;
+        var vCono = document.getElementById("cono").value;
+        var vDivi = document.getElementById("divi").value;
+//        alert(vCono);
+//        alert(vDivi);
+
+
+        var vDepartmentname = document.getElementById("Dname").innerHTML;
+        var vDate = document.getElementById("vDate").value;
+        var vFwhs = document.getElementById("vFwarehouse").value;
+        var vTwhs = document.getElementById("vTwarehouse").value;
+        if (
+                isEmpty(vCostcenter) &&
+                isEmpty(vRequester) &&
+                isEmpty(vDepartmentname) &&
+                isEmpty(vDate) &&
+                sendSuccess() &&
+                isEmpty(vFwhs) &&
+                isEmptyto(vTwhs)) {
 
 
 
-    //  }
+
+
+
+            var status = document.getElementById("status").value;
+            $('#collapseExample').collapse('show');
+            console.log("Save button Clicked.");
+            var ordernum = document.getElementById("ordernum").innerHTML;
+            var vCompany = document.getElementById("company").value;
+            var vcc = document.getElementById("vPeriod");
+            var vCostcenter = vcc.options[vcc.selectedIndex].text;
+            var vRequester = document.getElementById("username").value;
+            var vDepartmentname = document.getElementById("Dname").innerHTML;
+            var vDate = document.getElementById("vDate").value;
+            var vType = document.querySelector('input[name="radiotype"]:checked').value;
+            var vITMType = document.querySelector('input[name="itemtype"]:checked').value;
+            var vFwhs = document.getElementById("vFwarehouse").value;
+            var vTwhs = document.getElementById("vTwarehouse").value;
+            var Location = document.getElementById("fname").value;
+            var vcono = document.getElementById("cono").value;
+            var vdivi = document.getElementById("divi").value;
+
+            // todo addfac
+
+            var facility = "<%out.print(session.getAttribute("fac"));%>".trim();
+
+            var orderPurpose = "-";
+            var rqtdate = "-";
+            var dpmhead = "2000-00-00";
+            var orddpmh = "-";
+            var drhdate = "-";
+            var ordissb = "-";
+            var isbdate = "-";
+            var ordstat = "00";
+            if (ordernum === "00000000" && Key !== "S2") {
+
+
+
+                $.ajax({
+                    url: './Action',
+                    type: 'GET',
+                    dataType: 'text',
+                    data: {
+                        path: "insertorderid",
+                        vcompany: vCompany,
+                        vrequester: vRequester,
+                        vdepartmentname: vDepartmentname,
+                        vcostcenter: vCostcenter,
+                        vdate: vDate,
+                        vtype: vType,
+                        vfwhs: vFwhs,
+                        vtwhs: vTwhs,
+                        location: Location,
+                        orderpurpose: orderPurpose,
+                        rqtdate: rqtdate,
+                        dpmhead: dpmhead,
+                        orddpmh: orddpmh,
+                        drhdate: drhdate,
+                        ordissb: ordissb,
+                        isbdate: isbdate,
+                        ordstat: ordstat,
+                        vcono: vcono,
+                        vdivi: vdivi,
+                        fac: facility,
+                        itemtype: vITMType,
+
+                    },
+                    success: function (result) {
+
+                        console.log("SAVED Data");
+                        document.getElementById("ordernum").innerHTML = result;
+                        document.getElementById("ordernumpp").value = result;
+                    }
+
+                });
+
+            } else {
+
+                // todoupdate 
+                var orderPurpose = document.getElementById("mypparea").value;
+                var rqtdate = "regdate";
+                var drhdate = "drhdate";
+                var isbdate = "isbdate";
+                var ordstat = "01";
+                $.ajax({
+                    url: './Action',
+                    type: 'GET',
+                    data: {
+                        path: "updateheaddata",
+                        id: document.getElementById("ordernum").innerHTML,
+                        vcompany: vCompany,
+                        vrequester: vRequester,
+                        vdepartmentname: vDepartmentname,
+                        vcostcenter: vCostcenter,
+                        vdate: vDate,
+                        vtype: vType,
+                        vfwhs: vFwhs,
+                        vtwhs: vTwhs,
+                        location: Location,
+                        orderPurpose: orderPurpose
+
+                    },
+                    success: function (result) {
+
+                        console.log("Updated Data");
+                    }
+
+                });
+                ////////  table data  Storing  //////////
+
+
+
+                var data = $("#Jsgrid").jsGrid("option", "data");
+                console.log("All data : ");
+                $.each(data, function () {
+                    $.each(this, function (k, v) {
+
+
+                        if (k === "Code") {
+                            if (v !== "22110000") {
+                                console.log("COde :");
+                            }
+
+                        } else if (k === "Description") {
+
+                            if (v !== null) {
+                                if (v !== "DEFAULT") {
+                                    console.log("Description :");
+                                }
+
+                            }
+                        } else if (k === "Unit") {
+                            console.log("Unit :");
+                        } else if (k === "Qty Iss") {
+                            console.log("Qty Iss :");
+                        } else if (k === "Qty Reg") {
+                            console.log("Qty Reg :");
+                        }
+
+                    });
+                });
+            }
+
+        } else {
+
+
+            alert("กรุณากรอกข้อมูลให้ครบ");
+        }
+    }
 
 
     var rowNum = 0;
     $('#vPeriod').change(function () {
 
-//        console.log(this.value);
-//        console.log(this.value.length);
+
         // todo
         document.getElementById('Dname').innerHTML = this.value;
     });
+//    $('#vState').change(function (e) {
+//
+//        var state = $(this).val().toString();
+//        console.log(state.toString());
+//        //three do 
+//        if (state === "State1") {
+//
+////            document.getElementById("sendtom3").style.visibility = 'hidden';
+//            document.getElementById("rqby").style.visibility = 'visible';
+//            document.getElementById("dpmhd").style.visibility = 'visible';
+//            document.getElementById("isby").style.visibility = 'hidden';
+//            document.getElementById("btn_openmodal2").style.visibility = 'hidden';
+//            document.getElementById("btn_openmodal").style.visibility = 'visible';
+//            document.getElementById("rqdate2txt").style.visibility = 'hidden';
+//            document.getElementById("vhead").style.visibility = 'visible';
+//            document.getElementById("sigf").style.visibility = 'hidden';
+//            document.getElementById("imgclose2").style.visibility = 'hidden';
+//            document.getElementById("imgclose3").style.visibility = 'hidden';
+//            var srcimg = document.getElementById("image_id");
+//            console.log(srcimg);
+//            if (srcimg !== null) {
+//
+//                console.log(srcimg);
+//                if (srcimg.src === null) {
+//
+//                    document.getElementById("imgclose").style.visibility = 'hidden';
+//                } else {
+//                    document.getElementById("imgclose").style.visibility = 'visible';
+//                }
+//            } else {
+//                console.log("No");
+//                document.getElementById("imgclose").style.visibility = 'hidden';
+//            }
+//
+//        } else if (state === "State2") {
+////            document.getElementById("sendtom3").style.visibility = 'hidden';
+//            document.getElementById("rqby").style.visibility = 'visible';
+//            document.getElementById("dpmhd").style.visibility = 'visible';
+//            document.getElementById("isby").style.visibility = 'hidden';
+//            document.getElementById("btn_openmodal2").style.visibility = 'visible';
+//            document.getElementById("btn_openmodal").style.visibility = 'hidden';
+//            document.getElementById("rqdate2txt").style.visibility = 'visible';
+//            document.getElementById("vhead").style.visibility = 'collapse';
+//            document.getElementById("sigf").style.visibility = 'visible';
+//            document.getElementById("imgclose").style.visibility = 'hidden';
+//            document.getElementById("imgclose3").style.visibility = 'hidden';
+//            var srcimg = document.getElementById("image_id2");
+//            if (srcimg !== null) {
+//                if (srcimg.src === null) {
+//
+//                    document.getElementById("imgclose2").style.visibility = 'hidden';
+//                } else {
+//                    document.getElementById("imgclose2").style.visibility = 'visible';
+//                }
+//            } else {
+//
+//                document.getElementById("imgclose2").style.visibility = 'hidden';
+//            }
+//
+//        } else if (state === "State3") {
+//
+//
+////            document.getElementById("sendtom3").style.visibility = 'visible';
+//            document.getElementById("rqby").style.visibility = 'visible';
+//            document.getElementById("dpmhd").style.visibility = 'visible';
+//            document.getElementById("isby").style.visibility = 'visible';
+//            document.getElementById("btn_openmodal2").style.visibility = 'hidden';
+//            document.getElementById("btn_openmodal").style.visibility = 'hidden';
+//            document.getElementById("rqdate2txt").style.visibility = 'visible';
+//            document.getElementById("vhead").style.visibility = 'collapse';
+//            document.getElementById("imgclose").style.visibility = 'hidden';
+//            document.getElementById("imgclose2").style.visibility = 'hidden';
+//            var srcimg = document.getElementById("image_id3");
+//            if (srcimg !== null) {
+//
+//
+//
+//                if (srcimg.src === null) {
+//
+//                    document.getElementById("imgclose3").style.visibility = 'hidden';
+//                } else {
+//                    document.getElementById("imgclose3").style.visibility = 'visible';
+//                }
+//            } else {
+//
+//                document.getElementById("imgclose3").style.visibility = 'hidden';
+//            }
+//
+//
+//
+//        }
+//
+//
+//
+//    });
+//    function changeddl1() {
+//        alert("Show");
+//    }
+//
+//    function changeddl(a) {
+//        //        var state = $(this).val().toString();
+//        //        console.log(state.toString());
+//        //three do 
+//        if (a === "S1") {
+//
+//            document.getElementById("rqby").style.visibility = 'visible';
+//            document.getElementById("dpmhd").style.visibility = 'visible';
+//            document.getElementById("isby").style.visibility = 'hidden';
+//            document.getElementById("btn_openmodal2").style.visibility = 'hidden';
+//            document.getElementById("btn_openmodal").style.visibility = 'visible';
+//            document.getElementById("rqdate2txt").style.visibility = 'hidden';
+//            document.getElementById("vhead").style.visibility = 'visible';
+//            document.getElementById("sigf").style.visibility = 'hidden';
+//            document.getElementById("imgclose2").style.visibility = 'hidden';
+//            document.getElementById("imgclose3").style.visibility = 'hidden';
+//            var srcimg = document.getElementById("image_id");
+//            console.log(srcimg);
+//            if (srcimg !== null) {
+//
+//                console.log(srcimg);
+//                if (srcimg.src === null) {
+//
+//                    document.getElementById("imgclose").style.visibility = 'hidden';
+//                } else {
+//                    document.getElementById("imgclose").style.visibility = 'visible';
+//                }
+//            } else {
+//                console.log("No");
+//                document.getElementById("imgclose").style.visibility = 'hidden';
+//            }
+//
+//        } else if (a === "S2") {
+//            document.getElementById("rqby").style.visibility = 'visible';
+//            document.getElementById("dpmhd").style.visibility = 'visible';
+//            document.getElementById("isby").style.visibility = 'hidden';
+//            document.getElementById("btn_openmodal2").style.visibility = 'visible';
+//            document.getElementById("btn_openmodal").style.visibility = 'hidden';
+//            document.getElementById("rqdate2txt").style.visibility = 'visible';
+//            document.getElementById("vhead").style.visibility = 'collapse';
+//            document.getElementById("sigf").style.visibility = 'visible';
+//            document.getElementById("imgclose").style.visibility = 'hidden';
+//            document.getElementById("imgclose3").style.visibility = 'hidden';
+//            var srcimg = document.getElementById("image_id2");
+//            if (srcimg !== null) {
+//                if (srcimg.src === null) {
+//
+//                    document.getElementById("imgclose2").style.visibility = 'hidden';
+//                } else {
+//                    document.getElementById("imgclose2").style.visibility = 'visible';
+//                }
+//            } else {
+//
+//                document.getElementById("imgclose2").style.visibility = 'hidden';
+//            }
+//
+//        } else if (a === "S3") {
+//
+//            document.getElementById("rqby").style.visibility = 'visible';
+//            document.getElementById("dpmhd").style.visibility = 'visible';
+//            document.getElementById("isby").style.visibility = 'visible';
+//            document.getElementById("btn_openmodal2").style.visibility = 'hidden';
+//            document.getElementById("btn_openmodal").style.visibility = 'hidden';
+//            document.getElementById("rqdate2txt").style.visibility = 'visible';
+//            document.getElementById("vhead").style.visibility = 'collapse';
+//            document.getElementById("imgclose").style.visibility = 'hidden';
+//            document.getElementById("imgclose2").style.visibility = 'hidden';
+//            var srcimg = document.getElementById("image_id3");
+//
+//            if (srcimg !== null) {
+//
+//
+//
+//                if (srcimg.src === null) {
+//
+//                    document.getElementById("imgclose3").style.visibility = 'hidden';
+//                } else {
+//                    document.getElementById("imgclose3").style.visibility = 'visible';
+//                }
+//            } else {
+//
+//                document.getElementById("imgclose3").style.visibility = 'hidden';
+//            }
+//
+//
+//
+//        } else {
+//
+//
+//        }
+//
+//
+//    }
     function remove() {
         var x = document.getElementById("mySelect");
         x.remove(x.selectedIndex);
     }
 
+
+    $("#SendReturnMail").click(function (e) {
+
+        var ID = document.getElementById("ordernum").innerHTML;
+
+        $.ajax({
+            url: './Action',
+            type: 'GET',
+            data: {
+                path: "returnid",
+                id: ID
+            },
+            success: function (result) {
+
+                alert("Returned");
+                window.location.replace("http://192.200.9.189:8080/MaterialRequest/?report=material_request");
+            }
+
+        });
+
+
+    });
 
 
     $("#SendAppMail").click(function (e) {
@@ -1732,31 +2102,26 @@
 
 
         // todosubmit 
-        console.log("wow");
         alert("An email has been sent.");
         var vhead = document.getElementById("vhead").value;
         var vNo = document.getElementById("ordernum").innerHTML;
         var purpose = document.getElementById("mypparea").value;
-        console.log("vhead");
-        console.log(vhead);
-        console.log(purpose);
+
         insertsubmit(purpose, vhead, vNo);
         getEmailByName(vhead);
     });
     $("#btn_openmodal").click(function (e) {
 
         buttonid = "button1";
-        console.log(buttonid);
     });
     $("#btn_openmodal2").click(function (e) {
 
         buttonid = "button2";
-        console.log(buttonid);
+        $("#SendAppMail").show();
     });
     $("#btn_openmodal3").click(function (e) {
 
         buttonid = "button3";
-        console.log(buttonid);
     });
     // todo pp 
 
@@ -1778,6 +2143,8 @@
     });
     $("#imgclose2").click(function (e) {
         var vNo = document.getElementById("ordernum").innerHTML;
+        var sm = document.getElementById("SendAppMail");
+
         console.log("Click");
         $("#image_id2").remove();
         var img = document.getElementById('image_id2');
@@ -1785,23 +2152,29 @@
         imgclose.style.visibility = "hidden";
         document.getElementById("rqdate2").innerHTML = "-";
         DeleteSignature("ORD_DPMH", vNo, "DPH_DATE");
+        sm.disabled = true;
     });
     $("#imgclose3").click(function (e) {
         var vNo = document.getElementById("ordernum").innerHTML;
         console.log("Click");
+        var sm = document.getElementById("SendAppMail");
+
         $("#image_id3").remove();
         var img = document.getElementById('image_id3');
         var imgclose = document.getElementById('imgclose3');
         imgclose.style.visibility = "hidden";
         document.getElementById("rqdate3").innerHTML = "-";
         DeleteSignature("ORD_ISSB", vNo, "ISB_DATE");
+        sm.disabled = true;
     });
     $("#btn_login").click(function (e) {
-
 
         var vhead = document.getElementById('vhead');
         var username = document.getElementById("username").value;
         var modal = document.getElementById("exampleModal");
+        var sm = document.getElementById("SendAppMail");
+        sm.style.visibility = "visible";
+
         modal.style.display = "none"; // Close the modal
 
         var prnum = document.getElementById("cname").value;
@@ -1819,9 +2192,8 @@
                 prno: prno
             },
             success: function (result) {
-
+                sm.disabled = false;
                 console.log("Result Clob : ");
-                console.log(result);
                 $.each(result, function (i, obj) {
                     //var img = $('<img id="image_id">');
                     var imgclose = document.getElementById('imgclose');
@@ -1866,7 +2238,6 @@
                         img.attr('src', 'data:image/png;base64,' + result[i].ST_SIGN);
                         insertSignature("ORD_ISSB", vNo, username, date3, "ISB_DATE");
                     }
-                    console.log(result[i].ST_SIGN);
                 });
                 //document.getElementById("myDiv").style.border = "thick solid #0000FF";
             },
@@ -1878,7 +2249,8 @@
     });
     var cono = document.getElementById("cono").value;
     var divi = document.getElementById("divi").value;
-    var facility = "1A1";
+    var facility = "<%out.print(session.getAttribute("fac"));%>".trim();
+//    var facility =  document.getElementById("fac").value;
 //    var cono = "10"
 //    var divi = "101"
 
@@ -1894,6 +2266,25 @@
             dateFormat: 'yy-mm-dd'
         });
     });
+//    $.ajax({
+//        url: './Action',
+//        type: 'GET',
+//        dataType: 'json',
+//        data: {
+//            path: "getWarehouse",
+//            cono: cono,
+//            divi: divi,
+//            fac: facility
+//        },
+//        async: false
+//    }).done(function (response) {
+//        console.log(response);
+//        warehouse = response;
+//        $.each(response, function (i, obj) {
+//            var div_data = "<option value=" + obj.MWWHLO + ">" + obj.WAREHOUSE + "</option>";
+//            $(div_data).appendTo('#vWarehouse');
+//        });
+//    });
     $.ajax({
         url: './Action',
         type: 'GET',
@@ -1906,26 +2297,6 @@
         },
         async: false
     }).done(function (response) {
-        console.log(response);
-        warehouse = response;
-        $.each(response, function (i, obj) {
-            var div_data = "<option value=" + obj.MWWHLO + ">" + obj.WAREHOUSE + "</option>";
-            $(div_data).appendTo('#vWarehouse');
-        });
-    });
-    $.ajax({
-        url: './Action',
-        type: 'GET',
-        dataType: 'json',
-        data: {
-            path: "getWarehouse",
-            cono: cono,
-            divi: divi,
-            fac: facility
-        },
-        async: false
-    }).done(function (response) {
-        console.log(response);
         warehouse = response;
         $.each(response, function (i, obj) {
             var div_data = "<option value=" + obj.MWWHLO + ">" + obj.WAREHOUSE + "</option>";
@@ -1942,14 +2313,13 @@
         type: 'GET',
         dataType: 'json',
         data: {
-            path: "getWarehouse",
+            path: "gettoWarehouse",
             cono: cono,
             divi: divi,
             fac: facility
         },
         async: false
     }).done(function (response) {
-        console.log(response);
         warehouse = response;
         $.each(response, function (i, obj) {
             var div_data = "<option value=" + obj.MWWHLO + ">" + obj.WAREHOUSE + "</option>";
@@ -1970,12 +2340,20 @@
         },
         async: false
     }).done(function (response) {
-        console.log(response);
         warehouse = response;
+        var options;
         $.each(response, function (i, obj) {
             var div_data = "<option value=" + obj.US_LOGIN + ">" + obj.US_LOGIN + "</option>";
             $(div_data).appendTo('#vhead');
+
+            options += '<option value="' + obj.US_LOGIN + '" />';
+
         });
+
+
+
+        document.getElementById('orderidlist').innerHTML = options;
+
     }); //todo 
 
 
@@ -1985,21 +2363,24 @@
 
     $('#vFwarehouse').on('change', function () {
         var checkBox = document.getElementById("onhandval").checked;
-        var itemtype = document.getElementById("itemtype").checked;
+        //var itemstype = document.getElementById("itemstype").checked;
+        var itemstype = document.querySelector('input[name="itemtype"]:checked').value;
+        console.log(itemtype);
 //        item = []; 
 //        itemno = [];
-        getItemscode(this.value, checkBox, itemtype);
+        getItemscode(this.value, checkBox, itemstype);
     });
     $('#vTwarehouse').on('change', function () {
 
         var vFwhs = document.getElementById("vFwarehouse").value;
-        getItemscode2way(vFwhs, this.value);
+        //getItemscode2way(vFwhs, this.value);
     });
     $(function (e) {
 
         var e = document.getElementById("vFwarehouse");
         var value = e.value;
         getCostcenter("SB0102");
+
         var myTagField = function (config) {
             jsGrid.Field.call(this, config);
         };
@@ -2012,6 +2393,8 @@
                 return value;
             },
             insertTemplate: function (value) {
+
+                var cono = document.getElementById("cono").value;
                 //todoauto
                 var isexpense = true;
                 var fullCost = 0;
@@ -2034,7 +2417,8 @@
                             url: './Action',
                             data: {
                                 path: "getitemtype",
-                                itemid: selectedid
+                                itemid: selectedid,
+                                cono: cono
 
                             },
                             success: function (data) {
@@ -2042,15 +2426,8 @@
 
                                 console.log("Clicked");
                                 items = data;
-                                console.log(items);
                                 ittem = items;
-                                console.log("dddddddddddddddddddddddatttttttttttttttttttta");
-                                console.log(data);
-                                console.log("##################");
-                                console.log(ittem);
-                                console.log("##################");
-                                console.log("*********************");
-                                console.log("*********************");
+
                                 //                                teamField.items = ittem;
                                 //                                teamField.textField = "MMUNMS";
                                 //                                teamField.valueField = "MMUNMS";
@@ -2061,8 +2438,7 @@
                                 $(".states-filter").empty().append(teamField.insertTemplate());
                             },
                             error: function (e) {
-                                alert('Error occured');
-                                console.log(e);
+                                alert('Error occured2');
                             }
                         });
                         grid.option("fields")[2].insertControl.val(disc);
@@ -2071,7 +2447,6 @@
                 return reitem;
             },
             insertValue: function () {
-                console.log(this._insertAuto.val());
                 var revalue = this._insertAuto.val();
                 const myArray = revalue.split(":");
                 return myArray[0];
@@ -2079,7 +2454,6 @@
             editTemplate: function (value) {
 
 
-                console.log(prevalue);
                 var state = document.getElementById("vState").value;
                 if (state === "State1" || state === "State2") {
 
@@ -2097,6 +2471,7 @@
                             const myArray = text.split(":");
                             let word = myArray[0];
                             let disc = myArray[1];
+
                             selectedid = word;
                             ui.item.value = word;
                             $.ajax({
@@ -2105,7 +2480,8 @@
                                 url: './Action',
                                 data: {
                                     path: "getitemtype",
-                                    itemid: selectedid
+                                    itemid: selectedid,
+                                    cono: cono
 
                                 },
                                 success: function (data) {
@@ -2116,9 +2492,7 @@
                                     console.log(items);
                                     ittem = items;
                                     console.log("dddddddddddddddddddddddatttttttttttttttttttta");
-                                    console.log(data);
                                     console.log("##################");
-                                    console.log(ittem);
                                     console.log("##################");
                                     console.log("*********************");
                                     console.log("*********************");
@@ -2134,7 +2508,7 @@
                                     $(".estates-filter").empty().append(teamField.editTemplate());
                                 },
                                 error: function (e) {
-                                    alert('Error occured');
+                                    alert('Error occured3');
                                     console.log(e);
                                 }
                             });
@@ -2267,87 +2641,6 @@
         jsGrid.fields.myTagFieldfull = myTagFieldfull;
         //////////////////////////////////////////////////////////////////
 
-
-        $("#Jsgridup").jsGrid({
-            width: "100%",
-            height: "400px",
-            filtering: true,
-            editing: true,
-            sorting: true,
-            inserting: true,
-            paging: true,
-            controller: {
-                loadData: function (filter) {
-                    var data = $.Deferred();
-                    $.ajax({
-                        type: 'GET',
-                        dataType: 'json',
-                        url: './Action',
-                        data: {
-                            path: "getItemcode",
-                            whs: "A80",
-                            check: "true",
-                            itemstype: itemstype
-
-                        },
-                        async: false
-                    }).done(function (response) {
-
-                        console.log("click to show value");
-                        console.log(response);
-                        console.log("click to show value");
-                        response = $.grep(response, function (item) {
-                            return (!filter.MMITNO || (item.MMITNO.indexOf(filter.MMITNO) > -1));
-                        });
-                        data.resolve(response);
-                    });
-                    return data.promise();
-                },
-                updateItem: function (item) {
-
-                }
-            },
-            deleteConfirm: "คุณต้องการลบข้อมูลรายการนี้ใช่หรือไม่ ?",
-            fields: [
-                {name: "No.", type: "number", width: 30, align: "center", inserting: false, editing: false, filtering: false,
-                    itemTemplate: function (value, item) {
-                        return this._grid.data.indexOf(item) + 1;
-                    }
-                },
-                {
-                    title: "Code",
-                    name: "ITEM",
-                    type: "text",
-                    filtering: false
-
-                },
-                {title: "Description", name: "MMITDS", type: "text", width: 70, filtering: false, editing: true
-                },
-                {title: "Unit", name: "ITEM", type: "textSelect", items: ittem, filtering: false, width: 30, editing: true, insertcss: "states-filter", editcss: "estates-filter"
-                },
-                {title: "Qty_Reg", name: "QTY_REQT", type: "money", width: 30, inserting: true, filtering: false
-                },
-                {type: "control", modeSwitchButton: false, clearFilterButton: false,
-                    itemTemplate: function (value, item) {
-                        var $result = $([]);
-                        var state = document.getElementById("vState").value;
-                        if (state === "State1") {
-                            $result = $result.add(this._createDeleteButton(item));
-                            $result = $result.add(this._createEditButton(item));
-                        } else if (state === "State2") {
-                            $result = $result.add(this._createDeleteButton(item));
-                            this._grid.editing = true;
-                        } else if (state === "State3") {
-                            $result = $result.add(this._createDeleteButton(item));
-                            this._grid.editing = false;
-                        }
-
-                        return $result;
-                    }
-                }
-
-            ]
-        });
         $("#Jsgrid").jsGrid({
             width: "100%",
             height: "400px",
@@ -2386,7 +2679,8 @@
 
                         var e = document.getElementById("vFwarehouse");
                         var value = e.value;
-                        var result = checkitemexist(args.item.ITM_ID, value, args.item.QTY_REQT);
+                        var cono = document.getElementById("cono").value;
+                        var result = checkitemexist(args.item.ITM_ID, value, args.item.QTY_REQT, cono);
                         console.log("--------------- result ----------------");
                         console.log(result);
                         if (result)
@@ -2413,6 +2707,9 @@
                             var value = e.value;
                             var cono = document.getElementById("cono").value;
                             var divi = document.getElementById("divi").value;
+                            var text = args.item.ITM_DESC.toString();
+                            var result = text.replaceAll("'", "");
+                            //alert(result)
                             $.ajax({
                                 type: 'GET',
                                 url: './Action',
@@ -2420,7 +2717,7 @@
                                     path: "insertitemdata",
                                     code: args.item.ITM_ID,
                                     //                        code: "11",
-                                    desc: args.item.ITM_DESC,
+                                    desc: result,
                                     unit: args.item.ITM_UNIT,
                                     reqt: args.item.QTY_REQT,
                                     issu: issu,
@@ -2465,6 +2762,8 @@
                                 var value = e.value;
                                 var cono = document.getElementById("cono").value;
                                 var divi = document.getElementById("divi").value;
+                                var text = args.item.ITM_DESC.toString();
+                                var result = text.replaceAll("'", "");
                                 $.ajax({
                                     type: 'GET',
                                     url: './Action',
@@ -2472,7 +2771,7 @@
                                         path: "insertitemdata",
                                         code: args.item.ITM_ID,
                                         //                        code: "11",
-                                        desc: args.item.ITM_DESC,
+                                        desc: result,
                                         unit: args.item.ITM_UNIT,
                                         reqt: args.item.QTY_REQT,
                                         issu: 0,
@@ -2487,7 +2786,7 @@
                                         console.log("Added");
                                     },
                                     error: function (e) {
-                                        alert('Error occured');
+                                        alert('Error occured4');
                                         console.log(e);
                                     }
                                 });
@@ -2536,10 +2835,11 @@
                         type: 'GET',
                         url: './Action',
                         data: {
-                            path: "deleteitemdata",
+                            path: "deleteitemdatapp",
                             code: args.item.ITM_ID,
-                            itid: args.item.ID,
-                            id: id
+                            id: id,
+                            qty: args.item.QTY_REQT
+
 
 
                         },
@@ -2548,7 +2848,7 @@
                             console.log("Updated");
                         },
                         error: function (e) {
-                            alert('Error occured');
+                            alert('Error occured5');
                             console.log(e);
                         }
                     });
@@ -2561,7 +2861,8 @@
                 var idtxt = args.item.ITM_ID.toString();
                 var e = document.getElementById("vFwarehouse");
                 var value = e.value;
-                var result = checkitemexist(args.item.ITM_ID, value, args.item.QTY_REQT);
+                var cono = document.getElementById("cono").value;
+                var result = checkitemexist(args.item.ITM_ID, value, args.item.QTY_REQT, cono);
                 console.log("--------------- result ----------------");
                 console.log(result);
                 if (result)
@@ -2601,7 +2902,7 @@
                             console.log("Updated");
                         },
                         error: function (e) {
-                            alert('Error occured');
+                            alert('Error occured6');
                             console.log(e);
                         }
                     });
@@ -2635,7 +2936,7 @@
                                     console.log("Updated");
                                 },
                                 error: function (e) {
-                                    alert('Error occured');
+                                    alert('Error occured7');
                                     console.log(e);
                                 }
                             });
@@ -2676,7 +2977,7 @@
                         console.log("Updated");
                     },
                     error: function (e) {
-                        alert('Error occured');
+                        alert('Error occured8');
                         console.log(e);
                     }
                 });
@@ -2713,10 +3014,9 @@
                 },
                 {title: "Unit", name: "ITM_UNIT", type: "textSelect", items: ittem, filtering: false, width: 30, editing: true, insertcss: "states-filter", editcss: "estates-filter"
                 },
-                {title: "Qty_Reg", name: "QTY_REQT", type: "money", width: 30, inserting: true, filtering: false
 
+                {title: "Qty_Reg", name: "QTY_REQT", type: "money", width: 30, inserting: true, filtering: false},
 
-                },
 //                {title: "Qty_Iss", name: "QTY_ISSU", type: "number", width: 30, filtering: false, editing: true,
 
 
@@ -2808,7 +3108,7 @@
     var itemname = [];
     var itemtype = [];
     var itemfull = [];
-    var ittem = [];
+    var ittem = ["0"];
     $('.college').click(function () {
         $('.college').css('color', 'red');
     });
@@ -2860,25 +3160,21 @@
 
 
 
-    TextSelectField.prototype = new jsGrid.SelectField({
 
-        sorter: "string",
-        filterValue: function () {
-            return this.filterControl.val();
-        },
-        itemTemplate: function (value) {
 
-            return value;
-        },
-        insertValue: function () {
-            return this.insertControl.val();
-        },
-        editValue: function () {
-            return this.editControl.val();
-        }
-    });
-    jsGrid.fields.textSelect = TextSelectField;
+
     /////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
 
 
     var getmyid = function (username) {
@@ -2951,12 +3247,14 @@
 
             },
             error: function (e) {
-                alert('Error occured itemcode');
+                alert('Error occured itemcode2way');
                 console.log(e);
             }
         });
     };
-    var getItemscode = function (whs, check, itemtype) {
+
+    var cono = document.getElementById("cono").value;
+    var getItemscode = function (whs, check, itemstype) {
         var warehouse = whs;
         $.ajax({
             type: 'GET',
@@ -2966,13 +3264,14 @@
                 path: "getItemcode",
                 whs: whs,
                 check: check,
+                cono: cono,
                 itemstype: itemstype
+
 
             },
             success: function (data) {
 
                 items = data;
-                console.log(data);
                 $.each(data, function (i) {
 
                     if (!(data[i].MMPUUN in itemtype)) {
@@ -2984,7 +3283,7 @@
                 });
             },
             error: function (e) {
-                alert('Error occured itemcode');
+                alert('Error occured itemcodessssscode');
                 console.log(e);
             }
         });
@@ -2994,6 +3293,7 @@
         var cono = document.getElementById("cono").value;
         var divi = document.getElementById("divi").value;
         var Department = dep;
+
         $.ajax({
             type: 'GET',
             dataType: 'json',
@@ -3018,126 +3318,40 @@
                 });
             },
             error: function (e) {
-                alert('Error occured');
+                alert('Error occured9');
                 console.log(e);
             }
         });
     };
-    var clients = [
-        {"Name": "Otto Clay", "Age": 25, "Country": 1, "Address": "Ap #897-1459 Quam Avenue", "Married": false},
-        {"Name": "Connor Johnston", "Age": 45, "Country": 2, "Address": "Ap #370-4647 Dis Av.", "Married": true},
-        {"Name": "Lacey Hess", "Age": 29, "Country": 3, "Address": "Ap #365-8835 Integer St.", "Married": false},
-        {"Name": "Timothy Henson", "Age": 56, "Country": 1, "Address": "911-5143 Luctus Ave", "Married": true},
-        {"Name": "Ramona Benton", "Age": 32, "Country": 3, "Address": "Ap #614-689 Vehicula Street", "Married": false}
-    ];
-    var countries = [
-        {Name: "", Id: 0},
-        {Name: "United States", Id: 1},
-        {Name: "Canada", Id: 2},
-        {Name: "United Kingdom", Id: 3}
-    ];
     $(document).ready(function () {
 
-//                var test  = session.getAttribute("test"); 
-//                alert(test);
-
-
-        $("#Jsgridup").jsGrid({
-
-            width: "100%",
-            height: "400px",
-            inserting: true,
-            editing: true,
-            sorting: true,
-            paging: true,
-            data: alldata,
-            fields: [
-                {name: "MMITNO", type: "text", width: 150},
-//            { name: "MMITNO", type: "number", width: 50 },
-//            { name: "Address", type: "text", width: 200 },
-//            { name: "Country", type: "select", items: countries, valueField: "Id", textField: "Name" },
-//            { name: "Married", type: "checkbox", title: "Is Married", sorting: false },
-                {type: "control"}
-            ]
-        });
-        $("#Jsgridup1").jsGrid({
-            width: "100%",
-            inserting: false,
-            editing: false,
-            sorting: true,
-            paging: true,
-            data: alldata,
-            fields: [
-
-                {title: "MMITNO", name: "MMITNO", type: "text"},
-//            {title: "ORD_CUSID", name: "ORD_CUSID", type: "text", width: 100, align: "center"},
-//            {title: "ORD_EMPID", name: "ORD_EMPID", type: "text", width: 100, align: "center"},
-//            {title: "ORD_DATE", name: "ORD_DATE", type: "number", width: 100, align: "center"},
-//            {title: "ORD_TOTAL", name: "ORD_TOTAL", type: "number", width: 100, align: "center"}
-
-            ]
-
-        });
-//        $.ajax({
-//            type: 'GET',
-//            dataType: 'json',
-//            url: './Action',
-//            data: {
-//                path: "getItemcode",
-//                whs: "A80",
-//                check: "true"
-//
-//            },
-//            success: function (data) {
-//
-//
-//                alldata = data;
-//                console.log("click");
-//                console.log(data);
-//                $("#Jsgridup").jsGrid("loadData");
-
-//            },
-//            error: function (e) {
-//                alert('Error occured itemcode');
-//                console.log(e);
-//            }
-//        });
 
 
 
-        $('#collapseExample').collapse('show');
+
+        //var facility =  document.getElementById("fac").value;
+
+//alert(cono);
+
         var mvxtxt = document.getElementById('movextxt');
         var date = document.getElementById('vDate');
         var vhead = document.getElementById('vhead');
         var today = new Date();
+//        date.max = new Date(new Date().setDate(today.getDate() + 15)).toISOString().split("T")[0];
+//        date.min = new Date(new Date().setDate(today.getDate() - 15)).toISOString().split("T")[0];
         date.max = new Date(new Date().setDate(today.getDate() + 15)).toISOString().split("T")[0];
-        date.min = new Date(new Date().setDate(today.getDate() - 15)).toISOString().split("T")[0];
-        //date.min = today.getDate(); 
+        date.min = new Date(new Date().setDate(today.getDate() - 45)).toISOString().split("T")[0];
+        date.valueAsDate = today;
 
         var ordernum = document.getElementById('ordernum');
         var selectID = document.getElementById('idsearch');
         var searchid = document.getElementById('ssearch');
-//        var username = document.getElementById("username").value;
         var sm = document.getElementById('SendAppMail');
         var rt = document.getElementById('SendReturnMail');
         var rj = document.getElementById('SendRejectMail');
         var rj1 = document.getElementById('SendRejectMail1');
-//        var sm3 = document.getElementById('sendtom3');
-//        var mvx = document.getElementById('movexno');
-        // document.getElementById('#SendAppMail').disabled = true;
 
 
-
-//        var vDate = document.getElementById("date").innerHTML;
-//        var input = vDate;
-//        var formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-//                .withChronology(ThaiBuddhistChronology.INSTANCE)
-//        var inputDate = ChronoLocalDate.from(LocalDate.parse(input, formatter))
-//        document.getElementById("date").innerHTML = inputDate;
-//         document.getElementById("date").value = inputDate;
-
-//        var username = session.getAttribute("user"); 
-//        getmyid(username);
 
         console.log("ready!");
         const queryString = window.location.search;
@@ -3146,6 +3360,7 @@
         const KeyID = urlParams.get('ORDID');
         document.getElementById("ssearch").value = KeyID;
         var box = document.getElementById("collapseExample");
+        var signimg = document.getElementById("image_id");
         var vRequester = document.getElementById("username").value;
         var cretxt = document.getElementById("creatortxt");
         var user = document.getElementById("usename");
@@ -3156,20 +3371,22 @@
 
 
             cretxt.innerHTML = vRequester + "&nbsp&nbsp";
-            mvxtxt.innerHTML = "Requester : ";
+            mvxtxt.innerHTML = "BB_Requester : ";
             $('#Jsgrid').jsGrid('option', 'inserting', true);
             $('#Jsgrid').jsGrid('option', 'editing', true);
-            //            document.getElementById("vState").value = "State1";
-            //            chkStatus = "S1";
+
             rt.style.visibility = 'hidden';
             rj.style.visibility = 'hidden';
             rj1.style.visibility = 'visible';
-//            sm3.style.visibility = 'hidden';
-//            sm.style.visibility = 'hidden';
+
             sm.disabled = true;
-            vhead.disabled = true;
+            if (signimg.src == null || signimg.src == "") {
+                vhead.disabled = true;
+
+            }
+
             document.getElementById("status").value = "S1";
-            getsignature("PHONGS_PHO", "S1", KeyID);
+//            getsignature("PHONGS_PHO", "S1", KeyID);
             document.getElementById("imgclose").style.visibility = 'visible';
             /////
 
@@ -3182,7 +3399,6 @@
 
         } else if (Key === "S2") {
 
-
             mvxtxt.innerHTML = "Department Head : ";
             $('#Jsgrid').jsGrid('option', 'inserting', true);
             $('#Jsgrid').jsGrid('option', 'editing', true);
@@ -3190,7 +3406,7 @@
             rj.style.visibility = 'visible';
             rj1.style.visibility = 'hidden';
 //            sm3.style.visibility = 'hidden';
-            sm.style.visibility = 'visible';
+            sm.style.visibility = 'hidden';
             document.getElementById("vState").value = "State2";
             chkStatus = "S2";
             box.className = "collapse in";
@@ -3207,7 +3423,7 @@
             document.getElementById("sigf").style.visibility = 'visible';
             document.getElementById("imgclose").style.visibility = 'hidden';
             document.getElementById("imgclose3").style.visibility = 'hidden';
-            getsignature("PHONGS_PHO", Key, KeyID);
+//            getsignature("PHONGS_PHO", Key, KeyID);
             var frame = document.getElementById('image_div');
             frame.style.border = "1px solid black";
         } else if (Key === "S3") {
@@ -3238,8 +3454,8 @@
             document.getElementById("sigf").style.visibility = 'visible';
             document.getElementById("imgclose").style.visibility = 'hidden';
             document.getElementById("imgclose3").style.visibility = 'hidden';
-            getsignature("PHONGS_PHO", "S2", KeyID);
-            getsignature("PHONGS_PHO", "S3", KeyID);
+//            getsignature("PHONGS_PHO", "S2", KeyID);
+//            getsignature("PHONGS_PHO", "S3", KeyID);
             var frame = document.getElementById('image_div');
             frame.style.border = "1px solid black";
             var frame2 = document.getElementById('image_div2');
@@ -3271,7 +3487,11 @@
 //            sm3.style.visibility = 'hidden';
 //    sm.style.visibility = 'hidden';
             sm.disabled = true;
-            vhead.disabled = true;
+
+            if (signimg.src == null || signimg.src == "") {
+                vhead.disabled = true;
+
+            }
 //SendReturnMail
 //SendRejectMail
 
@@ -3299,7 +3519,6 @@
             },
             success: function (result) {
 
-                console.log("Result Clob : ");
                 $.each(result, function (i, obj) {
                     //var img = $('<img id="image_id">');
                     var imgclose = document.getElementById('imgclose');
@@ -3346,11 +3565,12 @@
                         frame.style.border = "1px solid black";
                         img.attr('src', 'data:image/png;base64,' + result[i].ST_SIGN);
                     }
-                    console.log(result[i].ST_SIGN);
                 });
             }
         });
     };
+
+
     var getsinglesignature = function (prno) {
 
         $.ajax({
@@ -3365,7 +3585,6 @@
             },
             success: function (result) {
 
-                console.log("Result Clob : ");
                 $.each(result, function (i, obj) {
                     //var img = $('<img id="image_id">');
                     var imgclose = document.getElementById('imgclose');
@@ -3379,6 +3598,9 @@
             }
         });
     };
+
+
+
     var getallsignature = function (orderid) {
 
         var cono = document.getElementById("cono").value;
@@ -3405,6 +3627,8 @@
             }
         });
     };
+
+
     var get1signature = function (prno) {
 
         $.ajax({
@@ -3430,12 +3654,17 @@
             }
         });
     };
+
+
     var adddropdownlist = function (prno) {
 
 
 
 
     };
+
+
+
     var aa = [
         {Id1: "xxx"},
         {Id1: "xxxx"},
@@ -3465,7 +3694,6 @@
             },
             success: function (result) {
 
-                console.log(result);
             }
         });
     }
@@ -3489,7 +3717,6 @@
             },
             success: function (result) {
 
-                console.log(result);
             }
         });
     }
@@ -3511,7 +3738,6 @@
             },
             success: function (result) {
 
-                console.log(result);
             }
         });
     }
@@ -3519,7 +3745,7 @@
     function getEmailByName(name) {
 
 
-        console.log(name);
+
         $.ajax({
             url: './Action',
             type: 'GET',
@@ -3533,7 +3759,6 @@
             },
             success: function (result) {
 
-                console.log(result);
             }
         });
     }
@@ -3543,8 +3768,7 @@
 
 
         var name = "mmm";
-        console.log(orderid);
-        console.log(rolename);
+
         $.ajax({
             url: './Action',
             type: 'GET',
@@ -3568,7 +3792,7 @@
     function sendtom3result() {
         type = document.querySelector('input[name="radiotype"]:checked').value;
         ordernum = document.getElementById("ordernum").innerHTML;
-        console.log("sssssssss               " + type);
+
         $.ajax({
             url: './Action',
             type: 'GET',
@@ -3595,7 +3819,7 @@
 
 
 
-    function checkitemexist(id, frm_whs, qty) {
+    function checkitemexist(id, frm_whs, qty, cono) {
 
 
         var isExist = false;
@@ -3607,7 +3831,8 @@
                 path: "getonhand",
                 code: id,
                 frm_whs: frm_whs,
-                qty_reg: qty
+                qty_reg: qty,
+                cono: cono
 
 
 
@@ -3629,7 +3854,7 @@
 
             },
             error: function (e) {
-                alert('Error occured');
+                alert('Error occured1');
                 console.log(e);
             }
         });
@@ -3779,164 +4004,6 @@
 
         });
     }
-
-    function fun() {
-//    $.ajax({
-//    type: 'GET',
-//            dataType: 'json',
-//            url: './Action',
-//            data: {
-//            path: "getItemcode",
-//                    whs: "A80",
-//                    check: "true"
-//
-//            },
-//            success: function (data) {
-//
-//
-//            alldata = data;
-//            console.log("click222222");
-//            console.log(data);
-//            console.log(alldata);
-//            $("#Jsgridup").jsGrid("loadData");
-//            }
-//    });
-
-        Call_GridUP();
-        Call_GridDOWN();
-    }
-
-//    alldata = [{MMITNO: "001"}];
-    function  Call_GridUP() {
-
-
-        var vcc = document.getElementById("vPeriod");
-        var vCostcenter = vcc.options[vcc.selectedIndex].text;
-        var vRequester = document.getElementById("username").value;
-        var vCono = document.getElementById("cono").value;
-        var vDivi = document.getElementById("divi").value;
-
-        console.log(ittem);
-        var whs = document.getElementById("vFwarehouse").value
-        $("#Jsgridup").show();
-        $("#Jsgridup").jsGrid({
-            width: "100%",
-            height: "auto",
-            filtering: true,
-            inserting: false,
-            editing: true,
-            sorting: true,
-            paging: true,
-            autoload: true,
-            pageSize: 5,
-//                pageButtonCount: 5,
-            controller: {
-                loadData: function (filter) {
-                    var data = $.Deferred();
-                    $.ajax({
-                        type: 'GET',
-                        dataType: 'json',
-                        url: './Action',
-                        data: {
-                            path: "getItemcode",
-                            whs: whs,
-                            check: "true",
-                            itemstype: itemstype
-
-                        },
-                        async: false
-                    }).done(function (response) {
-
-                        console.log("click to show value");
-                        console.log(response);
-                        console.log("click to show value");
-                        response = $.grep(response, function (item) {
-                            return (!filter.MMITNO || (item.MMITNO.indexOf(filter.MMITNO) > -1));
-                        });
-                        data.resolve(response);
-                    });
-                    return data.promise();
-                },
-                updateItem: function (item) {
-
-
-                }
-            },
-            fields: [
-                {name: "MMCONO", type: "text", width: 150, editing: false},
-                {name: "ITEM", type: "text", width: 150, editing: false},
-                {name: "MMITNO", type: "text", width: 150, editing: false},
-                {name: "MMITDS", type: "text", width: 150, editing: false},
-                {name: "MMUNMS", type: "text", width: 150, editing: false},
-                {name: "QTY_REG", type: "text", width: 150},
-                {type: "control", width: 30, deleteButton: false, css: "blue-cell"}
-
-            ]
-        });
-
-    }
-
-
-    function  Call_GridDOWN() {
-
-        var id = document.getElementById("ordernum").innerHTML;
-        $("#Jsgriddown").show();
-        $("#Jsgriddown").jsGrid({
-            width: "100%",
-            height: "auto",
-            filtering: true,
-            inserting: false,
-            editing: true,
-            sorting: true,
-            paging: true,
-            autoload: true,
-            pageSize: 5,
-//                pageButtonCount: 5,
-            controller: {
-                loadData: function (filter) {
-                    var data = $.Deferred();
-                    $.ajax({
-                        type: 'GET',
-                        dataType: 'json',
-                        url: './Action',
-                        data: {
-                            path: "getItemcodedown",
-                            order_id: id
-
-                        },
-                        async: false
-                    }).done(function (response) {
-
-                        console.log("click to show value");
-                        console.log(response);
-                        console.log("click to show value");
-                        response = $.grep(response, function (item) {
-                            return (!filter.MMITNO || (item.MMITNO.indexOf(filter.MMITNO) > -1));
-                        });
-                        data.resolve(response);
-                    });
-                    return data.promise();
-                },
-                updateItem: function (item) {
-
-
-                }
-            },
-            fields: [
-                {name: "REG_CONO", type: "text", width: 150},
-                {name: "ITM_ID", type: "text", width: 150},
-                {name: "ITM_DESC", type: "text", width: 150},
-                {name: "ITM_UNIT", type: "text", width: 150},
-                {name: "QTY_REQT", type: "text", width: 150},
-                {type: "control", width: 30, deleteButton: false, css: "blue-cell"}
-
-            ]
-        });
-
-    }
-
-
-
 
 
 

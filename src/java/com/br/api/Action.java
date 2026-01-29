@@ -240,13 +240,13 @@ public class Action extends HttpServlet {
 
             case "getHistorybystate":
                 System.out.println("getHistorybystate");
-                out.print(Select.getHistorybystate(request.getParameter("cono"), request.getParameter("divi")));
+                out.print(Select.getHistorybystate(request.getParameter("cono"), request.getParameter("divi"), request.getParameter("pgmtype")));
                 out.flush();
                 break;
                 
                   case "getHistorybystatefarm":
                 System.out.println("getHistorybystatefarm");
-                out.print(Select.getHistorybystatefarm(request.getParameter("cono"), request.getParameter("divi")));
+                out.print(Select.getHistorybystatefarm(request.getParameter("cono"), request.getParameter("divi") ,request.getParameter("pgmtype")));
                 out.flush();
                 break;
 

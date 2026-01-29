@@ -140,6 +140,19 @@
 
                                 </ul>
                             </li>
+                            
+                                   <li  class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" href="./">ใบเบิก&nbsp;<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu" style=" color: #ffffff; background-color: #070c13;">
+                                    <li  role="presentation"><a style=" color: #ffffff; background-color: #070c13;" class='dropdown-item' name="rental" href="?report=MTRRQT_Report_RTN">Report ใบเบิก</a></li>
+                                    <li  id="DPSpage" role="presentation" style=" visibility: visible"><a style=" color: #ffffff; background-color: #070c13;" class='dropdown-item' name="rental" href="?report=MTRRQT_Report_DPS">Report ใบฝาก</a></li>
+                                </ul>
+                            </li>
+                                <li  class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" href="./">ใบฝาก&nbsp;<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu" style=" color: #ffffff; background-color: #070c13;">
+                                    <li  role="presentation"><a style=" color: #ffffff; background-color: #070c13;" class='dropdown-item' name="rental" href="?report=material_request&pgmtype=DPT">Requester ใบฝาก</a></li>
+                                    <li  id="DEPTHEAD" role="presentation" style=" visibility: visible"><a style=" color: #ffffff; background-color: #070c13;" class='dropdown-item' name="rental" href="?report=material_request&pgmtype=DPT&status=S2&ORDID=00000000">Department Head ใบฝาก</a></li>
+                                </ul>
+                            </li>
                             <li  role="presentation"><a class='dropdown-item' name="history" href="?page=history">History</a></li>
                             <!--                            <li  role="presentation"><a class='dropdown-item' name="rental" href="?report=approval_setting">Approval Setting</a></li>-->
                             <li  class="dropdown" id="storepart" style=" visibility: hidden" ><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" href="./">Store Approval<span class="caret"></span></a>
@@ -166,6 +179,18 @@
 
                                 </ul>
                             </li>
+                            
+                            
+                            
+                             <li  class="dropdown" id="PPUKREPORT" ><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" href="./">REPORT<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu" style=" color: #ffffff; background-color: #070c13;">
+                                    <li  role="presentation"><a style=" color: #ffffff; background-color: #070c13;"class='dropdown-item' name="rental" href="?report=REPORTPage">Report</a></li>
+                              
+
+                                </ul>
+                            </li>
+                            
+                            
                             <!--<li  role="presentation"><a style=" color: #ffffff; background-color: #070c13;"class='dropdown-item' name="rental" href="?report=TestSpeech">Test</a></li>-->
 
 

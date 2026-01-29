@@ -400,14 +400,24 @@ AND MTTTID  = 'PPS'
 				<textElement>
 					<font fontName="TH SarabunPSK" size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{CONO}.equalsIgnoreCase("10")?"ISSUE 6 / 15 NOV 2024":"Issue 1 / 16 DEC 2024"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{CONO}.equalsIgnoreCase("10")
+    ? "ISSUE 6 / 15 NOV 2024"
+    : $P{CONO}.equalsIgnoreCase("700")
+        ? "ISSUE 1 / 2 JAN 2026"
+        : "ISSUE 1 / 16 DEC 2024"
+]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="478" y="29" width="58" height="20"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{CONO}.equalsIgnoreCase("10")?"FO-HO21-018":"FO-WT21-018"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{CONO}.equalsIgnoreCase("10")
+    ? "FO-HO21-018"
+    : $P{CONO}.equalsIgnoreCase("700")
+        ? " "   // 👈 ใส่ค่าที่ต้องการให้แสดงเมื่อเป็น 700
+        : "FO-WT21-018"
+]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>

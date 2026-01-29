@@ -1088,7 +1088,8 @@
                         data: {
                             path: "getItemcode",
                             whs: whs,
-                            check: "true"
+                            check: "true",
+                            itemstype:itemstype
 
                         },
                         async: false
@@ -1218,7 +1219,8 @@
                         data: {
                             path: "getItemcode",
                             whs: whs,
-                            check: "true"
+                            check: "true",
+                            itemstype:itemstype
 
                         },
                         async: false

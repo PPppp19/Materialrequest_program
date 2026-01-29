@@ -208,6 +208,7 @@ public class ConnectM3 {
                 System.out.println(GetDatePattern(ISS_DATE));
                 System.out.println(ONH_STAT);
                 System.out.println(itemonhand);
+                System.out.println(listonhand);
                 System.out.println(REG_FAC);
 
                 System.out.println("================================123");

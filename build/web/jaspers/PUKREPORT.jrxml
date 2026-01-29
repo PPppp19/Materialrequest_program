@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 4.5.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PUKREPORT" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2n.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[SELECT*    FROM BRLDTA0100.HR_RECEIPTEXPENSE
+   WHERE HR_RCNO = '68172073']]>
+	</queryString>
+	<field name="HR_CONO" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="HR_CONO"/>
+	</field>
+	<field name="HR_DIVI" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="HR_DIVI"/>
+	</field>
+	<field name="HR_RCNO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="HR_RCNO"/>
+	</field>
+	<field name="HR_VCNO1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="HR_VCNO1"/>
+	</field>
+	<field name="HR_VCNO2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="HR_VCNO2"/>
+	</field>
+	<field name="HR_STS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="HR_STS"/>
+	</field>
+	<field name="HR_FNNO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="HR_FNNO"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="30"/>
+				<textFieldExpression><![CDATA[$F{HR_CONO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-100" y="0" width="100" height="30"/>
+				<text><![CDATA[HR_CONO]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
