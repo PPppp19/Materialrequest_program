@@ -1389,8 +1389,8 @@ public class Select {
                     if (mRes.getString(7) != null) {
                         mMap.put("QTY_ISSU", mRes.getString(7).trim());
                     }
-                    if (mRes.getString(17) != null) {
-                        mMap.put("ONHAND", mRes.getString(17).trim());
+                    if (mRes.getString(19) != null) {
+                        mMap.put("ONHAND", mRes.getString(19).trim());
                     }
                     if (mRes.getString(8) != null) {
                         mMap.put("STATUS", mRes.getString(8).trim());
