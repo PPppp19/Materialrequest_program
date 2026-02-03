@@ -65,14 +65,20 @@
                             <input class="input100" type="password" name="password" id="vPassword" placeholder="Password">
                         </div>
 
+                        <% String user = (String) session.getAttribute("user"); %>
+
+
                         <div class="form-group">
                             <select class="form-control form-control-user" name="pgmtype" id="vPgmtype">
                                 <option value="">-- กรุณาเลือก --</option>
                                 <option value="MTR">Material Request</option>
-                                <option value="RTN">ใบเบิก</option>
-                                <option value="DPS">ใบฝาก</option>
+<!--                                <option value="RTN" class="for-aphide" style="display:none;">ใบเบิก</option>
+                                <option value="DPS" class="for-aphide" style="display:none;">ใบฝาก</option>-->
+
                             </select>
                         </div>
+
+                     
 
                         <div class="form-group">
                             <select class="form-control form-control-user" name="company" id="vCompany"  onchange="Location(this.value)">
