@@ -579,7 +579,8 @@
                 </div>
                 <div align="left">
 
-                    <input type="radio" id="itemtypetrn" name="itemtype" value="2">
+                    <input type="radio" id="itemtypetrn" name="itemtype" value="2" checked="true">
+
                     <label for="2">Purchased</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 
 
