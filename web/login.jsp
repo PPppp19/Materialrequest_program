@@ -68,15 +68,24 @@
                         <% String user = (String) session.getAttribute("user"); %>
 
 
-                        <div class="form-group">
+<!--                        <div class="form-group">
                             <select class="form-control form-control-user" name="pgmtype" id="vPgmtype">
                                 <option value="">-- กรุณาเลือก --</option>
-                                <option value="MTR">Material Request</option>
-<!--                                <option value="RTN" class="for-aphide" style="display:none;">ใบเบิก</option>
-                                <option value="DPS" class="for-aphide" style="display:none;">ใบฝาก</option>-->
+                                <option value="MTR">Material Request (โอน/ตัดค่าใช้จ่ายสินค้า)</option>
+                                <option value="RTN" >Requisition (ใบเบิกสินค้า)</option>
+                                <option value="DPS" >Deposit (ใบฝากสินค้า)</option>
 
                             </select>
-                        </div>
+                        </div>-->
+
+<div class="form-group">
+    <select class="form-control form-control-user" name="pgmtype" id="vPgmtype">
+        <option value="">-- กรุณาเลือก --</option>
+        <option value="MTR" selected>Material Request (โอน/ตัดค่าใช้จ่ายสินค้า)</option>
+        <option value="RTN">Requisition (ใบเบิกสินค้า)</option>
+        <option value="DPS">Deposit (ใบฝากสินค้า)</option>
+    </select>
+</div>
 
                      
 

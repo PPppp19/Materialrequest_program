@@ -186,8 +186,30 @@
                             <li  class="dropdown" id="PPUKREPORT" ><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" href="./">REPORT<span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu" style=" color: #ffffff; background-color: #070c13;">
                                     <li  role="presentation"><a style=" color: #ffffff; background-color: #070c13;"class='dropdown-item' name="rental" href="?report=REPORTPage">Report</a></li>
-                                    <li  role="presentation"><a style=" color: #ffffff; background-color: #070c13;" class='dropdown-item' name="rental" href="?report=MTRRQT_Report_RTN">Report ใบเบิก</a></li>
-                                    <li  id="DPSpage" role="presentation" style=" visibility: visible"><a style=" color: #ffffff; background-color: #070c13;" class='dropdown-item' name="rental" href="?report=MTRRQT_Report_DPS">Report ใบฝาก</a></li>
+<!--                                    <li  role="presentation"><a style=" color: #ffffff; background-color: #070c13;" class='dropdown-item' name="rental" href="?report=MTRRQT_Report_RTN">Report ใบเบิก</a></li>
+                                    <li  id="DPSpage" role="presentation" style=" visibility: visible"><a style=" color: #ffffff; background-color: #070c13;" class='dropdown-item' name="rental" href="?report=MTRRQT_Report_DPS">Report ใบฝาก</a></li>-->
+<%
+    String pgmty = (String) session.getAttribute("pgmty");
+%>
+
+<% if ("RTN".equalsIgnoreCase(pgmty)) { %>
+    <li role="presentation">
+        <a style="color:#ffffff; background-color:#070c13;" class='dropdown-item'
+           name="rental" href="?report=MTRRQT_Report_RTN">
+           Report ใบเบิก
+        </a>
+    </li>
+<% } %>
+
+<% if ("DPS".equalsIgnoreCase(pgmty)) { %>
+    <li id="DPSpage" role="presentation">
+        <a style="color:#ffffff; background-color:#070c13;" class='dropdown-item'
+           name="rental" href="?report=MTRRQT_Report_DPS">
+           Report ใบฝาก
+        </a>
+    </li>
+<% } %>
+
 
 
                                 </ul>
