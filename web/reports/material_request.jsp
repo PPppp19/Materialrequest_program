@@ -3812,7 +3812,7 @@
                 $.each(data, function (i) {
 
                     if (!(data[i].MMPUUN in itemtype)) {
-                        itemtype[data[i].MMPUUN] = 1;
+                        itemtype[data[i].MMPUUN] = 2;
                         itemtype.push(data[i].MMPUUN);
                     }
                     console.log("VVVVVVVVVVVVVVVV4444444444");
