@@ -393,7 +393,8 @@
                                                 data: {
                                                     path: "getHistorybystate",
                                                     cono: cono,
-                                                    divi: divi
+                                                    divi: divi,
+                                                      pgmtype: "<%out.print(session.getAttribute("pgmty"));%>"
                                                 },
                                                 success: function (data) {
 
@@ -430,7 +431,8 @@
                                                 data: {
                                                     path: "getHistorybystate",
                                                     cono: cono,
-                                                    divi: divi
+                                                    divi: divi,
+                                                      pgmtype: "<%out.print(session.getAttribute("pgmty"));%>"
                                                 },
                                                 success: function (data) {
 
@@ -733,7 +735,8 @@
                     data: {
                         path: "getHistorybystate",
                         cono: cono,
-                        divi: divi
+                        divi: divi,
+                          pgmtype: "<%out.print(session.getAttribute("pgmty"));%>"
                     },
                     success: function (data) {
 
@@ -763,7 +766,8 @@
                     data: {
                         path: "getHistorybystate",
                         cono: cono,
-                        divi: divi
+                        divi: divi,
+                          pgmtype: "<%out.print(session.getAttribute("pgmty"));%>"
 
                     },
                     success: function (data) {

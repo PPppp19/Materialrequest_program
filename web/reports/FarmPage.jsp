@@ -286,7 +286,8 @@
                 data: {
                     path: "getHistorybystatefarm",
                     cono: cono,
-                    divi: divi
+                    divi: divi,
+                      pgmtype: "<%out.print(session.getAttribute("pgmty"));%>"
                 },
                 success: function (data) {
 
@@ -329,7 +330,7 @@
                             whs: args.item.FRM_WAHO,
                             cono: cono,
                             divi: divi,
-                             pgmtype: "<%out.print(session.getAttribute("pgmty"));%>"
+                            pgmtype: "<%out.print(session.getAttribute("pgmty"));%>"
                         },
                         success: function (data) {
 
@@ -391,7 +392,8 @@
                                                 data: {
                                                     path: "getHistorybystatefarm",
                                                     cono: cono,
-                                                    divi: divi
+                                                    divi: divi,
+                                                    pgmtype: "<%out.print(session.getAttribute("pgmty"));%>"
                                                 },
                                                 success: function (data) {
 
@@ -428,7 +430,8 @@
                                                 data: {
                                                     path: "getHistorybystatefarm",
                                                     cono: cono,
-                                                    divi: divi
+                                                    divi: divi,
+                                                    pgmtype: "<%out.print(session.getAttribute("pgmty"));%>"
                                                 },
                                                 success: function (data) {
 
@@ -478,23 +481,23 @@
 
 
 
-                  filterValue: function () {
-                        return this.filterControl.val()
-                                ? parseFloat(this.filterControl.val() || 0, 10)
-                                : undefined;
-                    },
+                filterValue: function () {
+                    return this.filterControl.val()
+                            ? parseFloat(this.filterControl.val() || 0, 10)
+                            : undefined;
+                },
 
-                    insertValue: function () {
-                        return this.insertControl.val()
-                                ? parseFloat(this.insertControl.val() || 0, 10)
-                                : undefined;
-                    },
+                insertValue: function () {
+                    return this.insertControl.val()
+                            ? parseFloat(this.insertControl.val() || 0, 10)
+                            : undefined;
+                },
 
-                    editValue: function () {
-                        return this.editControl.val()
-                                ? parseFloat(this.editControl.val() || 0, 10)
-                                : undefined;
-                    },
+                editValue: function () {
+                    return this.editControl.val()
+                            ? parseFloat(this.editControl.val() || 0, 10)
+                            : undefined;
+                },
 
             });
             jsGrid.fields.money = MoneyField;
@@ -505,12 +508,12 @@
 
 
             $(function () {
-                
-                    function MoneyField(config) {
-                jsGrid.NumberField.call(this, config);
-            }
 
-            MoneyField.prototype = new jsGrid.NumberField({
+                function MoneyField(config) {
+                    jsGrid.NumberField.call(this, config);
+                }
+
+                MoneyField.prototype = new jsGrid.NumberField({
 
 //                itemTemplate: function (value) {
 //                    return  parseFloat(value).toFixed(2) || parseFloat(0).toFixed(2);
@@ -532,7 +535,7 @@
 
 
 
-                  filterValue: function () {
+                    filterValue: function () {
                         return this.filterControl.val()
                                 ? parseFloat(this.filterControl.val() || 0, 10)
                                 : undefined;
@@ -550,11 +553,11 @@
                                 : undefined;
                     }
 
-            });
-            jsGrid.fields.money = MoneyField;
+                });
+                jsGrid.fields.money = MoneyField;
 
 
-                
+
 
                 $("#grid").jsGrid({
                     width: "100%",
@@ -731,7 +734,8 @@
                     data: {
                         path: "getHistorybystatefarm",
                         cono: cono,
-                        divi: divi
+                        divi: divi,
+                        pgmtype: "<%out.print(session.getAttribute("pgmty"));%>"
                     },
                     success: function (data) {
 
@@ -761,7 +765,8 @@
                     data: {
                         path: "getHistorybystatefarm",
                         cono: cono,
-                        divi: divi
+                        divi: divi,
+                        pgmtype: "<%out.print(session.getAttribute("pgmty"));%>"
 
                     },
                     success: function (data) {
@@ -846,10 +851,10 @@
                         hideLoader();
                         alert(data);
                         document.getElementById('movexno').innerHTML = data;
-                        
-                        
+
+
                     },
-                        
+
                     error: function (e) {
                         alert("ล้มเหลว");
 
