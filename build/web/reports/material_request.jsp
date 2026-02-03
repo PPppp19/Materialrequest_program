@@ -1696,6 +1696,10 @@
                         var itemdesc = [];
                         var itemQTY_ETC = [];
                         var itemQTY_ETCTH = [];
+
+                        var itemQTY_THTXT = [];
+                        var itemQTY_NO = [];
+
                         var qtyreqt = [];
                         var qtyissu = [];
                         //                    $("#Jsgrid").jsGrid("loadData");
@@ -1933,6 +1937,15 @@
                                 } else if (k === "QTY_ETC") {
                                     console.log("QTY_ETC");
                                     itemQTY_ETC.push(v);
+                                } else if (k === "QTY_ETCTH") {
+                                    console.log("QTY_ETCTH");
+                                    itemQTY_ETCTH.push(v);
+                                } else if (k === "QTY_NO") {
+                                    console.log("QTY_NO");
+                                    itemQTY_NO.push(v);
+                                } else if (k === "QTY_THTXT") {
+                                    console.log("QTY_THTXT");
+                                    itemQTY_THTXT.push(v);
                                 } else if (k === "QTY_REQT") {
                                     console.log("QTY_REQT");
                                     qtyreqt.push(v);
@@ -3207,6 +3220,8 @@
                                     id: id,
                                     QTY_ETC: args.item.QTY_ETC,
                                     QTY_ETCTH: args.item.QTY_ETCTH,
+                                    QTY_NO: args.item.QTY_NO,
+                                    QTY_THTXT: args.item.QTY_THTXT,
                                     onhandsts: onhandsts,
                                     cono: cono,
                                     divi: divi
@@ -3263,6 +3278,8 @@
                                         id: id,
                                         QTY_ETC: args.item.QTY_ETC,
                                         QTY_ETCTH: args.item.QTY_ETCTH,
+                                        QTY_NO: args.item.QTY_NO,
+                                        QTY_THTXT: args.item.QTY_THTXT,
                                         onhandsts: "NO",
                                         cono: cono,
                                         divi: divi
@@ -3383,6 +3400,8 @@
                             itid: args.item.ID,
                             QTY_ETC: args.item.QTY_ETC,
                             QTY_ETCTH: args.item.QTY_ETCTH,
+                            QTY_NO: args.item.QTY_NO,
+                            QTY_THTXT: args.item.QTY_THTXT,
                             id: id,
                             onhand: "NO"
 
@@ -3417,6 +3436,10 @@
                                     reqt: args.item.QTY_REQT,
                                     issu: args.item.QTY_ISSU,
                                     itid: args.item.ID,
+                                    QTY_ETC: args.item.QTY_ETC,
+                                    QTY_ETCTH: args.item.QTY_ETCTH,
+                                    QTY_NO: args.item.QTY_NO,
+                                    QTY_THTXT: args.item.QTY_THTXT,
                                     id: id,
                                     onhand: "NO"
 
@@ -3458,6 +3481,10 @@
                         reqt: args.item.QTY_REQT,
                         issu: args.item.QTY_ISSU,
                         itid: args.item.ID,
+                        QTY_ETC: args.item.QTY_ETC,
+                        QTY_ETCTH: args.item.QTY_ETCTH,
+                        QTY_NO: args.item.QTY_NO,
+                        QTY_THTXT: args.item.QTY_THTXT,
                         id: id,
                         onhand: "NO"
 
@@ -3504,9 +3531,12 @@
                 },
                 {title: "Unit", name: "ITM_UNIT", type: "textSelect", items: ittem, filtering: false, width: 30, editing: true, insertcss: "states-filter", editcss: "estates-filter"
                 },
-                {title: "Qty_Reg", name: "QTY_REQT", type: "money", width: 30, inserting: true, filtering: false},
-                {title: "QTY_ETC", name: "QTY_ETC", type: "text", width: 50, inserting: true, filtering: false},
-                {title: "QTY_ETCTH", name: "QTY_ETCTH", type: "text", width: 50, inserting: true, filtering: false},
+                {title: "Qty", name: "QTY_REQT", type: "money", width: 30, inserting: true, filtering: false},
+                {title: "เลขที่ส่งฝาก", name: "QTY_ETC", type: "text", width: 50, inserting: true, filtering: false},
+                {title: "วันที่ส่งฝาก", name: "QTY_ETCTH", type: "text", width: 50, inserting: true, filtering: false},
+
+                {title: "หมายเหตุการฝาก", name: "QTY_NO", type: "text", width: 50, inserting: true, filtering: false},
+                {title: "หมายเหตุการเบิก", name: "QTY_THTXT", type: "text", width: 50, inserting: true, filtering: false},
 
 //                {title: "Qty_Iss", name: "QTY_ISSU", type: "number", width: 30, filtering: false, editing: true,
 

@@ -252,7 +252,7 @@ public class Action extends HttpServlet {
 
             case "gethistory":
                 System.out.println("gethistory");
-                out.print(Select.getHistory(request.getParameter("cono"), request.getParameter("divi")));
+                out.print(Select.getHistory(request.getParameter("cono"), request.getParameter("divi") , request.getParameter("pgmtype")  ));
                 out.flush();
                 break;
 
@@ -270,7 +270,7 @@ public class Action extends HttpServlet {
 
             case "gethistoryitem":
                 System.out.println("gethistoryitem");
-                out.print(Select.getHistoryitem(request.getParameter("id"), request.getParameter("whs"), request.getParameter("cono"), request.getParameter("divi")));
+                out.print(Select.getHistoryitem(request.getParameter("id"), request.getParameter("whs"), request.getParameter("cono"), request.getParameter("divi") ,request.getParameter("pgmtype")) );
                 out.flush();
 
                 break;
@@ -382,7 +382,7 @@ public class Action extends HttpServlet {
                 String a = Integer.toString(inum1);
                 System.out.print(a);
 
-                Insert.Additemdata(a, request.getParameter("id"), request.getParameter("code"), request.getParameter("desc"), request.getParameter("unit"), request.getParameter("reqt"), request.getParameter("issu"), request.getParameter("onhandsts"), request.getParameter("cono"), request.getParameter("divi"), request.getParameter("QTY_ETC"),request.getParameter("QTY_ETCTH") );
+                Insert.Additemdata(a, request.getParameter("id"), request.getParameter("code"), request.getParameter("desc"), request.getParameter("unit"), request.getParameter("reqt"), request.getParameter("issu"), request.getParameter("onhandsts"), request.getParameter("cono"), request.getParameter("divi"), request.getParameter("QTY_ETC"),request.getParameter("QTY_ETCTH"),request.getParameter("QTY_NO") ,request.getParameter("QTY_THTXT") );
 
             } catch (JSONException ex) {
                 Logger.getLogger(Action.class.getName()).log(Level.SEVERE, null, ex);
@@ -565,7 +565,7 @@ public class Action extends HttpServlet {
                 Update.updateitemdata(request.getParameter("id"), request.getParameter("itid"),
                         request.getParameter("code"), request.getParameter("desc"),
                         request.getParameter("unit"), request.getParameter("reqt"),
-                        request.getParameter("issu"), request.getParameter("onhand") ,request.getParameter("QTY_ETC") ,request.getParameter("QTY_ETCTH") 
+                        request.getParameter("issu"), request.getParameter("onhand") ,request.getParameter("QTY_ETC") ,request.getParameter("QTY_ETCTH") ,request.getParameter("QTY_NO") ,request.getParameter("QTY_THTXT") 
                 );
             } catch (JSONException ex) {
                 Logger.getLogger(Action.class.getName()).log(Level.SEVERE, null, ex);

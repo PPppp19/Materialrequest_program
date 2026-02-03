@@ -434,11 +434,11 @@ public class Select {
                         + "    SELECT \n"
                         + "        GMUSER,\n"
                         + "        ROW_NUMBER() OVER(ORDER BY GMUSER) AS RN\n"
-                        + "    FROM "+ GBVAR.DBPRD +".SR_GROUPMASTER\n"
+                        + "    FROM " + GBVAR.DBPRD + ".SR_GROUPMASTER\n"
                         + "    WHERE GMDES1 = 'MAT'\n"
-                        + "      AND GMGROU = '"+GMGROUP+"'\n"
-                        + "      AND GMSGRO = '"+WHA+"'\n"
-                        + "      AND GMCONO = '"+GMCONO+"'  AND GMDIVI = '"+GMDIVI+"' \n"
+                        + "      AND GMGROU = '" + GMGROUP + "'\n"
+                        + "      AND GMSGRO = '" + WHA + "'\n"
+                        + "      AND GMCONO = '" + GMCONO + "'  AND GMDIVI = '" + GMDIVI + "' \n"
                         + "),\n"
                         + "R (RN, STR) AS (\n"
                         + "    SELECT RN, VARCHAR(GMUSER, 5000)\n"
@@ -479,8 +479,8 @@ public class Select {
                 conn.close();
             }
         }
-        
-            return MGUSER;
+
+        return MGUSER;
     }
 
     public static String getcreator(String ordernum) throws Exception {
@@ -1128,8 +1128,8 @@ public class Select {
             case "S4":
                 stste = "14";
                 break;
-                
-                  case "S5":
+
+            case "S5":
                 stste = "15";
                 break;
 
@@ -1183,10 +1183,9 @@ public class Select {
                     }
 
                     mMap.put("ITM_TYPE", mRes.getString(25).trim());
-                    
-                    
-                     mMap.put("ORD_MG1", mRes.getString(26).trim());
-                       mMap.put("MG1_DATE", mRes.getString(27).trim());
+
+                    mMap.put("ORD_MG1", mRes.getString(26).trim());
+                    mMap.put("MG1_DATE", mRes.getString(27).trim());
 
                     mJSonArr.put(mMap);
 
@@ -1311,8 +1310,7 @@ public class Select {
                     mMap.put("ORD_REGB", mRes.getString(1).trim());
                     mMap.put("ORD_DPMH", mRes.getString(2).trim());
                     mMap.put("ORD_MG1", mRes.getString(3).trim());
-                     mMap.put("ORD_MG2", mRes.getString(4).trim());
-                    
+                    mMap.put("ORD_MG2", mRes.getString(4).trim());
 
 //                    mMap.put("MMFUDS", mRes.getString(3).trim());
                     mJSonArr.put(mMap);
@@ -1340,13 +1338,24 @@ public class Select {
 
     }
 
-    public static JSONArray getHistoryitem(String id, String whs, String cono, String divi) throws Exception {
+    public static JSONArray getHistoryitem(String id, String whs, String cono, String divi, String pgmtype) throws Exception {
 
         JSONArray mJSonArr = new JSONArray();
         Connection conn = ConnectDB2.ConnectionDB();
 
         try {
             if (conn != null) {
+
+                String pgmType = pgmtype;
+                String condition = "";
+
+                if ("RTN".equalsIgnoreCase(pgmType)) {
+                    condition = "PGM_TYPE = 'RTN'";
+                } else if ("DPS".equalsIgnoreCase(pgmType)) {
+                    condition = "PGM_TYPE = 'DPS'";
+                } else if ("MTR".equalsIgnoreCase(pgmType)) {
+                    condition = "(PGM_TYPE = 'MTR' OR PGM_TYPE IS NULL)";
+                }
 
                 Statement stmt = conn.createStatement();
 //                String query = "SELECT  * FROM  BRLDTA0100.FAR_ITMTLB03  where ORD_ID = '" + id + "'";
@@ -1359,12 +1368,12 @@ public class Select {
                         + "FROM M3FDBPRD.MITLOC \n"
                         + "WHERE  MLWHLO = '" + whs + "'\n"
                         + "AND MLSTAS = 2\n"
-                        + "AND mlcono = '" + cono + "'\n"
+                        + "AND mlcono = '" + cono + "' \n"
                         + "GROUP  BY MLITNO,MLCONO\n"
                         + ") AS B \n"
                         + "ON a.ITM_ID = b.MLITNO";
 
-                System.out.println("Selectall history1\n" + query);
+                System.out.println("Selectall history1haha\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
 
                 while (mRes.next()) {
@@ -1427,13 +1436,29 @@ public class Select {
 
     }
 
-    public static JSONArray getHistory(String cono, String divi) throws Exception {
+    public static JSONArray getHistory(String cono, String divi , String pgmtype) throws Exception {
 
         JSONArray mJSonArr = new JSONArray();
         Connection conn = ConnectDB2.ConnectionDB();
+        
+            String pgmType = pgmtype;
+                String condition = "";
+
+        System.out.println("com.br.data.Select.getHistory()");
+        
+                System.out.println(pgmtype);
+        System.out.println("com.br.data.Select.getHistory()");
 
         try {
             if (conn != null) {
+                
+                       if ("RTN".equalsIgnoreCase(pgmType)) {
+                    condition = "PGM_TYPE = 'RTN'";
+                } else if ("DPS".equalsIgnoreCase(pgmType)) {
+                    condition = "PGM_TYPE = 'DPS'";
+                } else if ("MTR".equalsIgnoreCase(pgmType)) {
+                    condition = "(PGM_TYPE = 'MTR' OR PGM_TYPE IS NULL)";
+                }
 
                 Statement stmt = conn.createStatement();
 
@@ -1445,9 +1470,9 @@ public class Select {
                         + "FRM_WAHO , TO_WAHO,\n"
                         + "ORD_REGB , ORD_DPMH,\n"
                         + "ORD_ISSB\n"
-                        + "FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04 WHERE COM_ID = '" + cono + "' ORDER BY ord_id DESC  ";
+                        + "FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04 WHERE COM_ID = '" + cono + "' AND "+condition+" ORDER BY ord_id DESC  ";
 
-                System.out.println("Selectall history2\n" + query);
+                System.out.println("Selectall history2 no\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
 
                 while (mRes.next()) {
@@ -1812,18 +1837,17 @@ public class Select {
             if (conn != null) {
 
                 Statement stmt = conn.createStatement();
-                
+
                 String pgmType = pgmtype;
-String condition = "";
+                String condition = "";
 
-if ("RTN".equalsIgnoreCase(pgmType)) {
-    condition = "PGM_TYPE = 'RTN'";
-} else if ("DPS".equalsIgnoreCase(pgmType)) {
-    condition = "PGM_TYPE = 'DPS'";
-} else if ("MTR".equalsIgnoreCase(pgmType)) {
-    condition = "(PGM_TYPE = 'MTR' OR PGM_TYPE IS NULL)";
-}
-
+                if ("RTN".equalsIgnoreCase(pgmType)) {
+                    condition = "PGM_TYPE = 'RTN'";
+                } else if ("DPS".equalsIgnoreCase(pgmType)) {
+                    condition = "PGM_TYPE = 'DPS'";
+                } else if ("MTR".equalsIgnoreCase(pgmType)) {
+                    condition = "(PGM_TYPE = 'MTR' OR PGM_TYPE IS NULL)";
+                }
 
                 String query = "SELECT ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04 WHERE ORD_STAT IN  ('11','21')   AND REG_FAC IN ('1B1', '1D1')      AND REG_CONO = '" + cono + "' AND REG_DIVI = '" + divi + "' AND ISB_DATE = '-' AND " + condition + "    ORDER BY CAST(id AS int )  desc  ";
                 System.out.println("Selectall history3\n" + query);
@@ -1917,22 +1941,21 @@ if ("RTN".equalsIgnoreCase(pgmType)) {
 
     }
 
-    public static JSONArray getHistorybystate(String cono, String divi , String pgmtype) throws Exception {
+    public static JSONArray getHistorybystate(String cono, String divi, String pgmtype) throws Exception {
 
         JSONArray mJSonArr = new JSONArray();
         Connection conn = ConnectDB2.ConnectionDB();
-        
-        String pgmType = pgmtype ; 
-String condition = "";
 
-if ("RTN".equalsIgnoreCase(pgmType)) {
-    condition = "PGM_TYPE = 'RTN'";
-} else if ("DPS".equalsIgnoreCase(pgmType)) {
-    condition = "PGM_TYPE = 'DPS'";
-} else if ("MTR".equalsIgnoreCase(pgmType)) {
-    condition = "(PGM_TYPE = 'MTR' OR PGM_TYPE IS NULL)";
-}
+        String pgmType = pgmtype;
+        String condition = "";
 
+        if ("RTN".equalsIgnoreCase(pgmType)) {
+            condition = "PGM_TYPE = 'RTN'";
+        } else if ("DPS".equalsIgnoreCase(pgmType)) {
+            condition = "PGM_TYPE = 'DPS'";
+        } else if ("MTR".equalsIgnoreCase(pgmType)) {
+            condition = "(PGM_TYPE = 'MTR' OR PGM_TYPE IS NULL)";
+        }
 
         try {
             if (conn != null) {
@@ -1942,7 +1965,7 @@ if ("RTN".equalsIgnoreCase(pgmType)) {
                 String query = "SELECT  ID, ORD_ID, COM_ID, COS_CENT, DEP_NAME, CRE_DATE, MAT_TYPE, FRM_WAHO, TO_WAHO, WAH_LOCA, ORD_PURP, ORD_REMAR, ORD_REGB, RQT_DATE, DPM_HEAD, ORD_DPMH, DPH_DATE, ORD_ISSB, ISB_DATE, ORD_STAT, RUID, MVX_ORDE, REG_CONO, REG_DIVI FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04 WHERE ORD_STAT IN  ('11','21')   AND REG_CONO = '" + cono + "' AND REG_DIVI = '" + divi + "'      AND ( \n"
                         + "                (REG_FAC NOT IN ('1B1', '1D1') ) \n"
                         + "               AND (REG_FAC NOT IN ('1B1', '1D1') ) \n"
-                        + "               )AND ISB_DATE = '-'  AND " + condition +"  ORDER BY CAST(id AS int )  desc  ";
+                        + "               )AND ISB_DATE = '-'  AND " + condition + "  ORDER BY CAST(id AS int )  desc  ";
                 System.out.println("Selectall history3\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);
 

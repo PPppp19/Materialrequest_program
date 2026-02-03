@@ -199,7 +199,7 @@
                         <input  type="hidden" name="cono" id="cono" value="<%out.print(session.getAttribute("cono"));%>" />
                         <input  type="hidden" name="PP" id="PP" value="xoxoxo" />
 
-                        <input class="form-control" list="orderidlist" autocomplete="off" placeholder="OrderID" id="MRNO" name="MRNO" value="">
+                        <input class="form-control" list="orderidlist" autocomplete="off" placeholder="OrderID" id="ord_id" name="ord_id" value="">
                         <datalist id="orderidlist"> </datalist>
 
                     </div> 
@@ -215,7 +215,7 @@
   
                       
                      <div class="col-md-offset-5  col-md-2 centerDiv">
-                        <button  type="submit" name="report"  id="report"  class="btn btn-danger text-center" value="NEWMATERAIL_REQ" style="width: 157px;">PRINT REPORT</button> 
+                        <button  type="submit" name="report"  id="report"  class="btn btn-danger text-center" value="NEWMATERAIL_REQ_RTN" style="width: 157px;">PRINT REPORT</button> 
                     </div> 
                 </div>
             </div>

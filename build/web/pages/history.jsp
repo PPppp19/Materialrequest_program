@@ -232,7 +232,8 @@
             data: {
                 path: "gethistory",
                 cono: cono,
-                divi: divi
+                divi: divi,
+                 pgmtype: "<%out.print(session.getAttribute("pgmty"));%>"
             },
             success: function (data) {
 
@@ -269,7 +270,8 @@
                                 path: "gethistoryitem",
                                 id: args.item.ORD_ID,
                                 cono: cono,
-                                divi: divi
+                                divi: divi,
+                                 pgmtype: "<%out.print(session.getAttribute("pgmty"));%>"
                             },
                             success: function (data) {
 
@@ -309,7 +311,6 @@
                             /////////////////////
 
 
-
                             $.ajax({
                                 type: 'GET',
                                 dataType: 'json',
@@ -318,7 +319,9 @@
                                 data: {
                                     path: "gethistory",
                                     cono: cono,
-                                    divi: divi
+                                    divi: divi,
+                                    pgmtype: "<%out.print(session.getAttribute("pgmty"));%>"
+                                     
                                 },
                                 success: function (data) {
 

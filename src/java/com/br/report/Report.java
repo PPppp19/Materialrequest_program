@@ -99,9 +99,9 @@ public class Report extends HttpServlet {
 //                }
 //                break;
 //
-              case "PUKREPORT":
+            case "PUKREPORT":
 
-                  /*
+                /*
                 String CONO12 = request.getParameter("cono");
                 String REQBY12 = "PPpppp";
                 String Costc12 = "Cos";
@@ -116,7 +116,7 @@ public class Report extends HttpServlet {
                 System.out.println(Department12);
                 System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxx");
                 
-                  */
+                 */
                 JasperDesign JPD9;
                 try {
                     String path1 = getServletContext().getRealPath("/jaspers/");
@@ -129,7 +129,7 @@ public class Report extends HttpServlet {
                     SimpleDateFormat A = new SimpleDateFormat("dd/MM/yyyy");
                     String DateNow = A.format(d);
 
-                 //   ResultSet Data111 = Datafrom222(ORD_ID12, CONO12);
+                    //   ResultSet Data111 = Datafrom222(ORD_ID12, CONO12);
 //                    
                     System.out.println("---------------------------");
 
@@ -148,10 +148,8 @@ public class Report extends HttpServlet {
 //                    parameters2.put("Costc", Costc12);
 //                    parameters2.put("DATE", DateNow);
 //                    parameters2.put("Department", Department12);
+                    Map parameters2 = new HashMap();
 
-
-  Map parameters2 = new HashMap();
-  
                     System.out.println("----------------");
 
                     try {
@@ -159,12 +157,12 @@ public class Report extends HttpServlet {
                     } catch (Exception ex) {
                         Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                  
+
                     byte[] bytes = JasperRunManager.runReportToPdf(jasperReport, parameters2, conn);
                     response.setContentType("application/pdf");
 
                     response.setContentLength(bytes.length);
-                    try ( ServletOutputStream ouputStream = response.getOutputStream()) {
+                    try (ServletOutputStream ouputStream = response.getOutputStream()) {
                         ouputStream.write(bytes, 0, bytes.length);
                         ouputStream.flush();
                     }
@@ -176,8 +174,8 @@ public class Report extends HttpServlet {
                 }
 
                 break;
-            
-             case "NEWMATERAIL_REQ_1":
+
+            case "NEWMATERAIL_REQ_1":
 
                 String CONO12 = request.getParameter("cono");
                 String REQBY12 = "PPpppp";
@@ -192,7 +190,7 @@ public class Report extends HttpServlet {
                 System.out.println(Costc12);
                 System.out.println(Department12);
                 System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxx");
-                
+
                 JasperDesign JPD2;
                 try {
                     String path1 = getServletContext().getRealPath("/jaspers/");
@@ -232,12 +230,158 @@ public class Report extends HttpServlet {
                     } catch (Exception ex) {
                         Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                  
+
                     byte[] bytes = JasperRunManager.runReportToPdf(jasperReport, parameters2, conn);
                     response.setContentType("application/pdf");
 
                     response.setContentLength(bytes.length);
-                    try ( ServletOutputStream ouputStream = response.getOutputStream()) {
+                    try (ServletOutputStream ouputStream = response.getOutputStream()) {
+                        ouputStream.write(bytes, 0, bytes.length);
+                        ouputStream.flush();
+                    }
+                    conn.close();
+                } catch (JRException ex) {
+                    Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex) {
+                    Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                break;
+
+            case "NEWMATERAIL_REQ_RTN":
+
+                String CONORTN = request.getParameter("cono");
+//                String REQBY12 = "PPpppp";
+//                String Costc12 = "Cos";
+//                String Department12 = "Dept";
+                String ORD_IDRTN = request.getParameter("ord_id");
+//
+//                System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxx");
+//                System.out.println(ORD_ID12);
+//                System.out.println(CONO12);
+//                System.out.println(REQBY12);
+//                System.out.println(Costc12);
+//                System.out.println(Department12);
+//                System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxx");
+                JasperDesign JPD3;
+                try {
+                    String path1 = getServletContext().getRealPath("/jaspers/");
+
+                    JPD2 = JRXmlLoader.load(path1 + "RTN_REPORT.jrxml");
+                    JasperReport jasperReport = JasperCompileManager.compileReport(JPD2);
+
+                    Locale.setDefault(Locale.US);
+                    Date d = new Date();
+                    SimpleDateFormat A = new SimpleDateFormat("dd/MM/yyyy");
+                    String DateNow = A.format(d);
+
+                    //  ResultSet Data111 = Datafrom222(ORD_ID12, CONO12);
+//                    
+                    System.out.println("---------------------------");
+
+//                    if (Data111.next()) {
+//
+//                        Costc12 = Data111.getString("COS_CENT").trim();
+//                        Department12 = Data111.getString("DEP_NAME").trim();
+//                        CONO12 = Data111.getString("REG_CONO").trim();
+//                        REQBY12 = Data111.getString("ORD_REGB").trim();
+//
+//                    }
+                    Map parameters2 = new HashMap();
+                    parameters2.put("company_cono", CONORTN);
+                    parameters2.put("ord_id", ORD_IDRTN);
+
+                    System.out.println("----------------");
+
+                    try {
+                        conn = ConnectDB2.ConnectionDB();
+                    } catch (Exception ex) {
+                        Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    byte[] bytes = JasperRunManager.runReportToPdf(jasperReport, parameters2, conn);
+                    response.setContentType("application/pdf");
+
+                    response.setContentLength(bytes.length);
+                    try (ServletOutputStream ouputStream = response.getOutputStream()) {
+                        ouputStream.write(bytes, 0, bytes.length);
+                        ouputStream.flush();
+                    }
+                    conn.close();
+                } catch (JRException ex) {
+                    Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex) {
+                    Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                break;
+
+            case "NEWMATERAIL_REQ_DPS":
+
+                String CONODPS = request.getParameter("cono");
+//                String REQBY12 = "PPpppp";
+//                String Costc12 = "Cos";
+//                String Department12 = "Dept";
+
+                String ORD_IDDPS = request.getParameter("ord_id");
+                String BUS_LICENSEDPS = request.getParameter("bus_license");
+                String BUS_DRIVERDPS = request.getParameter("bus_driver");
+                String SEAL_NODPS = request.getParameter("seal_no");
+                String SEAL_TIMEDPS = request.getParameter("seal_time");
+
+//
+//                System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxx");
+//                System.out.println(ORD_ID12);
+//                System.out.println(CONO12);
+//                System.out.println(REQBY12);
+//                System.out.println(Costc12);
+//                System.out.println(Department12);
+//                System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxx");
+                JasperDesign JPD4;
+                try {
+                    String path1 = getServletContext().getRealPath("/jaspers/");
+
+                    JPD2 = JRXmlLoader.load(path1 + "DPS_REPORT2.jrxml");
+                    JasperReport jasperReport = JasperCompileManager.compileReport(JPD2);
+
+                    Locale.setDefault(Locale.US);
+                    Date d = new Date();
+                    SimpleDateFormat A = new SimpleDateFormat("dd/MM/yyyy");
+                    String DateNow = A.format(d);
+
+                    //  ResultSet Data111 = Datafrom222(ORD_ID12, CONO12);
+//                    
+                    System.out.println("---------------------------");
+
+//                    if (Data111.next()) {
+//
+//                        Costc12 = Data111.getString("COS_CENT").trim();
+//                        Department12 = Data111.getString("DEP_NAME").trim();
+//                        CONO12 = Data111.getString("REG_CONO").trim();
+//                        REQBY12 = Data111.getString("ORD_REGB").trim();
+//
+//                    }
+                    Map parameters2 = new HashMap();
+                    parameters2.put("company_cono", CONODPS);
+                    parameters2.put("ord_id", ORD_IDDPS);
+                    parameters2.put("bus_license", BUS_LICENSEDPS);
+                    parameters2.put("bus_driver", BUS_DRIVERDPS);
+                    parameters2.put("seal_no", SEAL_NODPS);
+                    parameters2.put("seal_time", SEAL_TIMEDPS);
+
+                    System.out.println("----------------");
+
+                    try {
+                        conn = ConnectDB2.ConnectionDB();
+                    } catch (Exception ex) {
+                        Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    byte[] bytes = JasperRunManager.runReportToPdf(jasperReport, parameters2, conn);
+                    response.setContentType("application/pdf");
+
+                    response.setContentLength(bytes.length);
+                    try (ServletOutputStream ouputStream = response.getOutputStream()) {
                         ouputStream.write(bytes, 0, bytes.length);
                         ouputStream.flush();
                     }
@@ -265,7 +409,7 @@ public class Report extends HttpServlet {
                 System.out.println(Costc1);
                 System.out.println(Department1);
                 System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxx");
-                
+
                 JasperDesign JPD;
                 try {
                     String path1 = getServletContext().getRealPath("/jaspers/");
@@ -305,12 +449,12 @@ public class Report extends HttpServlet {
                     } catch (Exception ex) {
                         Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                  
+
                     byte[] bytes = JasperRunManager.runReportToPdf(jasperReport, parameters2, conn);
                     response.setContentType("application/pdf");
 
                     response.setContentLength(bytes.length);
-                    try ( ServletOutputStream ouputStream = response.getOutputStream()) {
+                    try (ServletOutputStream ouputStream = response.getOutputStream()) {
                         ouputStream.write(bytes, 0, bytes.length);
                         ouputStream.flush();
                     }

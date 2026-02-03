@@ -33,7 +33,7 @@ public class Insert {
         return text;
     }
 
-    public static void Additemdata(String itid, String id, String code, String desc, String unit, String reqt, String issu, String onhandsts, String cono, String divi , String QTY_ETC, String QTY_ETCTH ) throws Exception {
+    public static void Additemdata(String itid, String id, String code, String desc, String unit, String reqt, String issu, String onhandsts, String cono, String divi , String QTY_ETC, String QTY_ETCTH,String QTY_NO, String QTY_THTXT ) throws Exception {
 
         System.out.println("add reqt");
         System.out.println(reqt);
@@ -49,9 +49,9 @@ public class Insert {
 
                 Statement stmt = conn.createStatement();
                 String query = "INSERT INTO  "+GBVAR.DBPRD+".FAR_ITMTLB04\n"
-                        + "(ID,ORD_ID,ITM_ID,ITM_DESC,ITM_UNIT,QTY_REQT,QTY_ISSU,ONH_STAT,POS_STAT, REG_CONO,REG_DIVI , QTY_ETC,QTY_ETCTH)\n"
+                        + "(ID,ORD_ID,ITM_ID,ITM_DESC,ITM_UNIT,QTY_REQT,QTY_ISSU,ONH_STAT,POS_STAT, REG_CONO,REG_DIVI , QTY_ETC,QTY_ETCTH, QTY_NO,QTY_THTXT)\n"
                         + "VALUES \n"
-                        + "('" + itid + "','" + id + "','" + code + "','" + desc + "','" + unit + "','" + reqt + "','" + issu + "','" + onhandsts + "','-','" + cono + "','" + divi + "' , '"+QTY_ETC+"', '"+QTY_ETCTH+"') \n ";
+                        + "('" + itid + "','" + id + "','" + code + "','" + desc + "','" + unit + "','" + reqt + "','" + issu + "','" + onhandsts + "','-','" + cono + "','" + divi + "' , '"+QTY_ETC+"', '"+QTY_ETCTH+"' , '"+QTY_NO+"','"+QTY_THTXT+"') \n ";
                 System.out.println("Additemdata\n" + query);
                 stmt.execute(query);
 

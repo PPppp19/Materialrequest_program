@@ -328,7 +328,8 @@
                             id: args.item.ORD_ID,
                             whs: args.item.FRM_WAHO,
                             cono: cono,
-                            divi: divi
+                            divi: divi,
+                             pgmtype: "<%out.print(session.getAttribute("pgmty"));%>"
                         },
                         success: function (data) {
 

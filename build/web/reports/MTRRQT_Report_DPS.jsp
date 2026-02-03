@@ -193,13 +193,20 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-offset-5  col-md-2 centerDiv">
-                        <label>MR NO :</label><br>
+                        <label>ORDER NO :</label><br>
                         <input  type="hidden" name="company" id="company" value="<%out.print(session.getAttribute("comp"));%>" />
                         <input  type="hidden" name="username" id="username" value="<%out.print(session.getAttribute("user"));%>" />
                         <input  type="hidden" name="cono" id="cono" value="<%out.print(session.getAttribute("cono"));%>" />
                         <input  type="hidden" name="PP" id="PP" value="xoxoxo" />
 
-                        <input class="form-control" list="orderidlist" autocomplete="off" placeholder="OrderID" id="MRNO" name="MRNO" value="">
+                        <input class="form-control" list="orderidlist" autocomplete="off" placeholder="OrderID" id="ord_id" name="ord_id" value="">
+                       
+                        <input class="form-control" list="orderidlist" autocomplete="off" placeholder="คนขับ" id="bus_driver" name="bus_driver" value="">
+                        <input class="form-control" list="orderidlist" autocomplete="off" placeholder="ทะเบียนรถ" id="bus_license" name="bus_license" value="">
+                        <input class="form-control" list="orderidlist" autocomplete="off" placeholder="หมายเลขซีล" id="seal_no" name="seal_no" value="">
+                        <input class="form-control" list="orderidlist" autocomplete="off" placeholder="เวลาปิดตู้" id="seal_time" name="seal_time" value="">
+
+
                         <datalist id="orderidlist"> </datalist>
 
                     </div> 
@@ -215,7 +222,7 @@
   
                       
                      <div class="col-md-offset-5  col-md-2 centerDiv">
-                        <button  type="submit" name="report"  id="report"  class="btn btn-danger text-center" value="NEWMATERAIL_REQ" style="width: 157px;">PRINT REPORT</button> 
+                        <button  type="submit" name="report"  id="report"  class="btn btn-danger text-center" value="NEWMATERAIL_REQ_DPS" style="width: 157px;">PRINT REPORT</button> 
                     </div> 
                 </div>
             </div>
