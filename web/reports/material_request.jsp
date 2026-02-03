@@ -20,6 +20,9 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
 <!DOCTYPE html>
 
+<script>
+    const PGM = "<%= session.getAttribute("pgmty")%>";
+</script>
 <style>
 
     input[type='radio']:after {
@@ -1697,6 +1700,8 @@
                         var itemQTY_ETC = [];
                         var itemQTY_ETCTH = [];
 
+                        var itemQTY_KGS = [];
+
                         var itemQTY_THTXT = [];
                         var itemQTY_NO = [];
 
@@ -1940,6 +1945,9 @@
                                 } else if (k === "QTY_ETCTH") {
                                     console.log("QTY_ETCTH");
                                     itemQTY_ETCTH.push(v);
+                                } else if (k === "QTY_KGS") {
+                                    console.log("QTY_KGS");
+                                    itemQTY_KGS.push(v);
                                 } else if (k === "QTY_NO") {
                                     console.log("QTY_NO");
                                     itemQTY_NO.push(v);
@@ -2027,7 +2035,7 @@
         if (PGMTYPE === null) {
             PGMTYPE = "MTR";
         }
-        alert(PGMTYPE);
+        //alert(PGMTYPE);
         var vcc = document.getElementById("vPeriod");
         var vCostcenter = vcc.options[vcc.selectedIndex].text;
         var vRequester = document.getElementById("username").value;
@@ -3222,6 +3230,7 @@
                                     QTY_ETCTH: args.item.QTY_ETCTH,
                                     QTY_NO: args.item.QTY_NO,
                                     QTY_THTXT: args.item.QTY_THTXT,
+                                    QTY_KGS: args.item.QTY_KGS,
                                     onhandsts: onhandsts,
                                     cono: cono,
                                     divi: divi
@@ -3280,6 +3289,7 @@
                                         QTY_ETCTH: args.item.QTY_ETCTH,
                                         QTY_NO: args.item.QTY_NO,
                                         QTY_THTXT: args.item.QTY_THTXT,
+                                        QTY_KGS: args.item.QTY_KGS,
                                         onhandsts: "NO",
                                         cono: cono,
                                         divi: divi
@@ -3402,6 +3412,7 @@
                             QTY_ETCTH: args.item.QTY_ETCTH,
                             QTY_NO: args.item.QTY_NO,
                             QTY_THTXT: args.item.QTY_THTXT,
+                            QTY_KGS: args.item.QTY_KGS,
                             id: id,
                             onhand: "NO"
 
@@ -3440,6 +3451,7 @@
                                     QTY_ETCTH: args.item.QTY_ETCTH,
                                     QTY_NO: args.item.QTY_NO,
                                     QTY_THTXT: args.item.QTY_THTXT,
+                                    QTY_KGS: args.item.QTY_KGS,
                                     id: id,
                                     onhand: "NO"
 
@@ -3485,6 +3497,7 @@
                         QTY_ETCTH: args.item.QTY_ETCTH,
                         QTY_NO: args.item.QTY_NO,
                         QTY_THTXT: args.item.QTY_THTXT,
+                        QTY_KGS: args.item.QTY_KGS,
                         id: id,
                         onhand: "NO"
 
@@ -3532,11 +3545,55 @@
                 {title: "Unit", name: "ITM_UNIT", type: "textSelect", items: ittem, filtering: false, width: 30, editing: true, insertcss: "states-filter", editcss: "estates-filter"
                 },
                 {title: "Qty", name: "QTY_REQT", type: "money", width: 30, inserting: true, filtering: false},
-                {title: "เลขที่ส่งฝาก", name: "QTY_ETC", type: "text", width: 50, inserting: true, filtering: false},
-                {title: "วันที่ส่งฝาก", name: "QTY_ETCTH", type: "text", width: 50, inserting: true, filtering: false},
 
-                {title: "หมายเหตุการฝาก", name: "QTY_NO", type: "text", width: 50, inserting: true, filtering: false},
-                {title: "หมายเหตุการเบิก", name: "QTY_THTXT", type: "text", width: 50, inserting: true, filtering: false},
+                {
+                    title: "เลขที่ส่งฝาก",
+                    name: "QTY_ETC",
+                    type: "text",
+                    width: 50,
+                    inserting: (PGM === "RTN"),
+                    filtering: false,
+                    visible: (PGM === "RTN")   // เปิดเฉพาะตอน RTN/DPS
+                },
+                {
+                    title: "วันที่ส่งฝาก",
+                    name: "QTY_ETCTH",
+                    type: "text",
+                    width: 50,
+                    inserting: (PGM === "RTN"),
+                    filtering: false,
+                    visible: (PGM === "RTN")   // เปิดเฉพาะตอน RTN/DPS
+                },
+
+                {
+                    title: "หมายเหตุการฝาก",
+                    name: "QTY_NO",
+                    type: "text",
+                    width: 50,
+                    inserting: (PGM === "DPS"),
+                    filtering: false,
+                    visible: (PGM === "DPS")   // เปิดเฉพาะตอน RTN/DPS
+                },
+
+                {
+                    title: "หมายเหตุการเบิก",
+                    name: "QTY_THTXT",
+                    type: "text",
+                    width: 50,
+                    inserting: (PGM === "RTN"),
+                    filtering: false,
+                    visible: (PGM === "RTN")   // เปิดเฉพาะตอน RTN/DPS
+                },
+
+                {
+                    title: "จำนวน KG.",
+                    name: "QTY_KGS",
+                    type: "text",
+                    width: 50,
+                    inserting: (PGM === "RTN" || PGM === "DPS"),
+                    filtering: false,
+                    visible: (PGM === "RTN" || PGM === "DPS")   // เปิดเฉพาะตอน RTN/DPS
+                },
 
 //                {title: "Qty_Iss", name: "QTY_ISSU", type: "number", width: 30, filtering: false, editing: true,
 

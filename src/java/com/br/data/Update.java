@@ -354,7 +354,7 @@ public class Update {
         return text;
     }
 
-    public static void updateitemdata(String id, String itid, String code, String desc, String unit, String reqt, String issu, String onhand, String QTY_ETC, String QTY_ETCTH, String QTY_NO, String QTY_THTXT) throws Exception {
+    public static void updateitemdata(String id, String itid, String code, String desc, String unit, String reqt, String issu, String onhand, String QTY_ETC, String QTY_ETCTH, String QTY_NO, String QTY_THTXT ,String QTY_KGS) throws Exception {
 
         Connection conn = ConnectDB2.ConnectionDB();
         desc = convertApostrophe(desc);
@@ -364,7 +364,7 @@ public class Update {
 
                 Statement stmt = conn.createStatement();
                 String query = "UPDATE " + GBVAR.DBPRD + ".FAR_ITMTLB04\n"
-                        + "SET ITM_ID = '" + code + "',ITM_DESC = '" + desc + "', ONH_STAT = '" + onhand + "',ITM_UNIT = '" + unit + "',QTY_REQT = '" + reqt + "', QTY_ISSU = '" + issu + "' , QTY_ETC = '" + QTY_ETC + "' AND QTY_ETCTH = '" + QTY_ETCTH + "' AND QTY_ETC = '" + QTY_ETC + "' , QTY_ETCNO = '" + QTY_THTXT + "' \n"
+                        + "SET ITM_ID = '" + code + "',ITM_DESC = '" + desc + "', ONH_STAT = '" + onhand + "',ITM_UNIT = '" + unit + "',QTY_REQT = '" + reqt + "', QTY_ISSU = '" + issu + "' , QTY_ETC = '" + QTY_ETC + "' AND QTY_ETCTH = '" + QTY_ETCTH + "' AND QTY_ETC = '" + QTY_ETC + "' , QTY_ETCNO = '" + QTY_THTXT + "', QTY_KGS = '"+QTY_KGS+"' \n"
                         + "WHERE ID  = '" + itid + "'"
                         + "AND ORD_ID = '" + id + "'  ";
                 System.out.println("updateitemdata\n" + query);
