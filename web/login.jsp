@@ -82,8 +82,8 @@
     <select class="form-control form-control-user" name="pgmtype" id="vPgmtype">
         <option value="">-- กรุณาเลือก --</option>
         <option value="MTR" selected>Material Request (โอน/ตัดค่าใช้จ่ายสินค้า)</option>
-        <option value="RTN">Requisition (ใบเบิกสินค้า)</option>
-        <option value="DPS">Deposit (ใบฝากสินค้า)</option>
+        <option value="RTN">Requisition (ใบเบิกสินค้านอกบริษัท)</option>
+        <option value="DPS">Deposit (ใบฝากสินค้านอกบริษัท)</option>
     </select>
 </div>
 

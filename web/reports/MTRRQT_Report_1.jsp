@@ -209,12 +209,12 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-offset-5  col-md-2 centerDiv">
-<!--                        <button  type="submit" name="report"  id="report"  class="btn btn-danger text-center" value="MATERAIL_REQ" style="width: 157px;">PRINT REPORT</button> -->
+                        <!--                        <button  type="submit" name="report"  id="report"  class="btn btn-danger text-center" value="MATERAIL_REQ" style="width: 157px;">PRINT REPORT</button> -->
                     </div> 
-                    
-  
-                      
-                     <div class="col-md-offset-5  col-md-2 centerDiv">
+
+
+
+                    <div class="col-md-offset-5  col-md-2 centerDiv">
                         <button  type="submit" name="report"  id="report"  class="btn btn-danger text-center" value="NEWMATERAIL_REQ_1" style="width: 157px;">PRINT REPORT Farm</button> 
                     </div> 
                 </div>
@@ -229,6 +229,8 @@
 
                 var cono = "<%out.print(session.getAttribute("cono"));%>";
                 var divi = "<%out.print(session.getAttribute("divi"));%>";
+                let PGMTYPE = "<%out.print(session.getAttribute("pgmty"));%>".trim();
+
                 $.ajax({
                     type: 'GET',
                     dataType: 'json',
@@ -237,7 +239,8 @@
                     data: {
                         path: "gethistory",
                         cono: cono,
-                        divi: divi
+                        divi: divi,
+                        pgmtype: PGMTYPE,
                     },
                     success: function (data) {
                         var options = '';
