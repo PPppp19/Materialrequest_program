@@ -1363,7 +1363,7 @@
         const Key = urlParams.get('status');
         let PGMTYPE = "<%out.print(session.getAttribute("pgmty"));%>".trim();
 
-        alert(PGMTYPE);
+       // alert(PGMTYPE);
         if (PGMTYPE === null) {
             PGMTYPE = "MTR";
         }
@@ -1390,8 +1390,8 @@
 
 
             if (Key !== "S2" && Key !== "S4" && Key !== "S5") {  // insert 
-                vhead = 'PHONGS_PHO';
-                //var vhead = 'WALAIL_KLE'; 
+                //vhead = 'PHONGS_PHO';
+                var vhead = 'WALAIL_KLE'; 
 
 
 

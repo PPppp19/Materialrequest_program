@@ -138,6 +138,8 @@ public class sendmail extends HttpServlet {
                                     }
                                 }
 
+                                
+                             
                             } 
                                 case "S4":
                             
@@ -277,7 +279,17 @@ public class sendmail extends HttpServlet {
                          
 
                     }
-                       response.sendRedirect("./?report=material_request");
+                    
+                      switch (status) {
+                        case "S2":
+                              response.sendRedirect("./?report=material_request&status=S2&ORDID=00000000");
+                            break;
+                            
+                               default:
+                                     response.sendRedirect("./?report=material_request");
+                                   break;
+                      }
+                          
 
                 } catch (Exception ex) {
 
