@@ -1,0 +1,801 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 4.5.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RTN_REPORT" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB2"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="company_cono" class="java.lang.String"/>
+	<parameter name="ord_id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 
+    ROWNUMBER() OVER() AS NO,
+    A.*
+FROM (
+    SELECT 
+        *
+    FROM  
+          (
+            SELECT * FROM BRLDTA0100.FAR_MTRREQ04  
+            WHERE  ORD_ID =  $P{ord_id} 
+            AND REG_CONO  =  $P{company_cono} 
+          ) AS HEAD
+    LEFT JOIN        
+          (
+            SELECT * FROM BRLDTA0100.FAR_ITMTLB04 fi 
+            WHERE  ORD_ID =  $P{ord_id} 
+            AND REG_CONO  =  $P{company_cono} 
+          ) AS DETAIL 
+          ON HEAD.ORD_ID  = DETAIL.ORD_ID
+    LEFT JOIN
+          (
+              SELECT ST_N6L3 AS REQ_NAME ,ST_SIGN AS REQ_SIGN 
+              FROM BRLDTA0100.STAFFLIST s 
+          ) AS SIGHNATURE
+          ON  HEAD.ORD_REGB = SIGHNATURE.REQ_NAME 
+    LEFT JOIN
+          (
+              SELECT ST_N6L3 AS DEP_NAME ,ST_SIGN AS DEP_SIGN 
+              FROM BRLDTA0100.STAFFLIST s 
+          ) AS DEP_SIGHNATURE
+          ON  HEAD.ORD_DPMH = DEP_SIGHNATURE.DEP_NAME 
+    LEFT JOIN
+          (
+              SELECT ST_N6L3 AS MG1_NAME ,ST_SIGN AS MG1_SIGN 
+              FROM BRLDTA0100.STAFFLIST s 
+          ) AS MG1_SIGHNATURE
+          ON  HEAD.ORD_MG1 = MG1_SIGHNATURE.MG1_NAME  
+    LEFT JOIN
+          (
+              SELECT ST_N6L3 AS MG2_NAME ,ST_SIGN AS MG2_SIGN 
+              FROM BRLDTA0100.STAFFLIST s 
+          ) AS MG2_SIGHNATURE
+          ON  HEAD.ORD_MG2 = MG2_SIGHNATURE.MG2_NAME
+) A]]>
+	</queryString>
+	<field name="NO" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="NO"/>
+	</field>
+	<field name="ID___00001" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ID___00001"/>
+	</field>
+	<field name="ORD_I00001" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ORD_I00001"/>
+	</field>
+	<field name="COM_ID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="COM_ID"/>
+	</field>
+	<field name="COS_CENT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="COS_CENT"/>
+	</field>
+	<field name="DEP_N00001" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DEP_N00001"/>
+	</field>
+	<field name="CRE_DATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="CRE_DATE"/>
+	</field>
+	<field name="MAT_TYPE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MAT_TYPE"/>
+	</field>
+	<field name="FRM_WAHO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="FRM_WAHO"/>
+	</field>
+	<field name="TO_WAHO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="TO_WAHO"/>
+	</field>
+	<field name="WAH_LOCA" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="WAH_LOCA"/>
+	</field>
+	<field name="ORD_PURP" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ORD_PURP"/>
+	</field>
+	<field name="ORD_REMAR" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ORD_REMAR"/>
+	</field>
+	<field name="ORD_REGB" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ORD_REGB"/>
+	</field>
+	<field name="RQT_DATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="RQT_DATE"/>
+	</field>
+	<field name="DPM_HEAD" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DPM_HEAD"/>
+	</field>
+	<field name="ORD_DPMH" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ORD_DPMH"/>
+	</field>
+	<field name="DPH_DATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DPH_DATE"/>
+	</field>
+	<field name="ORD_ISSB" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ORD_ISSB"/>
+	</field>
+	<field name="ISB_DATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ISB_DATE"/>
+	</field>
+	<field name="ORD_STAT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ORD_STAT"/>
+	</field>
+	<field name="RUID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="RUID"/>
+	</field>
+	<field name="MVX_O00001" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MVX_O00001"/>
+	</field>
+	<field name="REG_C00001" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="REG_C00001"/>
+	</field>
+	<field name="REG_D00001" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="REG_D00001"/>
+	</field>
+	<field name="REG_FAC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="REG_FAC"/>
+	</field>
+	<field name="ITM_TYPE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ITM_TYPE"/>
+	</field>
+	<field name="PGM_TYPE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PGM_TYPE"/>
+	</field>
+	<field name="ORD_MG1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ORD_MG1"/>
+	</field>
+	<field name="MG1_DATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MG1_DATE"/>
+	</field>
+	<field name="ORD_MG2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ORD_MG2"/>
+	</field>
+	<field name="MG2_DATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MG2_DATE"/>
+	</field>
+	<field name="ORD_MGLIST1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ORD_MGLIST1"/>
+	</field>
+	<field name="ORD_MGLIST2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ORD_MGLIST2"/>
+	</field>
+	<field name="ID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="ID"/>
+	</field>
+	<field name="ORD_ID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ORD_ID"/>
+	</field>
+	<field name="ITM_ID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ITM_ID"/>
+	</field>
+	<field name="ITM_DESC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ITM_DESC"/>
+	</field>
+	<field name="ITM_UNIT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ITM_UNIT"/>
+	</field>
+	<field name="QTY_REQT" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="QTY_REQT"/>
+	</field>
+	<field name="QTY_ISSU" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="QTY_ISSU"/>
+	</field>
+	<field name="ONH_STAT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ONH_STAT"/>
+	</field>
+	<field name="POS_STAT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="POS_STAT"/>
+	</field>
+	<field name="MVX_ORDE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MVX_ORDE"/>
+	</field>
+	<field name="REG_CONO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="REG_CONO"/>
+	</field>
+	<field name="REG_DIVI" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="REG_DIVI"/>
+	</field>
+	<field name="QTY_ETC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="QTY_ETC"/>
+	</field>
+	<field name="QTY_ETCTH" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="QTY_ETCTH"/>
+	</field>
+	<field name="QTY_NO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="QTY_NO"/>
+	</field>
+	<field name="QTY_THTXT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="QTY_THTXT"/>
+	</field>
+	<field name="QTY_KGS" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="QTY_KGS"/>
+	</field>
+	<field name="REQ_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="REQ_NAME"/>
+	</field>
+	<field name="REQ_SIGN" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="REQ_SIGN"/>
+	</field>
+	<field name="DEP_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DEP_NAME"/>
+	</field>
+	<field name="DEP_SIGN" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DEP_SIGN"/>
+	</field>
+	<field name="MG1_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MG1_NAME"/>
+	</field>
+	<field name="MG1_SIGN" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MG1_SIGN"/>
+	</field>
+	<field name="MG2_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MG2_NAME"/>
+	</field>
+	<field name="MG2_SIGN" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MG2_SIGN"/>
+	</field>
+	<variable name="SUM_KGS" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{QTY_KGS}]]></variableExpression>
+	</variable>
+	<variable name="SUM_QTYREG" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{QTY_REQT}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="90" splitType="Stretch">
+			<staticText>
+				<reportElement x="180" y="0" width="200" height="32"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ใบเบิกสินค้า]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="423" y="24" width="58" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[เลขที่ :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="423" y="44" width="58" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[วันที่ :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="0" width="55" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="TH SarabunPSK" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[FO-HO02-019]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="480" y="24" width="75" height="20"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ORD_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="481" y="44" width="74" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="44" width="90" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[เรียน ผู้จัดการบริษัท]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="70" width="290" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[บริษัท บางกอกแร้นช์ จำกัด (มหาชน) ขอเบิกสินค้าที่ฝากแช่ไว้ ดังรายการต่อไปนี้]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="90" y="44" width="200" height="20"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="15" width="555" height="5"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="2"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="-1" width="30" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ลำดับ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="134" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[รายการ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="-1" width="50" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[รหัสสินค้า]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="0" width="85" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[หมายเหตุ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="339" y="0" width="55" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[จำนวนแพ็ค]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="394" y="0" width="76" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[น้ำหนัก ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="214" y="0" width="60" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[เลขที่ส่งฝาก]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="274" y="0" width="65" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[วันที่ส่งฝาก]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="30" height="20"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="0" width="50" height="20"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ITM_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="0" width="134" height="20"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ITM_DESC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="214" y="0" width="60" height="20"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QTY_ETC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="274" y="0" width="65" height="20"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QTY_ETCTH}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="339" y="0" width="55" height="20"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QTY_REQT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="394" y="0" width="76" height="20"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QTY_KGS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="0" width="85" height="20"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QTY_THTXT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="380" splitType="Stretch">
+			<staticText>
+				<reportElement x="335" y="260" width="220" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ลงชื่อ...............................................ผู้จ่ายสินค้า]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="335" y="290" width="220" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[           วันที่................................. เวลา..........................           ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="260" width="220" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ลงชื่อ...............................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="290" width="220" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ผู้ตรวจนับสินค้า]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="360" width="135" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Issue: 3/11 Mar 2024 :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="360" width="220" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ผู้รับฝาก]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="122" width="115" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<text><![CDATA[(Store)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="101" width="60" height="20"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prepare by : ..........................................]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="0" y="20" width="115" height="68"/>
+				<imageExpression><![CDATA[$F{REQ_SIGN} != null && !$F{REQ_SIGN}.isEmpty() ?
+new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($F{REQ_SIGN})) :
+null]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="132" y="122" width="115" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<text><![CDATA[(Store Manager)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="132" y="101" width="60" height="20"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Check by : ..........................................]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="132" y="20" width="115" height="68"/>
+				<imageExpression><![CDATA[$F{DEP_SIGN} != null && !$F{DEP_SIGN}.isEmpty() ?
+new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($F{DEP_SIGN})) :
+null]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="265" y="122" width="115" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<text><![CDATA[(Planning/Marketing Manager)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="265" y="101" width="60" height="20"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Authorized by : ..........................................]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="265" y="20" width="115" height="68"/>
+				<imageExpression><![CDATA[$F{MG1_SIGN} != null && !$F{MG1_SIGN}.isEmpty() ?
+new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($F{MG1_SIGN})) :
+null]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="394" y="122" width="115" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<text><![CDATA[(Costing Manager)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="394" y="101" width="60" height="20"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Authorize by : ..........................................]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="394" y="20" width="115" height="68"/>
+				<imageExpression><![CDATA[$F{MG2_SIGN} != null && !$F{MG2_SIGN}.isEmpty() ?
+new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($F{MG2_SIGN})) :
+null]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="140" width="40" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<text><![CDATA[Date :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="305" y="140" width="75" height="20"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MG1_DATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="140" width="75" height="20"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{RQT_DATE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="132" y="140" width="40" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<text><![CDATA[Date :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="434" y="140" width="75" height="20"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MG2_DATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="172" y="140" width="75" height="20"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DPH_DATE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="394" y="140" width="40" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<text><![CDATA[Date :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="265" y="140" width="40" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<text><![CDATA[Date :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="60" y="101" width="55" height="20"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{REQ_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="192" y="101" width="55" height="20"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEP_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="325" y="101" width="55" height="20"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MG1_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="454" y="101" width="55" height="20"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MG2_NAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="40" width="554" height="10"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="10" width="285" height="10"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="0" width="80" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[รวม]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="350" y="0" width="36" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_QTYREG}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="0" width="44" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_KGS}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
