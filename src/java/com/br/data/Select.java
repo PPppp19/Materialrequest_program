@@ -1364,7 +1364,7 @@ public class Select {
                         + "FROM (SELECT  * FROM  " + GBVAR.DBPRD + ".FAR_ITMTLB04  where ORD_ID = '" + id + "' AND REG_CONO = '" + cono + "' AND REG_DIVI = '" + divi + "') AS A \n"
                         + "LEFT JOIN  \n"
                         + "(\n"
-                        + "SELECT MLITNO, MLCONO ,SUM(CAST(MLSTQT AS double)-CAST(MLALQT AS double)) as ONHAND\n"
+                        + "SELECT MLITNO, MLCONO ,ROUND(SUM(CAST(MLSTQT AS double)-CAST(MLALQT AS double)),2) as ONHAND\n"
                         + "FROM M3FDBPRD.MITLOC \n"
                         + "WHERE  MLWHLO = '" + whs + "'\n"
                         + "AND MLSTAS = 2\n"
