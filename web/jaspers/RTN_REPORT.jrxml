@@ -238,7 +238,7 @@ FROM (
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="90" splitType="Stretch">
+		<band height="130" splitType="Stretch">
 			<staticText>
 				<reportElement x="180" y="0" width="200" height="32"/>
 				<textElement textAlignment="Center">
@@ -276,33 +276,33 @@ FROM (
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{ORD_ID}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="481" y="44" width="74" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{CRE_DATE}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="44" width="90" height="20"/>
+				<reportElement x="0" y="90" width="90" height="20"/>
 				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK" size="12" isBold="false"/>
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
 				</textElement>
 				<text><![CDATA[เรียน ผู้จัดการบริษัท]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="70" width="290" height="20"/>
-				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK" size="12" isBold="false"/>
+				<reportElement x="173" y="110" width="222" height="20"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
 				</textElement>
-				<text><![CDATA[บริษัท บางกอกแร้นช์ จำกัด (มหาชน) ขอเบิกสินค้าที่ฝากแช่ไว้ ดังรายการต่อไปนี้]]></text>
+				<text><![CDATA[ขอเบิกสินค้าที่ฝากแช่ไว้ ดังรายการต่อไปนี้]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="90" y="44" width="200" height="20"/>
+				<reportElement x="90" y="90" width="200" height="20"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -310,9 +310,37 @@ FROM (
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["JPK Storage(Pet)" ]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="157" y="25" width="240" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COM_ID}.equalsIgnoreCase("10") ? "บริษัท บางกอกแร้นช์ จำกัด (มหาชน)" :
+$F{COM_ID}.equalsIgnoreCase("600") ? "บริษัท วินไทย ฟู้ด จำกัด" :
+$F{COM_ID}.equalsIgnoreCase("500") ? "บริษัท เอ็นเอส เดลิคาเทสเซน จำกัด" :
+$F{COM_ID}.equalsIgnoreCase("700") ? "บริษัท นอร์ธ สตาร์ ฟู้ด จำกัด"  :""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="150" y="32" width="248" height="36"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[
+โทร 02-175-7200 โทรสาร 02-175-7222 ]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="0" y="109" width="173" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COM_ID}.equalsIgnoreCase("10") ? "บริษัท บางกอกแร้นช์ จำกัด (มหาชน)" :
+$F{COM_ID}.equalsIgnoreCase("600") ? "บริษัท วินไทย ฟู้ด จำกัด" :
+$F{COM_ID}.equalsIgnoreCase("500") ? "บริษัท เอ็นเอส เดลิคาเทสเซน จำกัด" :
+$F{COM_ID}.equalsIgnoreCase("700") ? "บริษัท นอร์ธ สตาร์ ฟู้ด จำกัด"  :""]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -323,6 +351,9 @@ FROM (
 				<box>
 					<bottomPen lineWidth="1.0"/>
 				</box>
+				<textElement>
+					<font size="13"/>
+				</textElement>
 				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -333,61 +364,64 @@ FROM (
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
+				<textElement>
+					<font size="13"/>
+				</textElement>
 				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="-1" width="30" height="20"/>
 				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+					<font fontName="TH SarabunPSK" size="13" isBold="false"/>
 				</textElement>
 				<text><![CDATA[ลำดับ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="80" y="0" width="134" height="20"/>
 				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+					<font fontName="TH SarabunPSK" size="13" isBold="false"/>
 				</textElement>
 				<text><![CDATA[รายการ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="30" y="-1" width="50" height="20"/>
 				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+					<font fontName="TH SarabunPSK" size="13" isBold="false"/>
 				</textElement>
 				<text><![CDATA[รหัสสินค้า]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="470" y="0" width="85" height="20"/>
 				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+					<font fontName="TH SarabunPSK" size="13" isBold="false"/>
 				</textElement>
 				<text><![CDATA[หมายเหตุ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="339" y="0" width="55" height="20"/>
 				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+					<font fontName="TH SarabunPSK" size="13" isBold="false"/>
 				</textElement>
 				<text><![CDATA[จำนวนแพ็ค]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="394" y="0" width="76" height="20"/>
 				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+					<font fontName="TH SarabunPSK" size="13" isBold="false"/>
 				</textElement>
-				<text><![CDATA[น้ำหนัก ]]></text>
+				<text><![CDATA[น้ำหนัก KG.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="214" y="0" width="60" height="20"/>
 				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+					<font fontName="TH SarabunPSK" size="13" isBold="false"/>
 				</textElement>
 				<text><![CDATA[เลขที่ส่งฝาก]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="274" y="0" width="65" height="20"/>
 				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+					<font fontName="TH SarabunPSK" size="13" isBold="false"/>
 				</textElement>
 				<text><![CDATA[วันที่ส่งฝาก]]></text>
 			</staticText>
@@ -404,7 +438,7 @@ FROM (
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="13"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{NO}]]></textFieldExpression>
 			</textField>
@@ -417,7 +451,7 @@ FROM (
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="13"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{ITM_ID}]]></textFieldExpression>
 			</textField>
@@ -430,7 +464,7 @@ FROM (
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="13"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{ITM_DESC}]]></textFieldExpression>
 			</textField>
@@ -443,7 +477,7 @@ FROM (
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="13"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{QTY_ETC}]]></textFieldExpression>
 			</textField>
@@ -456,7 +490,7 @@ FROM (
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="13"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{QTY_ETCTH}]]></textFieldExpression>
 			</textField>
@@ -469,7 +503,7 @@ FROM (
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="13"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{QTY_REQT}]]></textFieldExpression>
 			</textField>
@@ -482,7 +516,7 @@ FROM (
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="13"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{QTY_KGS}]]></textFieldExpression>
 			</textField>
@@ -495,7 +529,7 @@ FROM (
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="13"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{QTY_THTXT}]]></textFieldExpression>
 			</textField>
@@ -536,7 +570,7 @@ FROM (
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
 				</textElement>
-				<text><![CDATA[Issue: 3/11 Mar 2024 :]]></text>
+				<text><![CDATA[Issue: 4/8 May 2025 :]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="140" y="360" width="220" height="20"/>
@@ -546,9 +580,9 @@ FROM (
 				<text><![CDATA[ผู้รับฝาก]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="122" width="115" height="18"/>
+				<reportElement x="0" y="122" width="130" height="18"/>
 				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="14"/>
 				</textElement>
 				<text><![CDATA[(Store)]]></text>
 			</staticText>
@@ -560,67 +594,67 @@ FROM (
 				<text><![CDATA[Prepare by : ..........................................]]></text>
 			</staticText>
 			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="0" y="20" width="115" height="68"/>
+				<reportElement x="0" y="20" width="130" height="68"/>
 				<imageExpression><![CDATA[$F{REQ_SIGN} != null && !$F{REQ_SIGN}.isEmpty() ?
 new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($F{REQ_SIGN})) :
 null]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="132" y="122" width="115" height="18"/>
+				<reportElement x="140" y="122" width="128" height="18"/>
 				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="14"/>
 				</textElement>
 				<text><![CDATA[(Store Manager)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="132" y="101" width="60" height="20"/>
+				<reportElement x="140" y="101" width="60" height="20"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Check by : ..........................................]]></text>
 			</staticText>
 			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="132" y="20" width="115" height="68"/>
+				<reportElement x="140" y="20" width="128" height="68"/>
 				<imageExpression><![CDATA[$F{DEP_SIGN} != null && !$F{DEP_SIGN}.isEmpty() ?
 new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($F{DEP_SIGN})) :
 null]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="265" y="122" width="115" height="18"/>
+				<reportElement x="281" y="122" width="129" height="18"/>
 				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="14"/>
 				</textElement>
 				<text><![CDATA[(Planning/Marketing Manager)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="265" y="101" width="60" height="20"/>
+				<reportElement x="281" y="101" width="60" height="20"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Authorized by : ..........................................]]></text>
 			</staticText>
 			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="265" y="20" width="115" height="68"/>
+				<reportElement x="281" y="20" width="129" height="68"/>
 				<imageExpression><![CDATA[$F{MG1_SIGN} != null && !$F{MG1_SIGN}.isEmpty() ?
 new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($F{MG1_SIGN})) :
 null]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="394" y="122" width="115" height="18"/>
+				<reportElement x="423" y="122" width="131" height="18"/>
 				<textElement textAlignment="Center">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="14"/>
 				</textElement>
 				<text><![CDATA[(Costing Manager)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="394" y="101" width="60" height="20"/>
+				<reportElement x="423" y="101" width="60" height="20"/>
 				<textElement>
 					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Authorize by : ..........................................]]></text>
 			</staticText>
 			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="394" y="20" width="115" height="68"/>
+				<reportElement x="423" y="20" width="131" height="68"/>
 				<imageExpression><![CDATA[$F{MG2_SIGN} != null && !$F{MG2_SIGN}.isEmpty() ?
 new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($F{MG2_SIGN})) :
 null]]></imageExpression>
@@ -628,12 +662,12 @@ null]]></imageExpression>
 			<staticText>
 				<reportElement x="0" y="140" width="40" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="14"/>
 				</textElement>
 				<text><![CDATA[Date :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="305" y="140" width="75" height="20"/>
+				<reportElement x="321" y="140" width="89" height="20"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -641,12 +675,12 @@ null]]></imageExpression>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{MG1_DATE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="40" y="140" width="75" height="20"/>
+				<reportElement x="40" y="140" width="90" height="20"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -654,19 +688,19 @@ null]]></imageExpression>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{RQT_DATE}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="132" y="140" width="40" height="20"/>
+				<reportElement x="140" y="140" width="40" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="14"/>
 				</textElement>
 				<text><![CDATA[Date :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="434" y="140" width="75" height="20"/>
+				<reportElement x="463" y="140" width="91" height="20"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -674,12 +708,12 @@ null]]></imageExpression>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{MG2_DATE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="172" y="140" width="75" height="20"/>
+				<reportElement x="180" y="140" width="88" height="20"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -687,26 +721,26 @@ null]]></imageExpression>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{DPH_DATE}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="394" y="140" width="40" height="20"/>
+				<reportElement x="423" y="140" width="56" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="14"/>
 				</textElement>
 				<text><![CDATA[Date :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="265" y="140" width="40" height="20"/>
+				<reportElement x="281" y="140" width="40" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="14"/>
 				</textElement>
 				<text><![CDATA[Date :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="60" y="101" width="55" height="20"/>
+				<reportElement x="60" y="101" width="70" height="20"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -714,12 +748,12 @@ null]]></imageExpression>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{REQ_NAME}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="192" y="101" width="55" height="20"/>
+				<reportElement x="200" y="101" width="68" height="20"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -727,12 +761,12 @@ null]]></imageExpression>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{DEP_NAME}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="325" y="101" width="55" height="20"/>
+				<reportElement x="341" y="101" width="69" height="20"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -740,12 +774,12 @@ null]]></imageExpression>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{MG1_NAME}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="454" y="101" width="55" height="20"/>
+				<reportElement x="483" y="101" width="71" height="20"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -753,7 +787,7 @@ null]]></imageExpression>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="TH SarabunPSK"/>
+					<font fontName="TH SarabunPSK" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{MG2_NAME}]]></textFieldExpression>
 			</textField>
@@ -766,31 +800,37 @@ null]]></imageExpression>
 				<box>
 					<bottomPen lineWidth="1.0"/>
 				</box>
+				<textElement>
+					<font size="14"/>
+				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="270" y="10" width="285" height="10"/>
+				<reportElement x="240" y="10" width="315" height="10"/>
 				<box>
 					<bottomPen lineWidth="1.0"/>
 				</box>
+				<textElement>
+					<font size="14"/>
+				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="270" y="0" width="80" height="20"/>
+				<reportElement x="240" y="0" width="99" height="20"/>
 				<textElement textAlignment="Center">
 					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
 				</textElement>
 				<text><![CDATA[รวม]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="350" y="0" width="36" height="20"/>
+				<reportElement x="339" y="0" width="55" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{SUM_QTYREG}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="410" y="0" width="44" height="20"/>
+				<reportElement x="394" y="0" width="76" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
 				</textElement>

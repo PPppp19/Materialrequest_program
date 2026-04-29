@@ -86,6 +86,8 @@ public class sendmail extends HttpServlet {
 
                     if ("RTN".equals(pgmtype) || "DPS".equals(pgmtype)) {
                         DPM_TO = "WALAIL_KLE";
+ //DPM_TO = "PHONGS_PHO";
+                        
                     }
 
                     System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
@@ -104,6 +106,9 @@ public class sendmail extends HttpServlet {
                             CONO = request.getParameter("cono");
                             if ("RTN".equals(pgmtype) || "DPS".equals(pgmtype)) {
                                 DPM_TO = "WALAIL_KLE";
+     //                           DPM_TO = "PHONGS_PHO";
+                                                             
+
                             }
 
                             rsl = Getuseremail(DPM_TO);
@@ -184,7 +189,8 @@ public class sendmail extends HttpServlet {
                             
                             case "S5":
                           //  DPM_TO = request.getParameter("vhead");
-                            rsl = Getuseremail("WALAIL_KLE");
+//                            rsl = Getuseremail("WALAIL_KLE");
+                                   rsl = Getuseremail("PHONGS_PHO");
                             while (rsl.next()) {
 
                                 arruserName.add(rsl.getString("ST_EMAIL").trim());
