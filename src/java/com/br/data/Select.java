@@ -2528,7 +2528,7 @@ public class Select {
                         + "AND a.MMSTAT = '20'  \n"
                         + "AND a.MMMABU = '" + itemtype + "' \n"
                         + "AND a.MMCUCD <> '' \n"
-                        + "AND a.MMPUPR > 0  \n"
+//                        + "AND a.MMPUPR > 0  \n"
                         + "AND a.MMITTY NOT IN ('SP','OH','FA','') \n"
                         + "AND  a.MMITNO  LIKE ('RM%') \n"
                         + "OR a.MMCONO = '" + cono + "'  \n"
