@@ -649,7 +649,7 @@
                         {name: "ITM_UNIT", type: "text", width: 3, editing: false},
                         {name: "QTY_REQT", type: "number", width: 3, editing: false},
                         {name: "QTY_ISSU", type: "money", width: 3, editing: true},
-                        {name: "ONHAND", type: "text", width: 3, editing: false},
+                        {name: "ONHAND", type: "money", width: 3, editing: false},
                         {name: "STATUS", type: "text", width: 3, editing: false,
                             itemTemplate: function (_, item) {
 
