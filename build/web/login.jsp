@@ -105,13 +105,13 @@
 
                         <div class="row container col-md-12" style="font-size: 13px; width: 280px;">
                             <div style="width: 140px;">
-                                <a href="http://192.200.9.189:8080/UserRequest/?Destination=PResetPW"><li style="color: blue;"><u>Reset Password</u></li></a>  
+                                <a href="http://192.200.9.188:8080/UserRequest/?Destination=PResetPW"><li style="color: blue;"><u>Reset Password</u></li></a>  
                             </div>  
                         </div>
 
                         <div class="form-group">
                             <div style="width: 140px;">
-                                <a href="#" onclick="window.open('http://192.200.9.189:8080/MaterialRequest/คู่มือการใช้งานโปรแกรม_Material_Request.pdf', '_blank', 'fullscreen=yes'); return true;" ><li style="color: blue;"><u>คู่มือการใช้งานโปรแกรม_Material_Request</u></li></a>        
+                                <a href="#" onclick="window.open('http://192.200.9.188:8080/MaterialRequest/คู่มือการใช้งานโปรแกรม_Material_Request.pdf', '_blank', 'fullscreen=yes'); return true;" ><li style="color: blue;"><u>คู่มือการใช้งานโปรแกรม_Material_Request</u></li></a>        
                             </div>  
                         </div>
                         <p style="color: red">${msg}</p>

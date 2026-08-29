@@ -1418,7 +1418,7 @@
 
 
                             alert("this ORD_ID is not this state");
-                            window.location.href = "http://192.200.9.189:8080/MaterialRequest/?report=material_request";
+                            window.location.href = "http://192.200.9.188:8080/MaterialRequest/?report=material_request";
                         }
 
 
@@ -1676,7 +1676,7 @@
         } else {
             alert("this ORD_IS has been completed.");
 //              location.replace("http://192.200.9.189:8080/UserRequest/login.jsp");
-            window.location.href = "http://192.200.9.189:8080/MaterialRequest/?report=material_request";
+            window.location.href = "http://192.200.9.188:8080/MaterialRequest/?report=material_request";
         }
 
 
@@ -2088,7 +2088,7 @@
             success: function (result) {
 
                 alert("Returned");
-                window.location.replace("http://192.200.9.189:8080/MaterialRequest/?report=material_request");
+                window.location.replace("http://192.200.9.188:8080/MaterialRequest/?report=material_request");
             }
 
         });

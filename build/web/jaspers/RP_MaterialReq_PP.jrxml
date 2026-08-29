@@ -47,7 +47,7 @@
 AND mtttyp IN ('51','41')
 
  ) AS z 
- ON  z.mtitno = a.itm_id AND b.FRM_WAHO = z.MTWHLO AND  z.MTRIDN = b.MVX_ORDE
+ ON   z.mtitno = a.itm_id AND b.FRM_WAHO = z.MTWHLO AND  z.MTRIDN = b.MVX_ORDE
   LEFT  JOIN  
  (
   SELECT DISTINCT mtbref, mtitno,MTWHLO,mtbano,MTTRDT 
@@ -379,7 +379,7 @@ AND MTTTID  = 'PPS'
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="TH SarabunPSK" size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of" ]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement x="280" y="22" width="40" height="20"/>
@@ -404,8 +404,7 @@ AND MTTTID  = 'PPS'
     ? "ISSUE 6 / 15 NOV 2024"
     : $P{CONO}.equalsIgnoreCase("700")
         ? "ISSUE 1 / 2 JAN 2026"
-        : "ISSUE 1 / 16 DEC 2024"
-]]></textFieldExpression>
+        : "ISSUE 1 / 16 DEC 2024"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="478" y="29" width="58" height="20"/>
@@ -416,8 +415,7 @@ AND MTTTID  = 'PPS'
     ? "FO-HO21-018"
     : $P{CONO}.equalsIgnoreCase("700")
         ? " "   // 👈 ใส่ค่าที่ต้องการให้แสดงเมื่อเป็น 700
-        : "FO-WT21-018"
-]]></textFieldExpression>
+        : "FO-WT21-018"]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
