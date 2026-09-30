@@ -1470,7 +1470,14 @@ public class Select {
                         + "FRM_WAHO , TO_WAHO,\n"
                         + "ORD_REGB , ORD_DPMH,\n"
                         + "ORD_ISSB\n"
-                        + "FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04 WHERE COM_ID = '" + cono + "' AND "+condition+" ORDER BY ord_id DESC  ";
+                        + "FROM  " + GBVAR.DBPRD + ".FAR_MTRREQ04 WHERE COM_ID = '" + cono + "'  　AND CRE_DATE >=\n" +
+"      RIGHT(DIGITS(YEAR(CURRENT_DATE)), 4) || '-' ||\n" +
+"      RIGHT(DIGITS(MONTH(CURRENT_DATE)), 2) || '-01'\n" +
+"  AND CRE_DATE < \n" +
+"      RIGHT(DIGITS(YEAR(CURRENT_DATE + 1 MONTH)), 4) || '-' ||\n" +
+"      RIGHT(DIGITS(MONTH(CURRENT_DATE + 1 MONTH)), 2) || '-01' AND "+condition+"  ORDER BY ord_id DESC  ";
+
+                                System.out.println("xxxxxxxx no \n" + condition);
 
                 System.out.println("Selectall history2 no\n" + query);
                 ResultSet mRes = stmt.executeQuery(query);

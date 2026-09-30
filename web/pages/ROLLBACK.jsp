@@ -199,8 +199,19 @@
                         <input  type="hidden" name="cono" id="cono" value="<%out.print(session.getAttribute("cono"));%>" />
                         <input  type="hidden" name="PP" id="PP" value="xoxoxo" />
 
-                        <input class="form-control"  autocomplete="off" placeholder="OrderID" id="orid" name="orid" value="">
-                        <!--                        <datalist id="orderidlist"> </datalist>-->
+              
+<!--                        <input class="form-control"  autocomplete="off" placeholder="OrderID" id="orid" name="orid" value="">
+                                                <datalist id="orderidlist"> </datalist>-->
+
+<input class="form-control"
+       autocomplete="off"
+       placeholder="OrderID"
+       id="orid"
+       name="orid"
+       list="orderidlist"
+       value="">
+
+<datalist id="orderidlist"></datalist>
 
                     </div> 
                 </div>
@@ -303,7 +314,9 @@
 
                 var cono = "<%out.print(session.getAttribute("cono"));%>";
                 var divi = "<%out.print(session.getAttribute("divi"));%>";
-                $.ajax({
+var pgmtype = "<%out.print(session.getAttribute("pgmty"));%>";
+
+    $.ajax({
                     type: 'GET',
                     dataType: 'json',
                     url: './Action',
@@ -311,7 +324,8 @@
                     data: {
                         path: "gethistory",
                         cono: cono,
-                        divi: divi
+                        divi: divi,
+                        pgmtype:pgmtype
                     },
                     success: function (data) {
                         var options = '';
@@ -320,11 +334,13 @@
                             console.log(value.ORD_ID);
                             options += '<option value="' + value.ORD_ID + '" />';
                         });
+                        
+                          console.log(options);
 
                         document.getElementById('orderidlist').innerHTML = options;
                     },
                     error: function (e) {
-                        alert('Error occured');
+                        alert('Error occuredxxx');
                         console.log(e);
                     }
                 });
