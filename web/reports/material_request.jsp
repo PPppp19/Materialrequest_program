@@ -1357,6 +1357,55 @@
         document.getElementById("imgclose4").style.visibility = 'hidden';
         document.getElementById("imgclose5").style.visibility = 'hidden';
     });
+    // ===== ใบเบิก/ใบฝาก (RTN/DPS) helpers =====
+
+    // หา user ในกลุ่ม (MKT/CST) ของคลังปลายทาง แล้วบันทึกเป็น ORD_MG1 (S2) / ORD_MG2 (S4)
+    function assignMGGroup(GMGROUP, mgStatus, purpose, vNo) {
+        var GMCONO = "<%out.print(session.getAttribute("cono"));%>".trim();
+        var GMDIVI = "<%out.print(session.getAttribute("divi"));%>".trim();
+        var WHA = document.getElementById("vTwarehouse").value;
+
+        return $.ajax({
+            url: './Action',
+            type: 'GET',
+            dataType: 'text',
+            data: {
+                path: "GETMGLIST",
+                GMCONO: GMCONO,
+                GMDIVI: GMDIVI,
+                GMGROUP: GMGROUP,
+                WHA: WHA
+            }
+        }).then(function (result) {
+            result = (result || "").trim();
+            // GETMGLIST คืนค่า "user" เมื่อไม่พบรายชื่อในกลุ่ม
+            if (result === "" || result === "user") {
+                return $.Deferred().reject("ไม่พบผู้อนุมัติกลุ่ม " + GMGROUP + " ของคลัง " + WHA).promise();
+            }
+            return insertsubmitRTNDPS(GMCONO, GMDIVI, purpose, result, vNo, mgStatus);
+        });
+    }
+
+    // submit ฟอร์ม Mail ไปที่ ./sendmail (form.submit() ไม่ส่งค่าของปุ่ม จึงต้องเพิ่ม hidden input เอง)
+    function submitMailForm() {
+        var form = document.getElementById("Mail");
+        var h = document.createElement("input");
+        h.type = "hidden";
+        h.name = "SendAppMail";
+        h.value = "SendAppMail";
+        form.appendChild(h);
+        form.submit();
+    }
+
+    function onRTNDPSFail(err) {
+        var msg = (typeof err === "string") ? err : "บันทึกข้อมูลผู้อนุมัติไม่สำเร็จ กรุณาลองใหม่";
+        alert(msg);
+        var sm = document.getElementById("SendAppMail");
+        if (sm) {
+            sm.disabled = false;
+        }
+    }
+
     function sendmail() {
 
 
@@ -1389,110 +1438,33 @@
         } else {
 
 
-            if (Key !== "S2" && Key !== "S4" && Key !== "S5") {  // insert 
-                vhead = 'PHONGS_PHO';
-               // var vhead = 'WALAIL_KLE'; 
+            if (Key !== "S2" && Key !== "S4" && Key !== "S5") {  // insert
+                // ใบเบิก/ใบฝาก : หัวหน้าแผนกผู้อนุมัติ S2 คือ WALAIL_KLE เสมอ
+                var vhead = 'WALAIL_KLE';
+                var vNo = document.getElementById("ordernum").innerHTML;
+                var purpose = document.getElementById("mypparea").value;
 
+                // ต้องรอให้บันทึก DPM_HEAD และ ORD_MG1 (กลุ่ม MKT) ลง DB ให้เสร็จก่อน แล้วค่อย submit ฟอร์มส่งเมล
+                document.getElementById("SendAppMail").disabled = true; // กันกดซ้ำ
+                $.when(
+                        insertsubmit(purpose, vhead, vNo),
+                        assignMGGroup("MKT", "S2", purpose, vNo)
+                        ).done(function () {
+                    submitMailForm();
+                }).fail(onRTNDPSFail);
+                return false;
 
-
-
+            } else if (Key === "S2") {
 
                 var vNo = document.getElementById("ordernum").innerHTML;
                 var purpose = document.getElementById("mypparea").value;
 
-
-
-                if (vhead != "00") {
-
-
-                    insertsubmit(purpose, vhead, vNo);
-
-                    getEmailByName(vhead);
-
-
-                } else {
-                    //alert("โปรดทำรายการใหม่" + vhead + " : " + vNo);
-                }
-
-
-
-
-
-                var GMCONO = "<%out.print(session.getAttribute("cono"));%>".trim();
-                var GMDIVI = "<%out.print(session.getAttribute("divi"));%>".trim();
-                var GMGROUP = "MKT";
-                var WHA = document.getElementById("vTwarehouse").value;
-                var vNo = document.getElementById("ordernum").innerHTML;
-
-
-
-                $.ajax({
-                    url: './Action',
-                    type: 'GET',
-                    data: {
-                        path: "GETMGLIST",
-                        GMCONO: GMCONO,
-                        GMDIVI: GMDIVI,
-                        GMGROUP: GMGROUP,
-                        WHA: WHA
-                    },
-                    success: function (result) {
-                        alert(result);
-
-
-                        // todo 
-
-                        insertsubmitRTNDPS(GMCONO, GMDIVI, purpose, result, vNo, "S2");
-
-
-                        //  insertsubmit(purpose, result, vNo);
-                    }
-
-                });
-
-
-
-
-
-
-            } else if (Key === "S2") {
-
-
-                alert("S2");
-
-                var GMCONO = "<%out.print(session.getAttribute("cono"));%>".trim();
-                var GMDIVI = "<%out.print(session.getAttribute("divi"));%>".trim();
-                var GMGROUP = "CST";
-                var WHA = document.getElementById("vTwarehouse").value;
-                var vNo = document.getElementById("ordernum").innerHTML;
-
-
-
-                $.ajax({
-                    url: './Action',
-                    type: 'GET',
-                    data: {
-                        path: "GETMGLIST",
-                        GMCONO: GMCONO,
-                        GMDIVI: GMDIVI,
-                        GMGROUP: GMGROUP,
-                        WHA: WHA
-                    },
-                    success: function (result) {
-                        alert(result);
-
-
-                        // todo 
-
-                        insertsubmitRTNDPS(GMCONO, GMDIVI, purpose, result, vNo, "S4");
-
-
-                        //  insertsubmit(purpose, result, vNo);
-                    }
-
-                });
-
-
+                // ต้องรอให้บันทึก ORD_MG2 (กลุ่ม CST) ลง DB ให้เสร็จก่อน แล้วค่อย submit ฟอร์มส่งเมล
+                document.getElementById("SendAppMail").disabled = true; // กันกดซ้ำ
+                assignMGGroup("CST", "S4", purpose, vNo).done(function () {
+                    submitMailForm();
+                }).fail(onRTNDPSFail);
+                return false;
 
             } else if (Key === "S4") {
 
@@ -2320,7 +2292,6 @@
 
                         });
                     });
-                    alert("update RTN DPT");
                 }
 
 
@@ -4391,7 +4362,7 @@
 
     function insertsubmit(purpose, dpmh_to, orderid) {
 
-        $.ajax({
+        return $.ajax({
             url: './Action',
             type: 'GET',
             data: {
@@ -4415,7 +4386,7 @@
 
     function insertsubmitRTNDPS(cono, divi, purpose, dpmh_to, orderid, status) {
 
-        $.ajax({
+        return $.ajax({
             url: './Action',
             type: 'GET',
             data: {
@@ -4437,7 +4408,7 @@
 
     function insertsubmit(purpose, dpmh_to, orderid) {
 
-        $.ajax({
+        return $.ajax({
             url: './Action',
             type: 'GET',
             data: {

@@ -600,7 +600,8 @@ public class Action extends HttpServlet {
             break;
 
             case "updateheaddata":
-                
+            case "updateheaddataRTNDPT": // ใบเบิก/ใบฝาก ใช้การอัปเดตหัวใบแบบเดียวกัน
+
                  try {
 
                 Update.updateheaddata(request.getParameter("id"), request.getParameter("vdepartmentname"), request.getParameter("vcostcenter"), request.getParameter("vdate"), request.getParameter("vtype"), request.getParameter("vfwhs"), request.getParameter("vtwhs"), request.getParameter("location"), request.getParameter("orderPurpose"));

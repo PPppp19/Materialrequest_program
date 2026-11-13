@@ -129,7 +129,7 @@ public class sendmail extends HttpServlet {
                             if ("RTN".equals(pgmtype) || "DPS".equals(pgmtype)) {
 
                                 ResultSet rs2 = GetApprovemailRTNDPS(CONO,request.getParameter("ordernumpp"),status);
-                                while (rs2.next()) {
+                                while (rs2 != null && rs2.next()) {
                                     String username = rs2.getString("VAL").trim();
                                     rsl = Getuseremail(username);
                                     while (rsl.next()) {
@@ -143,15 +143,15 @@ public class sendmail extends HttpServlet {
                                     }
                                 }
 
-                                
-                             
-                            } 
+                                // ใบเบิก/ใบฝาก จบที่นี่ ไม่ต้องไหลไป case S4 (เดิมทำให้ส่งเมลซ้ำ 2 ฉบับ)
+                                break;
+                            }
                                 case "S4":
                             
                             if ("RTN".equals(pgmtype) || "DPS".equals(pgmtype)) {
 
                                 ResultSet rs2 = GetApprovemailRTNDPS(CONO,request.getParameter("ordernumpp"),status);
-                                while (rs2.next()) {
+                                while (rs2 != null && rs2.next()) {
                                     String username = rs2.getString("VAL").trim();
                                     rsl = Getuseremail(username);
                                     while (rsl.next()) {
@@ -188,17 +188,10 @@ public class sendmail extends HttpServlet {
                             
                             
                             case "S5":
-                          //  DPM_TO = request.getParameter("vhead");
-//                            rsl = Getuseremail("WALAIL_KLE");
-                                   rsl = Getuseremail("PHONGS_PHO");
-                            while (rsl.next()) {
-
-                                arruserName.add(rsl.getString("ST_EMAIL").trim());
-                                System.out.println("WWWWWWWWWWW333333WWWWWWWWWWWWWWWWWW");
-                                System.out.println(arruserName);
-                                System.out.println(rsl.getString("ST_EMAIL").trim());
-                                System.out.println("WWWWWWWWWWW333333WWWWWWWWWWWWWWWWWW");
-
+                            // ใบเบิก/ใบฝาก : ขั้น S5 ยังไม่ต้องส่งเมลหาใคร แต่ต้องเลื่อนสถานะต่อ
+                            // (การ UPDATE ORD_STAT อยู่ใน getmaildetailRTNDPS ซึ่งปกติถูกเรียกเฉพาะตอนมีผู้รับเมล)
+                            if ("RTN".equals(pgmtype) || "DPS".equals(pgmtype)) {
+                                com.br.utility.Utilities.getmaildetailRTNDPS(request.getParameter("username"), request.getParameter("ordernumpp"), status, "", CONO, pgmtype);
                             }
 
                             break;
