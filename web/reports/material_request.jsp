@@ -1360,10 +1360,10 @@
     // ===== ใบเบิก/ใบฝาก (RTN/DPS) helpers =====
 
     // ผู้อนุมัติใบเบิก/ใบฝาก กำหนดตายตัว (ไม่ต้องค้นจาก SR_GROUPMASTER)
-    //   MKT -> ORD_MG1 (ขั้น S2) = NUTPRA_NAW
+    //   MKT -> ORD_MG1 (ขั้น S2) = ANUCHI_PIS
     //   CST -> ORD_MG2 (ขั้น S4) = NIT_TAW
     var RTNDPS_APPROVER = {
-        MKT: 'NUTPRA_NAW',
+        MKT: 'ANUCHI_PIS',
         CST: 'NIT_TAW'
     };
 
