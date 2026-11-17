@@ -1413,7 +1413,7 @@
         let PGMTYPE = "<%out.print(session.getAttribute("pgmty"));%>".trim();
 
        // alert(PGMTYPE);
-        if (PGMTYPE === null) {
+        if (!PGMTYPE || PGMTYPE === "null") { // session ไม่มีค่า = MTR
             PGMTYPE = "MTR";
         }
 
@@ -1574,7 +1574,7 @@
         }
 
         let PGMTYPE = "<%out.print(session.getAttribute("pgmty"));%>".trim();
-        if (PGMTYPE === null) {
+        if (!PGMTYPE || PGMTYPE === "null") { // session ไม่มีค่า = MTR
             PGMTYPE = "MTR";
         }
 
@@ -2005,7 +2005,7 @@
         const urlParams = new URLSearchParams(queryString);
         const Key = urlParams.get('status');
         let PGMTYPE = "<%out.print(session.getAttribute("pgmty"));%>".trim();
-        if (PGMTYPE === null) {
+        if (!PGMTYPE || PGMTYPE === "null") { // session ไม่มีค่า = MTR
             PGMTYPE = "MTR";
         }
         //alert(PGMTYPE);
@@ -3902,7 +3902,7 @@
         const urlParams = new URLSearchParams(queryString);
         const Key = urlParams.get('status');
         let PGMTYPE = "<%out.print(session.getAttribute("pgmty"));%>".trim();
-        if (PGMTYPE === null) {
+        if (!PGMTYPE || PGMTYPE === "null") { // session ไม่มีค่า = MTR
             PGMTYPE = "MTR";
         }
 

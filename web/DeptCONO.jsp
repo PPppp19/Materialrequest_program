@@ -36,7 +36,7 @@
            
 
             if (pgmtype == null || pgmtype.equalsIgnoreCase("MTR")) {
-                session.setAttribute("pgmty", request.getParameter("PGMTYPE"));
+                session.setAttribute("pgmty", "MTR"); // ลิงก์เก่าไม่มี PGMTYPE ให้ถือเป็น MTR
                 response.sendRedirect("/MaterialRequest?report=material_request&status=S2&ORDID=" + request.getParameter("ORDID") + "");
 
             } else {
