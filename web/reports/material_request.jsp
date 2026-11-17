@@ -1359,31 +1359,19 @@
     });
     // ===== ใบเบิก/ใบฝาก (RTN/DPS) helpers =====
 
-    // หา user ในกลุ่ม (MKT/CST) ของคลังปลายทาง แล้วบันทึกเป็น ORD_MG1 (S2) / ORD_MG2 (S4)
+    // ผู้อนุมัติใบเบิก/ใบฝาก กำหนดตายตัว (ไม่ต้องค้นจาก SR_GROUPMASTER)
+    //   MKT -> ORD_MG1 (ขั้น S2) = NUTPRA_NAW
+    //   CST -> ORD_MG2 (ขั้น S4) = NIT_TAW
+    var RTNDPS_APPROVER = {
+        MKT: 'NUTPRA_NAW',
+        CST: 'NIT_TAW'
+    };
+
+    // บันทึกผู้อนุมัติ ORD_MG1 (S2) / ORD_MG2 (S4)
     function assignMGGroup(GMGROUP, mgStatus, purpose, vNo) {
         var GMCONO = "<%out.print(session.getAttribute("cono"));%>".trim();
         var GMDIVI = "<%out.print(session.getAttribute("divi"));%>".trim();
-        var WHA = document.getElementById("vTwarehouse").value;
-
-        return $.ajax({
-            url: './Action',
-            type: 'GET',
-            dataType: 'text',
-            data: {
-                path: "GETMGLIST",
-                GMCONO: GMCONO,
-                GMDIVI: GMDIVI,
-                GMGROUP: GMGROUP,
-                WHA: WHA
-            }
-        }).then(function (result) {
-            result = (result || "").trim();
-            // GETMGLIST คืนค่า "user" เมื่อไม่พบรายชื่อในกลุ่ม
-            if (result === "" || result === "user") {
-                return $.Deferred().reject("ไม่พบผู้อนุมัติกลุ่ม " + GMGROUP + " ของคลัง " + WHA).promise();
-            }
-            return insertsubmitRTNDPS(GMCONO, GMDIVI, purpose, result, vNo, mgStatus);
-        });
+        return insertsubmitRTNDPS(GMCONO, GMDIVI, purpose, RTNDPS_APPROVER[GMGROUP], vNo, mgStatus);
     }
 
     // submit ฟอร์ม Mail ไปที่ ./sendmail (form.submit() ไม่ส่งค่าของปุ่ม จึงต้องเพิ่ม hidden input เอง)
